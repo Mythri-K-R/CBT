@@ -23,7 +23,11 @@ class InstitutionScope implements Scope
         }
 
         if ($user->institution_id) {
-            $builder->where($model->getTable().'.institution_id', $user->institution_id);
+            $table = $model->getTable();
+            $builder->where(function ($q) use ($table, $user) {
+                $q->where($table . '.institution_id', $user->institution_id)
+                  ->orWhereNull($table . '.institution_id');
+            });
         }
     }
 }

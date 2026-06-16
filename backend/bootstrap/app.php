@@ -3,6 +3,7 @@
 use App\Http\Middleware\CheckInstitutionScope;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\CheckFacultyPermission;
+use App\Http\Middleware\CheckSetupComplete;
 use App\Http\Middleware\CheckSubscription;
 use App\Http\Middleware\SingleSessionLock;
 use App\Http\Middleware\ProctorHeaders;
@@ -28,6 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'institution.scope'    => CheckInstitutionScope::class,
             'role'                 => CheckRole::class,
             'faculty.permission'   => CheckFacultyPermission::class,
+            'setup.complete'       => CheckSetupComplete::class,
             'subscription'         => CheckSubscription::class,
             'single.session'       => SingleSessionLock::class,
             'proctor.headers'      => ProctorHeaders::class,

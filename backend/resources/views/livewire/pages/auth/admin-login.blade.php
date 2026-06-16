@@ -18,6 +18,14 @@ new #[Layout('layouts.guest')] class extends Component
 
         $this->form->authenticate();
 
+        if (auth()->user()->role !== 'super_admin') {
+            auth()->logout();
+            Session::invalidate();
+            Session::regenerateToken();
+            $this->addError('form.email', 'Access denied. This portal is for system administrators only.');
+            return;
+        }
+
         Session::regenerate();
 
         $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);

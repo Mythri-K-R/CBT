@@ -12,7 +12,7 @@ new #[Layout('layouts.institution')] class extends Component {
     public function mount(Student $student): void
     {
         abort_if($student->institution_id !== auth()->user()->institution_id, 403);
-        $this->student = $student->load('batch');
+        $this->student = $student->load('batches');
     }
 
     public function with(): array
@@ -46,9 +46,9 @@ new #[Layout('layouts.institution')] class extends Component {
                 <h1 class="font-display text-2xl font-bold">{{ $student->name }}</h1>
                 <div class="flex items-center gap-2 text-sm text-muted-foreground mt-0.5">
                     <span class="font-mono">{{ $student->roll_number }}</span>
-                    @if($student->batch)
+                    @if($student->batches->isNotEmpty())
                     <span>·</span>
-                    <span>{{ $student->batch->name }}</span>
+                    <span>{{ $student->batches->first()->name }}</span>
                     @endif
                     @if($student->phone)
                     <span>·</span>
@@ -89,9 +89,8 @@ new #[Layout('layouts.institution')] class extends Component {
                 @foreach([
                     ['Name', $student->name],
                     ['Roll Number', $student->roll_number],
-                    ['Batch', $student->batch?->name ?? '—'],
+                    ['Batch', $student->batches->first()?->name ?? '—'],
                     ['Phone', $student->phone ?? '—'],
-                    ['Email', $student->email ?? '—'],
                     ['Enrolled', $student->created_at->format('d M Y')],
                 ] as [$label, $val])
                 <div class="flex justify-between">
@@ -137,7 +136,8 @@ new #[Layout('layouts.institution')] class extends Component {
             </thead>
             <tbody class="divide-y divide-border">
                 @forelse($attempts as $a)
-                <tr class="hover:bg-muted/20 transition-colors">
+                <tr class="hover:bg-muted/20 transition-colors cursor-pointer"
+                    onclick="window.location='{{ route('institution.students.attempt', ['student' => $student->id, 'attempt' => $a->uuid]) }}'">
                     <td class="px-4 py-3">
                         <div class="font-medium">{{ $a->test->title }}</div>
                         <div class="text-xs text-muted-foreground">{{ strtoupper($a->test->exam_type) }}</div>

@@ -179,9 +179,9 @@ new #[Layout('layouts.institution')] class extends Component {
             <div class="rounded-xl bg-primary/5 border border-primary/20 px-5 py-4">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="font-semibold">{{ ucfirst($institution->subscription_plan ?? 'Free') }} Plan</p>
-                        @if($institution->subscription_ends_at)
-                        <p class="text-sm text-muted-foreground mt-0.5">Expires {{ \Carbon\Carbon::parse($institution->subscription_ends_at)->format('d M Y') }}</p>
+                        <p class="font-semibold">{{ ucfirst($institution->plan ?? 'trial') }} Plan</p>
+                        @if($institution->subscription_end)
+                        <p class="text-sm text-muted-foreground mt-0.5">Expires {{ $institution->subscription_end->format('d M Y') }}</p>
                         @else
                         <p class="text-sm text-muted-foreground mt-0.5">No expiry</p>
                         @endif

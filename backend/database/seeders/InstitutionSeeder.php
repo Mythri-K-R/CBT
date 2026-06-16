@@ -65,8 +65,8 @@ class InstitutionSeeder extends Seeder
         $batch1 = \App\Models\Batch::create([
             'institution_id' => $institution->id,
             'name'           => 'NEET 2026 Droppers',
-            'exam_type'      => 'NEET',
-            'batch_type'     => 'Dropper',
+            'exam_type'      => 'neet',
+            'batch_type'     => 'dropper',
             'target_year'    => 2026,
             'start_date'     => now()->subMonths(2),
             'max_students'   => 100,
@@ -77,8 +77,8 @@ class InstitutionSeeder extends Seeder
         $batch2 = \App\Models\Batch::create([
             'institution_id' => $institution->id,
             'name'           => 'JEE 2026 Mains',
-            'exam_type'      => 'JEE Main',
-            'batch_type'     => 'Regular',
+            'exam_type'      => 'jee_main',
+            'batch_type'     => 'regular',
             'target_year'    => 2026,
             'start_date'     => now()->subMonths(1),
             'max_students'   => 120,

@@ -65,8 +65,8 @@ new #[Layout('layouts.admin')] class extends Component {
             <h1 class="font-display text-2xl font-bold">{{ $institution->name }}</h1>
             <div class="flex items-center gap-2 mt-0.5 text-sm text-muted-foreground">
                 @if($institution->city)<span>{{ $institution->city }}</span>@endif
-                @php $pc = ['basic'=>'bg-muted text-muted-foreground','professional'=>'bg-info/10 text-info','enterprise'=>'bg-primary/10 text-primary'][$institution->subscription_plan ?? 'basic'] ?? 'bg-muted text-muted-foreground'; @endphp
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold {{ $pc }}">{{ ucfirst($institution->subscription_plan ?? 'basic') }}</span>
+                @php $pc = ['trial'=>'bg-muted text-muted-foreground','starter'=>'bg-info/10 text-info','growth'=>'bg-success/10 text-success','enterprise'=>'bg-primary/10 text-primary'][$institution->plan ?? 'trial'] ?? 'bg-muted text-muted-foreground'; @endphp
+                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold {{ $pc }}">{{ ucfirst($institution->plan ?? 'trial') }}</span>
             </div>
         </div>
     </div>
@@ -100,8 +100,9 @@ new #[Layout('layouts.admin')] class extends Component {
                 ['Email', $institution->email ?? '—'],
                 ['Phone', $institution->phone ?? '—'],
                 ['City', $institution->city ?? '—'],
-                ['Plan', ucfirst($institution->subscription_plan ?? '—')],
-                ['Subscription Ends', $institution->subscription_ends_at?->format('d M Y') ?? '—'],
+                ['Contact', $institution->contact_person ?? '—'],
+                ['Plan', ucfirst($institution->plan ?? '—')],
+                ['Subscription Ends', $institution->subscription_end?->format('d M Y') ?? '—'],
                 ['Created', $institution->created_at->format('d M Y')],
             ] as [$label, $val])
             <div class="flex justify-between py-1.5 border-b border-border/50 last:border-0">

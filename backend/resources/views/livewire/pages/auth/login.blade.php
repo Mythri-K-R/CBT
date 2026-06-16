@@ -21,11 +21,15 @@ new #[Layout('layouts.guest')] class extends Component
         Session::regenerate();
 
         $user = auth()->user();
-        if (in_array($user->role, ['institution_admin', 'faculty', 'institution'])) {
-            $this->redirectIntended(default: route('institution.dashboard', absolute: false), navigate: true);
-        } else {
-            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        if ($user->role === 'super_admin') {
+            auth()->logout();
+            Session::invalidate();
+            Session::regenerateToken();
+            $this->addError('form.email', 'Use the admin login page for super admin access.');
+            return;
         }
+
+        $this->redirectIntended(default: route('institution.dashboard', absolute: false), navigate: true);
     }
 }; ?>
 
@@ -76,8 +80,8 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="flex-1 grid place-items-center p-4 sm:p-6">
             <div class="w-full max-w-md">
                 <div class="mb-6">
-                    <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight">Sign in to your portal</h2>
-                    <p class="mt-1.5 text-sm text-muted-foreground">Enter your credentials to continue.</p>
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight">Institution Portal</h2>
+                    <p class="mt-1.5 text-sm text-muted-foreground">Sign in with your institution admin or faculty credentials.</p>
                 </div>
 
                 <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -117,6 +121,7 @@ new #[Layout('layouts.guest')] class extends Component
 
                     <x-ui.button type="submit" class="w-full" size="lg">Sign in</x-ui.button>
                 </form>
+
 
             </div>
         </div>

@@ -16,6 +16,14 @@ Volt::route('t/{slug}/exam', 'pages.student.test-attempt')->name('student.test.a
 Volt::route('t/{slug}/result', 'pages.student.test-result')->name('student.test.result');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        $user = auth()->user();
+        if ($user->role === 'super_admin') {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('institution.dashboard');
+    })->name('dashboard');
+
     Route::view('profile', 'profile')->name('profile');
 
     // Super Admin Portal
@@ -32,12 +40,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Institution / Faculty Portal
-    Route::middleware(['role:institution_admin,faculty', 'institution.scope', 'subscription'])->prefix('institution')->name('institution.')->group(function () {
+    Route::middleware(['role:institution_admin,faculty', 'institution.scope'])->prefix('institution')->name('institution.')->group(function () {
+        // Setup wizard — no subscription or setup.complete check (accessible on first login)
+        Volt::route('setup', 'pages.institution.setup.wizard')->name('setup');
+    });
+
+    Route::middleware(['role:institution_admin,faculty', 'institution.scope', 'subscription', 'setup.complete'])->prefix('institution')->name('institution.')->group(function () {
         Volt::route('dashboard', 'pages.institution.dashboard')->name('dashboard');
         Volt::route('batches', 'pages.institution.batches.index')->name('batches');
         Volt::route('batches/{batch}', 'pages.institution.batches.show')->name('batches.show');
         Volt::route('students', 'pages.institution.students')->name('students');
         Volt::route('students/{student}', 'pages.institution.students.show')->name('students.show');
+        Volt::route('students/{student}/attempts/{attempt}', 'pages.institution.students.attempt-result')->name('students.attempt');
+        Volt::route('students/{student}/attempts/{attempt}/answers', 'pages.institution.students.answer-sheet')->name('students.answer-sheet');
         Volt::route('faculty', 'pages.institution.faculty')->name('faculty');
         Volt::route('questions', 'pages.institution.questions.index')->name('questions');
         Volt::route('questions/create', 'pages.institution.questions.create')->name('questions.create');
@@ -45,6 +60,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Volt::route('tests', 'pages.institution.tests.index')->name('tests');
         Volt::route('tests/create', 'pages.institution.tests.create')->name('tests.create');
         Volt::route('tests/{test}', 'pages.institution.tests.show')->name('tests.show');
+        Volt::route('papers', 'pages.institution.papers.index')->name('papers');
+        Volt::route('papers/{examType}', 'pages.institution.papers.list')->name('papers.list');
+        Volt::route('papers/{paper}/editor', 'pages.institution.papers.editor')->name('papers.editor');
         Volt::route('results', 'pages.institution.results')->name('results');
         Volt::route('results/{test}', 'pages.institution.results.show')->name('results.show');
         Volt::route('analytics', 'pages.institution.analytics')->name('analytics');
@@ -59,3 +77,6 @@ Route::post('logout', function (App\Livewire\Actions\Logout $logout) {
     $logout();
     return redirect('/');
 })->name('logout');
+
+
+

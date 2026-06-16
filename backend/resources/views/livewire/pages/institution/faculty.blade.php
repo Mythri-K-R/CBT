@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
@@ -9,7 +10,7 @@ new #[Layout('layouts.institution')] class extends Component {
     public bool $showModal = false;
     public bool $showPermissionsModal = false;
     public ?int $editingId = null;
-    public ?User $selectedFaculty = null;
+    public ?int $selectedFacultyId = null;
 
     public string $name = '';
     public string $email = '';
@@ -27,8 +28,10 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->showModal = true;
     }
 
-    public function openEdit(User $user): void
+    public function openEdit(int $id): void
     {
+        $user = User::find($id);
+        if (!$user) return;
         $this->editingId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
@@ -36,15 +39,16 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->showModal = true;
     }
 
-    public function openPermissions(User $user): void
+    public function openPermissions(int $id): void
     {
-        $this->selectedFaculty = $user;
-        $perms = $user->permissions ?? [];
-        $this->canCreateQuestions = in_array('can_create_questions', $perms);
-        $this->canCreateTests = in_array('can_create_tests', $perms);
-        $this->canViewResults = in_array('can_view_results', $perms);
-        $this->canViewAnalytics = in_array('can_view_analytics', $perms);
-        $this->canManageStudents = in_array('can_manage_students', $perms);
+        $user = User::find($id);
+        if (!$user) return;
+        $this->selectedFacultyId = $user->id;
+        $this->canCreateQuestions = (bool) $user->can_create_questions;
+        $this->canCreateTests    = (bool) $user->can_create_tests;
+        $this->canViewResults    = (bool) $user->can_view_results;
+        $this->canViewAnalytics  = (bool) $user->can_view_analytics;
+        $this->canManageStudents = (bool) $user->can_manage_students;
         $this->showPermissionsModal = true;
     }
 
@@ -68,10 +72,11 @@ new #[Layout('layouts.institution')] class extends Component {
             ]);
             $institution = auth()->user()->institution;
             $institution->users()->create([
-                'name' => $this->name,
-                'email' => $this->email,
+                'name'     => $this->name,
+                'email'    => $this->email,
+                'username' => Str::slug($this->name) . rand(100, 999),
                 'password' => bcrypt($this->password),
-                'role' => 'faculty',
+                'role'     => 'faculty',
             ]);
             session()->flash('success', 'Faculty account created. Share credentials with them.');
         }
@@ -80,21 +85,24 @@ new #[Layout('layouts.institution')] class extends Component {
 
     public function savePermissions(): void
     {
-        $perms = [];
-        if ($this->canCreateQuestions) $perms[] = 'can_create_questions';
-        if ($this->canCreateTests) $perms[] = 'can_create_tests';
-        if ($this->canViewResults) $perms[] = 'can_view_results';
-        if ($this->canViewAnalytics) $perms[] = 'can_view_analytics';
-        if ($this->canManageStudents) $perms[] = 'can_manage_students';
+        $user = User::find($this->selectedFacultyId);
+        if (!$user) return;
 
-        $this->selectedFaculty?->update(['permissions' => $perms]);
-        session()->flash('success', 'Permissions updated for '.$this->selectedFaculty?->name);
+        $user->update([
+            'can_create_questions' => $this->canCreateQuestions,
+            'can_create_tests'     => $this->canCreateTests,
+            'can_view_results'     => $this->canViewResults,
+            'can_view_analytics'   => $this->canViewAnalytics,
+            'can_manage_students'  => $this->canManageStudents,
+        ]);
+        session()->flash('success', 'Permissions updated for ' . $user->name);
         $this->showPermissionsModal = false;
     }
 
-    public function removeFaculty(User $user): void
+    public function removeFaculty(int $id): void
     {
-        $user->delete();
+        $user = User::find($id);
+        $user?->delete();
         session()->flash('success', 'Faculty member removed.');
     }
 
@@ -180,7 +188,16 @@ new #[Layout('layouts.institution')] class extends Component {
             <div class="mb-4">
                 <p class="text-xs font-medium text-muted-foreground mb-2">Permissions</p>
                 <div class="flex flex-wrap gap-1.5">
-                    @forelse(($member->permissions ?? []) as $perm)
+                    @php
+                        $activePerms = array_filter([
+                            'can_create_questions' => $member->can_create_questions,
+                            'can_create_tests'     => $member->can_create_tests,
+                            'can_view_results'     => $member->can_view_results,
+                            'can_view_analytics'   => $member->can_view_analytics,
+                            'can_manage_students'  => $member->can_manage_students,
+                        ]);
+                    @endphp
+                    @forelse(array_keys($activePerms) as $perm)
                     <span class="inline-flex items-center rounded-full bg-primary/10 text-primary text-[10px] px-2 py-0.5 font-medium">{{ $permLabels[$perm] ?? $perm }}</span>
                     @empty
                     <span class="text-xs text-muted-foreground italic">No permissions assigned</span>
@@ -233,7 +250,8 @@ new #[Layout('layouts.institution')] class extends Component {
 @endif
 
 <!-- Permissions Modal -->
-@if($showPermissionsModal && $selectedFaculty)
+@if($showPermissionsModal && $selectedFacultyId)
+@php $selectedFaculty = \App\Models\User::find($selectedFacultyId); @endphp
 <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
     <div class="w-full max-w-sm rounded-2xl bg-card border border-border shadow-2xl p-6">
         <div class="flex items-center justify-between mb-2">
@@ -242,7 +260,7 @@ new #[Layout('layouts.institution')] class extends Component {
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
         </div>
-        <p class="text-sm text-muted-foreground mb-5">{{ $selectedFaculty->name }}</p>
+        <p class="text-sm text-muted-foreground mb-5">{{ $selectedFaculty?->name }}</p>
 
         <div class="space-y-3">
             @foreach(['canCreateQuestions'=>'Create Questions','canCreateTests'=>'Create Tests','canViewResults'=>'View Results','canViewAnalytics'=>'View Analytics','canManageStudents'=>'Manage Students'] as $prop => $label)

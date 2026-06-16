@@ -12,11 +12,15 @@ class CheckRole
         $user = $request->user();
 
         if (!$user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
+            return $request->expectsJson()
+                ? response()->json(['message' => 'Unauthenticated.'], 401)
+                : redirect()->route('login');
         }
 
         if (!in_array($user->role, $roles)) {
-            return response()->json(['message' => 'You do not have permission to access this resource.'], 403);
+            return $request->expectsJson()
+                ? response()->json(['message' => 'You do not have permission to access this resource.'], 403)
+                : redirect()->route('dashboard');
         }
 
         return $next($request);

@@ -1,133 +1,92 @@
 <?php
 
-use App\Models\TestAttempt;
 use Livewire\Volt\Component;
+use Livewire\Attributes\Layout;
+use App\Models\TestLink;
+use App\Models\TestAttempt;
 
-new class extends Component {
+new #[Layout('layouts.exam')] class extends Component {
     public string $slug;
-    public TestAttempt $attempt;
+    public ?TestAttempt $attempt = null;
+    public ?TestLink $testLink = null;
 
     public function mount(string $slug): void
     {
         $this->slug = $slug;
+        $this->testLink = TestLink::with('test.institution')->where('slug', $slug)->first();
 
-        $attemptId = session('last_attempt_id');
-        if (!$attemptId) {
-            $this->redirect(route('student.test.landing', ['slug' => $slug]));
-            return;
+        if (!$this->testLink) {
+            abort(404);
         }
 
-        $this->attempt = TestAttempt::with(['test', 'student', 'responses.testQuestion'])
-            ->findOrFail($attemptId);
-
-        if ($this->attempt->status !== 'submitted') {
-            $this->redirect(route('student.test.landing', ['slug' => $slug]));
+        $attemptId = session("last_attempt_{$slug}");
+        if ($attemptId) {
+            $this->attempt = TestAttempt::with(['student', 'test'])->find($attemptId);
         }
     }
 }; ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Test Result — {{ $attempt->test->title ?? 'ExamSphere' }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="font-sans antialiased bg-[#f5f5f5]">
+@push('title')<title>Test Submitted — {{ $testLink->test->title }}</title>@endpush
+@push('styles')
+<style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f0f2f5; }
+    .nta-header { background: #1a3c5e; height: 52px; display: flex; align-items: center; padding: 0 24px; justify-content: space-between; }
+</style>
+@endpush
 
-<header style="background:#1a3c5e;" class="py-3 px-4 sm:px-8 flex items-center justify-between">
-    <div class="text-white font-bold text-lg">ExamSphere</div>
-    <div class="text-white/70 text-sm">Test Result</div>
-</header>
-
-@php
-    $a = $attempt;
-    $total = $a->responses->count();
-    $answered = $a->responses->whereIn('status',['answered','answered_marked_review'])->count();
-    $correct = $a->total_correct ?? 0;
-    $wrong = $a->total_wrong ?? 0;
-    $unattempted = $total - $answered;
-    $score = $a->total_score ?? 0;
-    $maxMarks = $a->test->total_marks ?? ($total * 4);
-    $accuracy = $answered > 0 ? round(($correct / $answered) * 100, 1) : 0;
-    $percentage = $maxMarks > 0 ? round(($score / $maxMarks) * 100, 1) : 0;
-@endphp
-
-<div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
-
-    <!-- Score card -->
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <div style="background:linear-gradient(135deg,#1a3c5e,#2a5a8e);" class="px-6 py-8 text-white text-center">
-            <p class="text-white/70 text-sm mb-1">{{ $a->student->name }} • {{ $a->test->title }}</p>
-            <div class="text-6xl font-bold mb-2">{{ $score }}</div>
-            <p class="text-white/80 text-lg">out of {{ $maxMarks }} marks</p>
-            <div class="mt-4 inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5">
-                <span class="text-white/80 text-sm">Percentile</span>
-                <span class="font-bold">{{ $a->percentile ? number_format($a->percentile, 2) : '—' }}</span>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-gray-100">
-            @foreach([
-                ['Correct', $correct, '#16a34a'],
-                ['Wrong', $wrong, '#dc2626'],
-                ['Unattempted', $unattempted, '#6b7280'],
-                ['Accuracy', $accuracy.'%', '#1a3c5e'],
-            ] as [$label, $val, $color])
-            <div class="px-4 py-4 text-center">
-                <p class="text-2xl font-bold" style="color:{{ $color }}">{{ $val }}</p>
-                <p class="text-xs text-gray-500 mt-0.5">{{ $label }}</p>
-            </div>
-            @endforeach
-        </div>
+<div>
+<div class="nta-header">
+    <div class="flex items-center gap-3">
+        @if($testLink->test->institution?->logo_path)
+        <img src="{{ asset('storage/'.$testLink->test->institution->logo_path) }}" class="h-8 w-auto" alt="">
+        @endif
+        <span class="text-white font-bold text-base">{{ $testLink->test->institution?->name ?? 'ExamSphere' }}</span>
     </div>
+    <span class="text-white/60 text-sm font-semibold">CBT Examination Portal</span>
+</div>
 
-    @if($a->rank_in_test)
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-4 flex items-center justify-between">
-        <div>
-            <p class="text-sm text-gray-500">Your Rank</p>
-            <p class="text-3xl font-bold" style="color:#1a3c5e;">#{{ $a->rank_in_test }}</p>
-        </div>
-        <div class="text-right">
-            <p class="text-sm text-gray-500">Score</p>
-            <p class="text-3xl font-bold">{{ number_format($percentage, 1) }}%</p>
-        </div>
-    </div>
-    @endif
+<div class="min-h-[calc(100vh-52px)] flex items-center justify-center p-4">
+    <div class="w-full max-w-md text-center">
 
-    <!-- Response breakdown -->
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <div class="px-5 py-4 border-b border-gray-100 font-semibold text-sm" style="color:#1a3c5e;">Question Summary</div>
-        <div class="divide-y divide-gray-50">
-            @foreach($a->responses->groupBy(fn($r) => $r->testQuestion?->section_id ?? 'General') as $section => $responses)
-            <div class="px-5 py-3">
-                <p class="text-xs font-semibold text-gray-400 uppercase mb-2">Section {{ $section }}</p>
-                <div class="flex flex-wrap gap-2">
-                    @foreach($responses as $r)
-                    @php
-                        $cls = match($r->status) {
-                            'answered' => $r->is_correct ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
-                            'answered_marked_review' => $r->is_correct ? 'bg-green-400 text-white' : 'bg-red-400 text-white',
-                            'not_visited' => 'bg-gray-200 text-gray-600',
-                            default => 'bg-red-100 text-red-700',
-                        };
-                    @endphp
-                    <div class="h-7 w-7 rounded text-xs font-bold flex items-center justify-center {{ $cls }}">{{ $r->testQuestion?->question_number ?? '?' }}</div>
-                    @endforeach
-                </div>
+        <!-- Success Icon -->
+        <div class="mx-auto mb-6 h-20 w-20 rounded-full flex items-center justify-center" style="background:#e8f5e9;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2E8B57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">Test Submitted Successfully</h1>
+        <p class="text-gray-500 text-sm mb-6">Your responses have been recorded and submitted.</p>
+
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 text-left space-y-3 mb-6">
+            @if($attempt?->student)
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Student</span>
+                <span class="font-semibold text-gray-800">{{ $attempt->student->name }}</span>
             </div>
-            @endforeach
+            <div class="flex justify-between text-sm border-t border-gray-100 pt-3">
+                <span class="text-gray-500">Roll Number</span>
+                <span class="font-mono text-gray-800">{{ $attempt->student->roll_number }}</span>
+            </div>
+            @endif
+            <div class="flex justify-between text-sm border-t border-gray-100 pt-3">
+                <span class="text-gray-500">Test</span>
+                <span class="font-semibold text-gray-800">{{ $testLink->test->title }}</span>
+            </div>
+            @if($attempt?->submitted_at)
+            <div class="flex justify-between text-sm border-t border-gray-100 pt-3">
+                <span class="text-gray-500">Submitted At</span>
+                <span class="text-gray-800">{{ $attempt->submitted_at->format('d M Y, h:i A') }}</span>
+            </div>
+            @endif
         </div>
-    </div>
 
-    <div class="text-center pb-4">
-        <p class="text-sm text-gray-500 mb-3">Detailed results will be available on the results portal</p>
-        <a href="{{ route('student.results') }}" class="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-5 py-2 text-sm font-medium hover:bg-gray-50 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-            View All Results
-        </a>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800 mb-6">
+            Your results will be reviewed and shared by your institution. You may close this window.
+        </div>
+
+        <p class="text-xs text-gray-400">Powered by <strong>ExamSphere</strong> CBT Platform</p>
     </div>
 </div>
-</body>
-</html>
+</div>

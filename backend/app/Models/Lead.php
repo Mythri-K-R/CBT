@@ -21,4 +21,9 @@ class Lead extends Model
         'status',
         'institution_id',
     ];
+
+    public function institution(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Institution::class);
+    }
 }

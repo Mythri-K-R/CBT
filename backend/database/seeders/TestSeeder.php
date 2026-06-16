@@ -85,6 +85,8 @@ class TestSeeder extends Seeder
 
     private function populateTest(Test $test, ExamTemplate $template, string $examType)
     {
+        $usedQuestionIds = [];
+
         foreach ($template->sections as $tplSection) {
             $section = TestSection::create([
                 'test_id' => $test->id,
@@ -99,12 +101,15 @@ class TestSeeder extends Seeder
 
             // Get random questions for this subject
             $questions = Question::where('subject_id', $section->subject_id)
+                ->whereNotIn('id', $usedQuestionIds)
                 ->inRandomOrder()
                 ->limit($section->question_count)
                 ->get();
 
             $qNum = 1;
             foreach ($questions as $question) {
+                $usedQuestionIds[] = $question->id;
+                
                 TestQuestion::create([
                     'test_id' => $test->id,
                     'section_id' => $section->id,

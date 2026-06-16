@@ -72,9 +72,17 @@
                     Book a Free Demo
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
-                <a href="{{ route('login') }}" class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-border bg-background px-8 py-3.5 text-base font-semibold shadow-sm hover:bg-accent hover:text-accent-foreground transition-all">
-                    Login to Portal
-                </a>
+                @auth
+                    @if(auth()->user()->role !== 'super_admin')
+                    <a href="{{ route('institution.dashboard') }}" class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-border bg-background px-8 py-3.5 text-base font-semibold shadow-sm hover:bg-accent hover:text-accent-foreground transition-all">
+                        Go to Dashboard
+                    </a>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-border bg-background px-8 py-3.5 text-base font-semibold shadow-sm hover:bg-accent hover:text-accent-foreground transition-all">
+                        Login to Portal
+                    </a>
+                @endauth
             </div>
         </div>
 

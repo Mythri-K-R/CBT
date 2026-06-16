@@ -12,15 +12,16 @@ new #[Layout('layouts.institution')] class extends Component {
     public bool $showModal = false;
     public string $name = '';
     public string $examType = 'neet';
-    public string $year = '';
-    public string $section = '';
+    public string $batchType = 'regular';
+    public string $targetYear = '';
     public ?int $editingId = null;
 
     public function openCreate(): void
     {
-        $this->reset(['name', 'examType', 'year', 'section', 'editingId']);
+        $this->reset(['name', 'examType', 'batchType', 'targetYear', 'editingId']);
         $this->examType = 'neet';
-        $this->year = (string) (now()->year + 1);
+        $this->batchType = 'regular';
+        $this->targetYear = (string) (now()->year + 1);
         $this->showModal = true;
     }
 
@@ -29,25 +30,25 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->editingId = $batch->id;
         $this->name = $batch->name;
         $this->examType = $batch->exam_type;
-        $this->year = $batch->year ?? '';
-        $this->section = $batch->section ?? '';
+        $this->batchType = $batch->batch_type ?? 'regular';
+        $this->targetYear = (string) ($batch->target_year ?? '');
         $this->showModal = true;
     }
 
     public function save(): void
     {
         $this->validate([
-            'name'     => 'required|string|max:100',
-            'examType' => 'required|in:neet,jee,kcet',
-            'year'     => 'nullable|digits:4',
-            'section'  => 'nullable|string|max:50',
+            'name'       => 'required|string|max:100',
+            'examType'   => 'required|in:neet,jee_main,jee_advanced,kcet,general',
+            'batchType'  => 'required|in:regular,crash_course,dropper,repeater,weekend,online,combined',
+            'targetYear' => 'nullable|digits:4',
         ]);
 
         $data = [
-            'name'      => $this->name,
-            'exam_type' => $this->examType,
-            'year'      => $this->year ?: null,
-            'section'   => $this->section ?: null,
+            'name'        => $this->name,
+            'exam_type'   => $this->examType,
+            'batch_type'  => $this->batchType,
+            'target_year' => $this->targetYear ?: null,
         ];
 
         if ($this->editingId) {
@@ -138,8 +139,8 @@ new #[Layout('layouts.institution')] class extends Component {
 
             <a href="{{ route('institution.batches.show', $batch) }}" wire:navigate class="block">
                 <h3 class="font-display font-bold text-lg mb-1 hover:text-primary transition-colors">{{ $batch->name }}</h3>
-                @if($batch->year || $batch->section)
-                <p class="text-sm text-muted-foreground mb-4">{{ $batch->year }}{{ $batch->year && $batch->section ? ' · ' : '' }}{{ $batch->section }}</p>
+                @if($batch->target_year)
+                <p class="text-sm text-muted-foreground mb-4">{{ ucfirst(str_replace('_',' ',$batch->batch_type ?? '')) }} · {{ $batch->target_year }}</p>
                 @else
                 <div class="mb-4"></div>
                 @endif
@@ -177,23 +178,33 @@ new #[Layout('layouts.institution')] class extends Component {
                 <input wire:model="name" type="text" placeholder="e.g. NEET 2026 – Morning Batch" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring @error('name') border-destructive @enderror">
                 @error('name')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
             </div>
-            <div>
-                <label class="block text-sm font-medium mb-1.5">Exam Type <span class="text-destructive">*</span></label>
-                <select wire:model="examType" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
-                    <option value="neet">NEET</option>
-                    <option value="jee">JEE (Mains + Advanced)</option>
-                    <option value="kcet">KCET</option>
-                </select>
-            </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <label class="block text-sm font-medium mb-1.5">Target Year</label>
-                    <input wire:model="year" type="text" placeholder="{{ now()->year + 1 }}" maxlength="4" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                    <label class="block text-sm font-medium mb-1.5">Exam Type <span class="text-destructive">*</span></label>
+                    <select wire:model="examType" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                        <option value="neet">NEET</option>
+                        <option value="jee_main">JEE Main</option>
+                        <option value="jee_advanced">JEE Advanced</option>
+                        <option value="kcet">KCET</option>
+                        <option value="general">General</option>
+                    </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-1.5">Section</label>
-                    <input wire:model="section" type="text" placeholder="A, Morning, etc." class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                    <label class="block text-sm font-medium mb-1.5">Batch Type</label>
+                    <select wire:model="batchType" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                        <option value="regular">Regular</option>
+                        <option value="crash_course">Crash Course</option>
+                        <option value="dropper">Dropper</option>
+                        <option value="repeater">Repeater</option>
+                        <option value="weekend">Weekend</option>
+                        <option value="online">Online</option>
+                        <option value="combined">Combined</option>
+                    </select>
                 </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1.5">Target Year</label>
+                <input wire:model="targetYear" type="text" placeholder="{{ now()->year + 1 }}" maxlength="4" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
             </div>
             <div class="flex items-center gap-3 pt-2">
                 <button type="submit" class="flex-1 rounded-lg bg-primary py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors">{{ $editingId ? 'Save Changes' : 'Create Batch' }}</button>

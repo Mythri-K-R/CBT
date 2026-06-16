@@ -22,10 +22,14 @@ class CheckSubscription
         }
 
         if (!$institution->isSubscriptionActive()) {
-            return response()->json([
-                'message'          => 'Subscription expired. Please renew to continue.',
-                'subscription_end' => $institution->subscription_end,
-            ], 402);
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message'          => 'Subscription expired. Please renew to continue.',
+                    'subscription_end' => $institution->subscription_end,
+                ], 402);
+            }
+            return redirect()->route('home')
+                ->with('error', 'Your subscription has expired. Please contact support@examsphere.in to renew.');
         }
 
         return $next($request);

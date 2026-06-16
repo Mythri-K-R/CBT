@@ -9,60 +9,74 @@ new #[Layout('layouts.admin')] class extends Component {
     use WithPagination;
 
     public string $search = '';
-    public string $statusFilter = '';
+    public string $planFilter = '';
     public bool $showModal = false;
     public ?int $editingId = null;
 
     public string $name = '';
+    public string $contactPerson = '';
     public string $email = '';
     public string $phone = '';
     public string $city = '';
-    public string $examTypes = 'neet';
-    public string $plan = 'basic';
+    public string $type = 'coaching_center';
+    public string $plan = 'trial';
     public string $subscriptionEnd = '';
 
     public function openCreate(): void
     {
-        $this->reset(['name','email','phone','city','examTypes','plan','subscriptionEnd','editingId']);
-        $this->examTypes = 'neet';
-        $this->plan = 'basic';
+        $this->reset(['name','contactPerson','email','phone','city','type','plan','subscriptionEnd','editingId']);
+        $this->type = 'coaching_center';
+        $this->plan = 'trial';
         $this->showModal = true;
     }
 
-    public function openEdit(Institution $institution): void
+    public function openEdit(int $id): void
     {
+        $institution = Institution::find($id);
+        if (!$institution) return;
         $this->editingId = $institution->id;
         $this->name = $institution->name;
+        $this->contactPerson = $institution->contact_person ?? '';
         $this->email = $institution->email ?? '';
         $this->phone = $institution->phone ?? '';
         $this->city = $institution->city ?? '';
-        $this->plan = $institution->subscription_plan ?? 'basic';
-        $this->subscriptionEnd = $institution->subscription_ends_at?->format('Y-m-d') ?? '';
+        $this->type = $institution->type ?? 'coaching_center';
+        $this->plan = $institution->plan ?? 'trial';
+        $this->subscriptionEnd = $institution->subscription_end?->format('Y-m-d') ?? '';
         $this->showModal = true;
     }
 
     public function save(): void
     {
         $this->validate([
-            'name' => 'required|string|max:200',
-            'email' => 'nullable|email|max:150',
-            'phone' => 'nullable|string|max:20',
-            'plan' => 'required|in:basic,professional,enterprise',
+            'name'          => 'required|string|max:200',
+            'contactPerson' => 'required|string|max:150',
+            'email'         => 'required|email|max:150',
+            'phone'         => 'required|string|max:20',
+            'type'          => 'required|in:pu_college,degree_college,neet_academy,jee_academy,kcet_institute,coaching_center,school,other',
+            'plan'          => 'required|in:trial,starter,growth,enterprise',
             'subscriptionEnd' => 'nullable|date',
         ]);
 
         $data = [
-            'name' => $this->name,
-            'email' => $this->email ?: null,
-            'phone' => $this->phone ?: null,
-            'city' => $this->city ?: null,
-            'subscription_plan' => $this->plan,
-            'subscription_ends_at' => $this->subscriptionEnd ?: null,
+            'name'             => $this->name,
+            'contact_person'   => $this->contactPerson,
+            'email'            => $this->email,
+            'phone'            => $this->phone,
+            'city'             => $this->city ?: null,
+            'type'             => $this->type,
+            'plan'             => $this->plan,
+            'subscription_end' => $this->subscriptionEnd ?: null,
         ];
 
-        $this->editingId
-            ? Institution::find($this->editingId)?->update($data)
-            : Institution::create($data);
+        if ($this->editingId) {
+            Institution::find($this->editingId)?->update($data);
+        } else {
+            $baseName = \Illuminate\Support\Str::slug($this->name);
+            $data['code'] = strtoupper(\Illuminate\Support\Str::random(6));
+            $data['slug'] = $baseName . '-' . rand(100, 999);
+            Institution::create($data);
+        }
 
         $this->showModal = false;
         session()->flash('success', 'Institution saved.');
@@ -71,9 +85,9 @@ new #[Layout('layouts.admin')] class extends Component {
     public function with(): array
     {
         $institutions = Institution::query()
-            ->withCount('users', 'students', 'tests')
+            ->withCount(['users', 'students', 'tests'])
             ->when($this->search, fn($q) => $q->where('name','like',"%{$this->search}%")->orWhere('city','like',"%{$this->search}%"))
-            ->when($this->statusFilter, fn($q) => $q->where('subscription_plan', $this->statusFilter))
+            ->when($this->planFilter, fn($q) => $q->where('plan', $this->planFilter))
             ->latest()
             ->paginate(15);
 
@@ -103,10 +117,11 @@ new #[Layout('layouts.admin')] class extends Component {
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search institutions..." class="h-9 w-full rounded-md border border-input bg-background pl-9 pr-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
         </div>
-        <select wire:model.live="statusFilter" class="h-9 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+        <select wire:model.live="planFilter" class="h-9 rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
             <option value="">All Plans</option>
-            <option value="basic">Basic</option>
-            <option value="professional">Professional</option>
+            <option value="trial">Trial</option>
+            <option value="starter">Starter</option>
+            <option value="growth">Growth</option>
             <option value="enterprise">Enterprise</option>
         </select>
     </div>
@@ -126,8 +141,8 @@ new #[Layout('layouts.admin')] class extends Component {
             <tbody class="divide-y divide-border">
                 @forelse($institutions as $inst)
                 @php
-                    $planColors = ['basic'=>'bg-muted text-muted-foreground','professional'=>'bg-info/10 text-info','enterprise'=>'bg-primary/10 text-primary'];
-                    $pc = $planColors[$inst->subscription_plan ?? 'basic'] ?? 'bg-muted text-muted-foreground';
+                    $planColors = ['trial'=>'bg-muted text-muted-foreground','starter'=>'bg-info/10 text-info','growth'=>'bg-success/10 text-success','enterprise'=>'bg-primary/10 text-primary'];
+                    $pc = $planColors[$inst->plan ?? 'trial'] ?? 'bg-muted text-muted-foreground';
                 @endphp
                 <tr class="hover:bg-muted/20 transition-colors">
                     <td class="px-4 py-3">
@@ -138,7 +153,7 @@ new #[Layout('layouts.admin')] class extends Component {
                     <td class="px-4 py-3 text-right hidden sm:table-cell text-muted-foreground">{{ $inst->students_count }}</td>
                     <td class="px-4 py-3 text-right hidden md:table-cell text-muted-foreground">{{ $inst->tests_count }}</td>
                     <td class="px-4 py-3">
-                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold {{ $pc }}">{{ ucfirst($inst->subscription_plan ?? 'basic') }}</span>
+                        <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold {{ $pc }}">{{ ucfirst($inst->plan ?? 'trial') }}</span>
                     </td>
                     <td class="px-4 py-3">
                         <div class="flex items-center justify-end gap-1">
@@ -175,26 +190,49 @@ new #[Layout('layouts.admin')] class extends Component {
                 <input wire:model="name" type="text" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring @error('name') border-destructive @enderror">
                 @error('name')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
             </div>
+            <div>
+                <label class="block text-sm font-medium mb-1.5">Contact Person <span class="text-destructive">*</span></label>
+                <input wire:model="contactPerson" type="text" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring @error('contactPerson') border-destructive @enderror">
+                @error('contactPerson')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
+            </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <label class="block text-sm font-medium mb-1.5">Email</label>
-                    <input wire:model="email" type="email" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                    <label class="block text-sm font-medium mb-1.5">Email <span class="text-destructive">*</span></label>
+                    <input wire:model="email" type="email" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring @error('email') border-destructive @enderror">
+                    @error('email')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-1.5">Phone</label>
-                    <input wire:model="phone" type="tel" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                    <label class="block text-sm font-medium mb-1.5">Phone <span class="text-destructive">*</span></label>
+                    <input wire:model="phone" type="tel" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring @error('phone') border-destructive @enderror">
+                    @error('phone')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
-            <div>
-                <label class="block text-sm font-medium mb-1.5">City</label>
-                <input wire:model="city" type="text" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">Type <span class="text-destructive">*</span></label>
+                    <select wire:model="type" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                        <option value="coaching_center">Coaching Center</option>
+                        <option value="neet_academy">NEET Academy</option>
+                        <option value="jee_academy">JEE Academy</option>
+                        <option value="kcet_institute">KCET Institute</option>
+                        <option value="pu_college">PU College</option>
+                        <option value="degree_college">Degree College</option>
+                        <option value="school">School</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">City</label>
+                    <input wire:model="city" type="text" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+                </div>
             </div>
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="block text-sm font-medium mb-1.5">Plan</label>
                     <select wire:model="plan" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
-                        <option value="basic">Basic</option>
-                        <option value="professional">Professional</option>
+                        <option value="trial">Trial</option>
+                        <option value="starter">Starter</option>
+                        <option value="growth">Growth</option>
                         <option value="enterprise">Enterprise</option>
                     </select>
                 </div>

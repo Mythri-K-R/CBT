@@ -57,9 +57,10 @@ class Institution extends Model
 
     public function isSubscriptionActive(): bool
     {
-        return $this->is_active
-            && $this->subscription_end
-            && $this->subscription_end->isFuture();
+        if (!$this->is_active) return false;
+        // No end date means no expiry (trial/unlimited)
+        if (!$this->subscription_end) return true;
+        return $this->subscription_end->isFuture();
     }
 
     public function isWithinStudentLimit(): bool

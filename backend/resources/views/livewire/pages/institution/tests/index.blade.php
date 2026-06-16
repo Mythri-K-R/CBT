@@ -90,7 +90,7 @@ new #[Layout('layouts.institution')] class extends Component {
                         <tr class="hover:bg-muted/50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="font-medium text-foreground">{{ $test->title }}</div>
-                                <div class="text-xs text-muted-foreground mt-0.5">{{ $test->template->name }} • {{ $test->duration_minutes }} mins</div>
+                                <div class="text-xs text-muted-foreground mt-0.5">{{ strtoupper($test->exam_type) }} • {{ $test->duration_minutes }} mins</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex flex-col gap-1 text-xs">

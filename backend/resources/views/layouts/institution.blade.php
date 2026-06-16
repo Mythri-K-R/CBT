@@ -75,6 +75,13 @@
             </a>
             @endif
 
+            @if($u?->role === 'institution_admin' || $u?->hasPermission('can_create_tests'))
+            <a href="{{ route('institution.papers') }}" wire:navigate class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors {{ request()->routeIs('institution.papers*') ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm' : 'text-sidebar-foreground hover:bg-sidebar-accent' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h5"/></svg>
+                <span x-show="!collapsed">Full Length Papers</span>
+            </a>
+            @endif
+
             @if($u?->role === 'institution_admin' || $u?->hasPermission('can_view_results'))
             <a href="{{ route('institution.results') }}" wire:navigate class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors {{ request()->routeIs('institution.results*') ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm' : 'text-sidebar-foreground hover:bg-sidebar-accent' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="M6 15V9"/><path d="M18 15V9"/><path d="M12 18V6"/><path d="M3 3v18h18"/></svg>

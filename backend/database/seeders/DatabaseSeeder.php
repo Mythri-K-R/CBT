@@ -13,8 +13,10 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             ExamTemplateSeeder::class,
             SuperAdminSeeder::class,
+            InstitutionSeeder::class,
             QuestionSeeder::class,
             TestSeeder::class,
+            DemoTestSeeder::class,
         ]);
     }
 }

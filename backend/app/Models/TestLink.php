@@ -51,6 +51,6 @@ class TestLink extends Model
 
     public function getUrlAttribute(): string
     {
-        return config('app.frontend_url').'/test/'.$this->slug;
+        return route('student.test.landing', ['slug' => $this->slug]);
     }
 }

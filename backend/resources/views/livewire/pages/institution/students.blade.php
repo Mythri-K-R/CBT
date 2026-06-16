@@ -19,49 +19,55 @@ new #[Layout('layouts.institution')] class extends Component {
     public string $name = '';
     public string $rollNumber = '';
     public string $phone = '';
-    public string $email = '';
     public string $batchId = '';
 
     public function openCreate(): void
     {
-        $this->reset(['name','rollNumber','phone','email','batchId','editingId']);
+        $this->reset(['name','rollNumber','phone','batchId','editingId']);
         $this->showModal = true;
     }
 
-    public function openEdit(Student $student): void
+    public function openEdit(int $id): void
     {
+        $student = Student::with('batches')->find($id);
+        if (!$student) return;
         $this->editingId = $student->id;
         $this->name = $student->name;
         $this->rollNumber = $student->roll_number;
         $this->phone = $student->phone ?? '';
-        $this->email = $student->email ?? '';
-        $this->batchId = $student->batch_id ?? '';
+        $this->batchId = (string) ($student->batches->first()?->id ?? '');
         $this->showModal = true;
     }
 
     public function save(): void
     {
         $this->validate([
-            'name' => 'required|string|max:150',
-            'rollNumber' => 'required|string|max:50',
-            'phone' => 'nullable|string|max:15',
-            'email' => 'nullable|email|max:150',
-            'batchId' => 'nullable|exists:batches,id',
+            'name'        => 'required|string|max:150',
+            'rollNumber'  => 'required|string|max:50',
+            'phone'       => 'nullable|string|max:20',
+            'batchId'     => 'nullable|exists:batches,id',
         ]);
 
         $data = [
-            'name' => $this->name,
+            'name'        => $this->name,
             'roll_number' => $this->rollNumber,
-            'phone' => $this->phone ?: null,
-            'email' => $this->email ?: null,
-            'batch_id' => $this->batchId ?: null,
+            'phone'       => $this->phone ?: null,
         ];
 
         if ($this->editingId) {
-            Student::find($this->editingId)?->update($data);
+            $student = Student::find($this->editingId);
+            $student?->update($data);
+            if ($student && $this->batchId) {
+                // Update primary batch (detach others, attach new)
+                $student->batches()->detach();
+                $student->batches()->attach($this->batchId, ['enrolled_at' => now(), 'status' => 'active']);
+            }
             session()->flash('success', 'Student updated.');
         } else {
-            auth()->user()->institution->students()->create($data);
+            $student = auth()->user()->institution->students()->create($data);
+            if ($this->batchId) {
+                $student->batches()->attach($this->batchId, ['enrolled_at' => now(), 'status' => 'active']);
+            }
             session()->flash('success', 'Student added.');
         }
 
@@ -69,9 +75,9 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->resetPage();
     }
 
-    public function deleteStudent(Student $student): void
+    public function deleteStudent(int $id): void
     {
-        $student->delete();
+        Student::find($id)?->delete();
         session()->flash('success', 'Student removed.');
     }
 
@@ -83,14 +89,14 @@ new #[Layout('layouts.institution')] class extends Component {
         $batches = Batch::orderBy('name')->get(['id','name','exam_type']);
 
         $students = Student::query()
-            ->with('batch')
+            ->with('batches')
             ->when($this->search, fn($q) => $q->where(function($q2) {
                 $q2->where('name','like',"%{$this->search}%")
                    ->orWhere('roll_number','like',"%{$this->search}%")
                    ->orWhere('phone','like',"%{$this->search}%");
             }))
-            ->when($this->batchFilter, fn($q) => $q->where('batch_id', $this->batchFilter))
-            ->when($this->examTypeFilter, fn($q) => $q->whereHas('batch', fn($q2) => $q2->where('exam_type', $this->examTypeFilter)))
+            ->when($this->batchFilter, fn($q) => $q->whereHas('batches', fn($q2) => $q2->where('batches.id', $this->batchFilter)))
+            ->when($this->examTypeFilter, fn($q) => $q->whereHas('batches', fn($q2) => $q2->where('exam_type', $this->examTypeFilter)))
             ->orderBy('name')
             ->paginate(20);
 
@@ -165,14 +171,15 @@ new #[Layout('layouts.institution')] class extends Component {
                     </td>
                     <td class="px-4 py-3 text-muted-foreground hidden sm:table-cell font-mono text-xs">{{ $student->roll_number }}</td>
                     <td class="px-4 py-3 hidden md:table-cell">
-                        @if($student->batch)
-                        <span class="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs font-medium">{{ $student->batch->name }}</span>
+                        @php $primaryBatch = $student->batches->first(); @endphp
+                        @if($primaryBatch)
+                        <span class="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs font-medium">{{ $primaryBatch->name }}</span>
                         @else
                         <span class="text-muted-foreground text-xs">—</span>
                         @endif
                     </td>
                     <td class="px-4 py-3 text-muted-foreground text-xs hidden lg:table-cell">
-                        {{ $student->phone ?? $student->email ?? '—' }}
+                        {{ $student->phone ?? '—' }}
                     </td>
                     <td class="px-4 py-3">
                         <div class="flex items-center justify-end gap-1">
@@ -182,7 +189,7 @@ new #[Layout('layouts.institution')] class extends Component {
                             <button wire:click="openEdit({{ $student->id }})" class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
                             </button>
-                            <button wire:click="deleteStudent({{ $student->id }})" wire:confirm="Remove {{ $student->name }}?" class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
+                            <button wire:click="deleteStudent({{ $student->id }})" wire:confirm="Remove this student permanently?" class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="m19 6-.867 12.142A2 2 0 0 1 16.138 20H7.862a2 2 0 0 1-1.995-1.858L5 6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
                             </button>
                         </div>
@@ -224,15 +231,9 @@ new #[Layout('layouts.institution')] class extends Component {
                 <input wire:model="rollNumber" type="text" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring font-mono @error('rollNumber') border-destructive @enderror">
                 @error('rollNumber')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
             </div>
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="block text-sm font-medium mb-1.5">Phone</label>
-                    <input wire:model="phone" type="tel" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1.5">Email</label>
-                    <input wire:model="email" type="email" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
-                </div>
+            <div>
+                <label class="block text-sm font-medium mb-1.5">Phone</label>
+                <input wire:model="phone" type="tel" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
             </div>
             <div>
                 <label class="block text-sm font-medium mb-1.5">Batch</label>
