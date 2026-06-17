@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 new #[Layout('layouts.institution')] class extends Component {
     public string $step       = 'exam_type';
     public string $examType   = '';
+    public string $mode       = 'bank'; // 'bank' | 'scratch'
     public string $title      = '';
     public string $description = '';
-    public string $scheduledStart = '';
+    public int    $durationMinutes = 180;
     public array  $subjects   = [];
     public int    $activeSubjectIdx = 0;
 
@@ -84,9 +84,15 @@ new #[Layout('layouts.institution')] class extends Component {
         ];
     }
 
+    public function selectMode(string $m): void
+    {
+        $this->mode = $m;
+        $this->step = 'configure';
+    }
+
     public function goToSchedule(): void
     {
-        if ($this->calcTotalQuestions() === 0) {
+        if ($this->mode === 'bank' && $this->calcTotalQuestions() === 0) {
             $this->addError('configure', 'Please select at least 1 question from any chapter.');
             return;
         }
@@ -98,102 +104,130 @@ new #[Layout('layouts.institution')] class extends Component {
     {
         $institutionId = Auth::user()->institution_id;
 
-        $this->validate([
+        $rules = [
             'title' => [
                 'required', 'string', 'max:255',
                 Rule::unique('tests')->where(fn($q) => $q->where('institution_id', $institutionId)),
             ],
-            'scheduledStart' => 'required|date',
-        ]);
+        ];
+        if ($this->mode === 'scratch') {
+            $rules['durationMinutes'] = 'required|integer|min:10|max:600';
+        }
+        $this->validate($rules);
 
-        $totalQ = $this->calcTotalQuestions();
-        if ($totalQ === 0) {
-            $this->addError('configure', 'No questions selected.');
-            return;
+        if ($this->mode === 'bank') {
+            $totalQ = $this->calcTotalQuestions();
+            if ($totalQ === 0) {
+                $this->addError('configure', 'No questions selected.');
+                return;
+            }
         }
 
-        $duration = $totalQ;
-        $startAt  = Carbon::parse($this->scheduledStart);
-        $endAt    = $startAt->copy()->addMinutes($duration);
-        $marks    = match($this->examType) {
+        $marks = match($this->examType) {
             'kcet'  => ['positive' => 1, 'negative' => 0],
             default => ['positive' => 4, 'negative' => 1],
         };
 
         $testUuid = null;
 
-        DB::transaction(function () use ($duration, $totalQ, $startAt, $endAt, $marks, &$testUuid) {
-            $test = Test::create([
-                'institution_id'          => Auth::user()->institution_id,
-                'created_by'              => Auth::id(),
-                'template_id'             => null,
-                'title'                   => $this->title,
-                'description'             => $this->description,
-                'exam_type'               => $this->examType,
-                'test_category'           => 'mock_test',
-                'duration_minutes'        => $duration,
-                'has_sectional_timing'    => false,
-                'allow_section_switching' => true,
-                'scheduled_start'         => $startAt,
-                'scheduled_end'           => $endAt,
-                'status'                  => 'scheduled',
-                'total_marks'             => $totalQ * $marks['positive'],
-                'show_result_immediately' => true,
-            ]);
+        DB::transaction(function () use ($marks, &$testUuid) {
+            if ($this->mode === 'bank') {
+                $totalQ   = $this->calcTotalQuestions();
+                $duration = $totalQ;
 
-            $questionNumber = 1;
-
-            foreach ($this->subjects as $order => $subjectData) {
-                $subjectTotal = collect($subjectData['chapters'])->sum(fn($c) => max(0, (int)($c['count'] ?? 0)));
-                if ($subjectTotal === 0) continue;
-
-                $section = TestSection::create([
-                    'test_id'        => $test->id,
-                    'name'           => $subjectData['name'],
-                    'subject_id'     => $subjectData['id'],
-                    'question_count' => $subjectTotal,
-                    'positive_marks' => $marks['positive'],
-                    'negative_marks' => $marks['negative'],
-                    'display_order'  => $order + 1,
+                $test = Test::create([
+                    'institution_id'          => Auth::user()->institution_id,
+                    'created_by'              => Auth::id(),
+                    'title'                   => $this->title,
+                    'description'             => $this->description,
+                    'exam_type'               => $this->examType,
+                    'test_category'           => 'mock_test',
+                    'duration_minutes'        => $duration,
+                    'has_sectional_timing'    => false,
+                    'allow_section_switching' => true,
+                    'scheduled_start'         => null,
+                    'scheduled_end'           => null,
+                    'status'                  => 'draft',
+                    'total_marks'             => $totalQ * $marks['positive'],
+                    'show_result_immediately' => true,
                 ]);
 
-                foreach ($subjectData['chapters'] as $chapterData) {
-                    $count = max(0, (int)($chapterData['count'] ?? 0));
-                    if ($count === 0) continue;
+                $questionNumber = 1;
+                foreach ($this->subjects as $order => $subjectData) {
+                    $subjectTotal = collect($subjectData['chapters'])->sum(fn($c) => max(0, (int)($c['count'] ?? 0)));
+                    if ($subjectTotal === 0) continue;
 
-                    $questions = Question::where('chapter_id', $chapterData['id'])
-                        ->where('exam_type', $this->examType)
-                        ->where('status', 'active')
-                        ->inRandomOrder()
-                        ->limit($count)
-                        ->get();
+                    $section = TestSection::create([
+                        'test_id'        => $test->id,
+                        'name'           => $subjectData['name'],
+                        'subject_id'     => $subjectData['id'],
+                        'question_count' => $subjectTotal,
+                        'positive_marks' => $marks['positive'],
+                        'negative_marks' => $marks['negative'],
+                        'display_order'  => $order + 1,
+                    ]);
 
-                    foreach ($questions as $q) {
-                        TestQuestion::create([
-                            'test_id'         => $test->id,
-                            'section_id'      => $section->id,
-                            'question_id'     => $q->id,
-                            'question_number' => $questionNumber++,
-                            'positive_marks'  => $marks['positive'],
-                            'negative_marks'  => $marks['negative'],
-                        ]);
+                    foreach ($subjectData['chapters'] as $chapterData) {
+                        $count = max(0, (int)($chapterData['count'] ?? 0));
+                        if ($count === 0) continue;
+
+                        $questions = Question::where('chapter_id', $chapterData['id'])
+                            ->where('exam_type', $this->examType)
+                            ->where('status', 'active')
+                            ->inRandomOrder()
+                            ->limit($count)
+                            ->get();
+
+                        foreach ($questions as $q) {
+                            TestQuestion::create([
+                                'test_id'         => $test->id,
+                                'section_id'      => $section->id,
+                                'question_id'     => $q->id,
+                                'question_number' => $questionNumber++,
+                                'positive_marks'  => $marks['positive'],
+                                'negative_marks'  => $marks['negative'],
+                            ]);
+                        }
                     }
                 }
-            }
+            } else {
+                // Scratch mode — blank test with empty sections
+                $test = Test::create([
+                    'institution_id'          => Auth::user()->institution_id,
+                    'created_by'              => Auth::id(),
+                    'title'                   => $this->title,
+                    'description'             => $this->description,
+                    'exam_type'               => $this->examType,
+                    'test_category'           => 'mock_test',
+                    'duration_minutes'        => $this->durationMinutes,
+                    'has_sectional_timing'    => false,
+                    'allow_section_switching' => true,
+                    'scheduled_start'         => null,
+                    'scheduled_end'           => null,
+                    'status'                  => 'draft',
+                    'total_marks'             => 0,
+                    'show_result_immediately' => true,
+                ]);
 
-            $examLabel = ['neet' => 'neet', 'jee_main' => 'jee', 'kcet' => 'kcet'][$this->examType] ?? 'test';
-            TestLink::create([
-                'test_id'        => $test->id,
-                'institution_id' => Auth::user()->institution_id,
-                'slug'           => $examLabel . '-' . strtolower(Str::random(8)),
-                'is_active'      => true,
-            ]);
+                foreach ($this->subjects as $order => $subjectData) {
+                    TestSection::create([
+                        'test_id'        => $test->id,
+                        'name'           => $subjectData['name'],
+                        'subject_id'     => $subjectData['id'],
+                        'question_count' => 0,
+                        'positive_marks' => $marks['positive'],
+                        'negative_marks' => $marks['negative'],
+                        'display_order'  => $order + 1,
+                    ]);
+                }
+            }
 
             $testUuid = $test->uuid;
         });
 
+        $redirectTab = $this->mode === 'scratch' ? 'questions' : 'preview';
         $this->redirect(
-            route('institution.tests.show', ['test' => $testUuid, 'tab' => 'links']),
+            route('institution.tests.show', ['test' => $testUuid, 'tab' => $redirectTab]),
             navigate: false
         );
     }
@@ -214,7 +248,7 @@ new #[Layout('layouts.institution')] class extends Component {
 
     {{-- Step indicator --}}
     <div class="flex items-center gap-0">
-        @foreach([['exam_type','Exam Type'],['configure','Questions'],['schedule','Schedule']] as $i => [$s, $label])
+        @foreach([['exam_type','Exam Type'],['configure','Questions'],['schedule','Details']] as $i => [$s, $label])
         @php
             $done    = ($step === 'configure' && $s === 'exam_type')
                     || ($step === 'schedule'  && in_array($s, ['exam_type','configure']));
@@ -289,10 +323,24 @@ new #[Layout('layouts.institution')] class extends Component {
     @if($step === 'configure')
     <div class="space-y-4">
         <div class="flex items-center justify-between">
-            <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Select chapters &amp; question counts</p>
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+                {{ $mode === 'bank' ? 'Select chapters & question counts' : 'Build test from scratch' }}
+            </p>
             <button wire:click="$set('step','exam_type')" type="button" class="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
                 Change exam type
+            </button>
+        </div>
+
+        {{-- Mode toggle --}}
+        <div class="flex gap-1 p-1 bg-muted rounded-lg w-fit">
+            <button wire:click="selectMode('bank')" type="button"
+                    class="px-4 py-1.5 rounded-md text-sm font-medium transition-all {{ $mode === 'bank' ? 'bg-card shadow text-foreground' : 'text-muted-foreground hover:text-foreground' }}">
+                From Question Bank
+            </button>
+            <button wire:click="selectMode('scratch')" type="button"
+                    class="px-4 py-1.5 rounded-md text-sm font-medium transition-all {{ $mode === 'scratch' ? 'bg-card shadow text-foreground' : 'text-muted-foreground hover:text-foreground' }}">
+                Build from Scratch
             </button>
         </div>
 
@@ -300,6 +348,7 @@ new #[Layout('layouts.institution')] class extends Component {
         <div class="rounded-lg bg-destructive/10 border border-destructive/20 px-4 py-2 text-sm text-destructive">{{ $message }}</div>
         @enderror
 
+        @if($mode === 'bank')
         <div class="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
             {{-- Subject Tabs --}}
             <div class="flex border-b border-border">
@@ -361,9 +410,25 @@ new #[Layout('layouts.institution')] class extends Component {
             @endif
             @endforeach
         </div>
+        @else
+        {{-- Scratch mode placeholder --}}
+        <div class="rounded-xl border border-dashed border-primary/30 bg-primary/5 p-10 text-center space-y-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto text-primary"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <h3 class="font-display font-bold text-lg">Build Questions from Scratch</h3>
+            <p class="text-sm text-muted-foreground max-w-sm mx-auto">
+                After creating the test, you'll be taken to the question editor where you can write your own questions section by section — with formula and image support.
+            </p>
+            <div class="flex justify-center gap-2 flex-wrap text-xs text-muted-foreground pt-1">
+                @foreach($subjects as $s)
+                <span class="px-2 py-1 bg-card rounded-full border border-border">{{ $s['name'] }}</span>
+                @endforeach
+            </div>
+        </div>
+        @endif
 
         {{-- Summary bar --}}
         <div class="rounded-xl border border-border bg-card/95 px-5 py-4 flex items-center justify-between gap-4">
+            @if($mode === 'bank')
             <div class="flex items-center gap-6 flex-wrap">
                 <div>
                     <p class="text-xs text-muted-foreground">Total Questions</p>
@@ -387,6 +452,9 @@ new #[Layout('layouts.institution')] class extends Component {
                 </div>
                 @endif
             </div>
+            @else
+            <p class="text-sm text-muted-foreground">{{ count($subjects) }} sections · You'll write questions after creating the test.</p>
+            @endif
             <button wire:click="goToSchedule" type="button"
                 class="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95 shrink-0">
                 Continue
@@ -396,13 +464,11 @@ new #[Layout('layouts.institution')] class extends Component {
     </div>
     @endif
 
-    {{-- ─── STEP 3: Schedule ─── --}}
+    {{-- ─── STEP 3: Details ─── --}}
     @if($step === 'schedule')
     @php
         $examLabels = ['neet' => 'NEET', 'jee_main' => 'JEE Main', 'kcet' => 'CET'];
-        $endPreview = $scheduledStart
-            ? \Carbon\Carbon::parse($scheduledStart)->addMinutes($totalQuestions)->format('d M Y, h:i A')
-            : null;
+        $dur = $mode === 'scratch' ? $durationMinutes : $totalQuestions;
     @endphp
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-5">
@@ -421,27 +487,22 @@ new #[Layout('layouts.institution')] class extends Component {
                         class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
                         placeholder="Instructions for students..."></textarea>
                 </div>
+                @if($mode === 'scratch')
+                <div class="space-y-2">
+                    <label class="text-sm font-medium">Test Duration (minutes)</label>
+                    <input type="number" wire:model.live="durationMinutes" min="10" max="600"
+                        class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                        placeholder="e.g. 180">
+                    @error('durationMinutes') <span class="text-[11px] text-destructive">{{ $message }}</span> @enderror
+                </div>
+                @endif
             </div>
 
-            <div class="rounded-xl border border-border bg-card p-6 shadow-sm space-y-5">
-                <h2 class="font-semibold text-sm border-b border-border/50 pb-3 text-muted-foreground uppercase tracking-wider">Schedule</h2>
-                <div class="space-y-2">
-                    <label class="text-sm font-medium">Start Date &amp; Time</label>
-                    <input type="datetime-local" wire:model.live="scheduledStart"
-                        class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
-                    @error('scheduledStart') <span class="text-[11px] text-destructive">{{ $message }}</span> @enderror
-                </div>
-                <div class="space-y-2">
-                    <label class="text-sm font-medium text-muted-foreground">End Time <span class="font-normal">(auto-calculated)</span></label>
-                    <div class="w-full rounded-lg border border-dashed border-border bg-muted/30 px-3 py-2.5 text-sm text-muted-foreground flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        @if($endPreview)
-                            {{ $endPreview }}
-                            <span class="ml-auto text-xs">({{ $totalQuestions }} min after start)</span>
-                        @else
-                            Set a start time to see end time
-                        @endif
-                    </div>
+            <div class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6"/><path d="M12 16h.01"/></svg>
+                <div>
+                    <p class="font-semibold">Start time will be set later</p>
+                    <p class="text-amber-700 text-xs mt-0.5">After writing and approving the questions, you can set the exam schedule from the test overview page before sharing the link.</p>
                 </div>
             </div>
 
@@ -454,7 +515,7 @@ new #[Layout('layouts.institution')] class extends Component {
                 <button type="button" wire:click="createTest" wire:loading.attr="disabled"
                     class="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95 disabled:opacity-60">
                     <span wire:loading.remove wire:target="createTest">
-                        Create Test &amp; Generate Link
+                        @if($mode === 'scratch') Create Test &amp; Write Questions @else Create Test @endif
                     </span>
                     <span wire:loading wire:target="createTest" class="flex items-center gap-2">
                         <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
@@ -473,6 +534,7 @@ new #[Layout('layouts.institution')] class extends Component {
                         <span class="text-muted-foreground">Exam</span>
                         <span class="font-semibold">{{ $examLabels[$examType] ?? $examType }}</span>
                     </div>
+                    @if($mode === 'bank')
                     <div class="flex justify-between text-sm">
                         <span class="text-muted-foreground">Total Questions</span>
                         <span class="font-semibold">{{ $totalQuestions }}</span>
@@ -485,12 +547,30 @@ new #[Layout('layouts.institution')] class extends Component {
                         <span class="text-muted-foreground">Total Marks</span>
                         <span class="font-semibold">{{ $totalQuestions * ($examType === 'kcet' ? 1 : 4) }}</span>
                     </div>
+                    @else
+                    <div class="flex justify-between text-sm">
+                        <span class="text-muted-foreground">Duration</span>
+                        <span class="font-semibold">{{ $durationMinutes }} min</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-muted-foreground">Sections</span>
+                        <span class="font-semibold">{{ count($subjects) }}</span>
+                    </div>
+                    @endif
                     <div class="flex justify-between text-sm">
                         <span class="text-muted-foreground">Marking</span>
                         <span class="font-semibold">{{ $examType === 'kcet' ? '+1 / 0' : '+4 / –1' }}</span>
                     </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-muted-foreground">Status</span>
+                        <span class="font-semibold text-amber-600">Draft</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-muted-foreground">Schedule</span>
+                        <span class="font-semibold text-muted-foreground italic">Set later</span>
+                    </div>
                 </div>
-                @if($totalQuestions > 0)
+                @if($mode === 'bank' && $totalQuestions > 0)
                 <div class="border-t border-border/50 pt-3 space-y-2">
                     <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Sections</p>
                     @foreach($subjects as $subject)
@@ -509,10 +589,14 @@ new #[Layout('layouts.institution')] class extends Component {
             <div class="rounded-xl border border-primary/20 bg-primary/5 p-4 text-xs text-muted-foreground space-y-2">
                 <p class="font-semibold text-foreground text-sm">What happens next?</p>
                 <ul class="space-y-1.5">
-                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">✓</span> Questions randomly picked from each chapter</li>
-                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">✓</span> Test link auto-generated</li>
-                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">✓</span> Share link with students via WhatsApp</li>
-                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">✓</span> NTA-style exam interface opens for students</li>
+                    @if($mode === 'bank')
+                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">①</span> Questions picked from your bank</li>
+                    @else
+                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">①</span> Write questions section by section</li>
+                    @endif
+                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">②</span> Review &amp; approve the question paper</li>
+                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">③</span> Set exam date &amp; time</li>
+                    <li class="flex items-start gap-2"><span class="text-primary mt-0.5">④</span> Generate link &amp; share with students</li>
                 </ul>
             </div>
         </div>

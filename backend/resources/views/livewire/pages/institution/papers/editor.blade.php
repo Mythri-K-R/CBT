@@ -10,6 +10,7 @@ use App\Models\Subject;
 use App\Models\Chapter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 new #[Layout('layouts.institution')] class extends Component {
     public Test $paper;
@@ -321,12 +322,19 @@ new #[Layout('layouts.institution')] class extends Component {
 
     public function schedulePaper(): void
     {
+        $institutionId = Auth::user()->institution_id;
         $this->validate([
+            'paperTitle' => ['required', 'string', 'max:255',
+                Rule::unique('tests', 'title')
+                    ->where(fn($q) => $q->where('institution_id', $institutionId))
+                    ->ignore($this->paper->id)
+            ],
             'scheduleStart' => 'required|date|after:now',
             'scheduleEnd'   => 'required|date|after:scheduleStart',
         ]);
 
         $this->paper->update([
+            'title'           => $this->paperTitle,
             'status'          => 'scheduled',
             'scheduled_start' => $this->scheduleStart,
             'scheduled_end'   => $this->scheduleEnd,
@@ -529,7 +537,7 @@ new #[Layout('layouts.institution')] class extends Component {
                         <p class="text-sm leading-relaxed line-clamp-2">{{ $q?->question_text ?? '(Question deleted)' }}</p>
                         <div class="flex items-center gap-2 mt-2 flex-wrap">
                             @if($q?->chapter) <span class="text-xs text-muted-foreground">{{ $q->chapter->name }}</span> @endif
-                            <span class="diff-badge {{ $dBadge }}">{{ ucfirst($q?->difficulty ?? 'medium') }}</span>
+                            <span class="diff-badge {{ $dBadge }}">{{ ($q?->difficulty ?? 'medium') === 'hard' ? 'Tough' : ucfirst($q?->difficulty ?? 'medium') }}</span>
                             <span class="text-xs text-muted-foreground">+{{ $tq->positive_marks }} / –{{ $tq->negative_marks }}</span>
                             @if($q && $q->institution_id === Auth::user()->institution_id)
                             <span class="text-xs text-primary font-medium">Custom</span>
@@ -632,7 +640,7 @@ new #[Layout('layouts.institution')] class extends Component {
                             <option value="">Any Level</option>
                             <option value="easy">Easy</option>
                             <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
+                            <option value="hard">Tough</option>
                         </select>
                     </div>
                 </div>
@@ -645,7 +653,7 @@ new #[Layout('layouts.institution')] class extends Component {
                     <div class="flex items-center gap-1.5 flex-wrap mb-2">
                         @if($bq->chapter) <span class="text-[10px] text-muted-foreground">{{ $bq->chapter->name }}</span> @endif
                         @php $dBadge = match($bq->difficulty ?? 'medium') { 'easy' => 'diff-easy', 'hard' => 'diff-hard', default => 'diff-medium' }; @endphp
-                        <span class="diff-badge {{ $dBadge }}">{{ ucfirst($bq->difficulty ?? 'medium') }}</span>
+                        <span class="diff-badge {{ $dBadge }}">{{ ($bq->difficulty ?? 'medium') === 'hard' ? 'Tough' : ucfirst($bq->difficulty ?? 'medium') }}</span>
                     </div>
                     @if(!empty($opts))
                     <div class="grid grid-cols-2 gap-1 text-[10px] text-muted-foreground mb-2">
@@ -758,7 +766,7 @@ new #[Layout('layouts.institution')] class extends Component {
                     <div>
                         <label class="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1 block">Difficulty</label>
                         <div class="flex gap-2">
-                            @foreach(['easy' => 'Easy', 'medium' => 'Medium', 'hard' => 'Hard'] as $val => $lbl)
+                            @foreach(['easy' => 'Easy', 'medium' => 'Medium', 'hard' => 'Tough'] as $val => $lbl)
                             <label class="flex-1 cursor-pointer">
                                 <input type="radio" wire:model="qDifficulty" value="{{ $val }}" class="sr-only">
                                 <div class="text-center py-1.5 rounded-md border text-xs font-semibold transition-colors
@@ -841,7 +849,13 @@ new #[Layout('layouts.institution')] class extends Component {
         <div class="bg-card rounded-xl shadow-xl max-w-md w-full overflow-hidden">
             <div class="bg-primary text-primary-foreground px-6 py-4 font-bold">Schedule as Live Test</div>
             <div class="p-6 space-y-4">
-                <p class="text-sm text-muted-foreground">Set the start and end time. Students can access the test via the generated link during this window.</p>
+                <p class="text-sm text-muted-foreground">Set the title and time window. A shareable test link will be generated.</p>
+                <div class="space-y-1">
+                    <label class="text-sm font-medium">Test Title</label>
+                    <input type="text" wire:model="paperTitle"
+                           class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none">
+                    @error('paperTitle') <p class="text-xs text-destructive">{{ $message }}</p> @enderror
+                </div>
                 <div class="space-y-1">
                     <label class="text-sm font-medium">Start Time</label>
                     <input type="datetime-local" wire:model="scheduleStart"

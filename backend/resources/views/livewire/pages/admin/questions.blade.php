@@ -168,7 +168,7 @@ new #[Layout('layouts.admin')] class extends Component {
                     <option value="">Any difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
+                    <option value="hard">Tough</option>
                 </select>
             </div>
 
@@ -192,7 +192,7 @@ new #[Layout('layouts.admin')] class extends Component {
                             <div class="flex items-center gap-2 flex-wrap">
                                 @if($q->subject) <span class="text-[10px] bg-muted text-muted-foreground px-2 py-0.5 rounded-full">{{ $q->subject->name }}</span> @endif
                                 @if($q->chapter) <span class="text-[10px] text-muted-foreground">{{ $q->chapter->name }}</span> @endif
-                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold {{ $diffClr }}">{{ ucfirst($q->difficulty ?? 'medium') }}</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold {{ $diffClr }}">{{ $q->difficulty === 'hard' ? 'Tough' : ucfirst($q->difficulty ?? 'medium') }}</span>
                                 <span class="text-[10px] text-muted-foreground uppercase">{{ $q->exam_type }}</span>
                                 <span class="text-[10px] text-muted-foreground">+{{ $q->positive_marks }}/-{{ $q->negative_marks }}</span>
                             </div>

@@ -149,7 +149,7 @@ new #[Layout('layouts.institution')] class extends Component {
                     <select wire:model="difficulty" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
+                        <option value="hard">Tough</option>
                     </select>
                 </div>
             </div>

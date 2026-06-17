@@ -21,7 +21,7 @@ class Test extends Model
         'shuffle_questions', 'shuffle_options', 'show_result_immediately', 'show_solutions_after',
         'max_attempts', 'fullscreen_required', 'tab_switch_limit', 'disable_copy_paste',
         'disable_right_click', 'auto_submit_on_violation', 'instructions', 'status',
-        'total_marks',
+        'total_marks', 'is_paper_approved',
     ];
 
     protected $casts = [
@@ -35,6 +35,7 @@ class Test extends Model
         'disable_copy_paste'        => 'boolean',
         'disable_right_click'       => 'boolean',
         'auto_submit_on_violation'  => 'boolean',
+        'is_paper_approved'         => 'boolean',
         'scheduled_start'           => 'datetime',
         'scheduled_end'             => 'datetime',
         'result_publish_at'         => 'datetime',

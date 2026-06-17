@@ -217,7 +217,7 @@ new #[Layout('layouts.institution')] class extends Component {
                     <option value="">Any difficulty</option>
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
+                    <option value="hard">Tough</option>
                 </select>
             </div>
 
@@ -277,7 +277,7 @@ new #[Layout('layouts.institution')] class extends Component {
                                 @if($question->topic)
                                 <span class="text-[10px] text-muted-foreground">{{ $question->topic->name }}</span>
                                 @endif
-                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold {{ $diffClr }}">{{ ucfirst($question->difficulty ?? 'medium') }}</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold {{ $diffClr }}">{{ $question->difficulty === 'hard' ? 'Tough' : ucfirst($question->difficulty ?? 'medium') }}</span>
                                 @if($isPlatform)
                                 <span class="text-[10px] px-2 py-0.5 rounded-full bg-info/10 text-info font-medium">Platform</span>
                                 @endif
