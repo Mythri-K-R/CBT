@@ -25,7 +25,7 @@ new #[Layout('layouts.institution')] class extends Component {
     public function mount(Test $test): void
     {
         abort_if($test->institution_id !== auth()->user()->institution_id, 403);
-        $this->test = $test->load(['template', 'batches', 'sections.testQuestions']);
+        $this->test = $test->load(['template', 'batches', 'sections.testQuestions.question']);
 
         $this->activeLink = TestLink::where('test_id', $test->id)
             ->where('is_active', true)
@@ -123,11 +123,18 @@ new #[Layout('layouts.institution')] class extends Component {
                 </span>
             </div>
         </div>
-        <button wire:click="$set('showGenerateModal', true)"
-                class="h-9 rounded-lg bg-primary text-primary-foreground px-4 text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            Generate Link
-        </button>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('institution.tests.answer-key', $test) }}" wire:navigate
+               class="h-9 rounded-lg border border-border bg-background px-4 text-sm font-medium hover:bg-muted transition-colors flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Answer Key
+            </a>
+            <button wire:click="$set('showGenerateModal', true)"
+                    class="h-9 rounded-lg bg-primary text-primary-foreground px-4 text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                Generate Link
+            </button>
+        </div>
     </div>
 
     {{-- Stat Cards --}}
@@ -146,10 +153,10 @@ new #[Layout('layouts.institution')] class extends Component {
     </div>
 
     {{-- Tabs --}}
-    <div class="border-b border-border flex gap-0">
-        @foreach(['overview'=>'Overview','results'=>'Results','questions'=>'Questions','links'=>'Link Management'] as $key => $label)
+    <div class="border-b border-border flex gap-0 overflow-x-auto">
+        @foreach(['overview'=>'Overview','results'=>'Results','questions'=>'Questions','preview'=>'Paper Preview','links'=>'Link Management'] as $key => $label)
         <button wire:click="$set('tab','{{ $key }}')"
-                class="px-4 py-2.5 text-sm font-medium border-b-2 transition-colors {{ $tab === $key ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground' }}">
+                class="px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap {{ $tab === $key ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground' }}">
             {{ $label }}
         </button>
         @endforeach
@@ -266,6 +273,68 @@ new #[Layout('layouts.institution')] class extends Component {
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        @endforeach
+    </div>
+    @endif
+
+    {{-- ── PAPER PREVIEW ──────────────────────────────────────────────────── --}}
+    @if($tab === 'preview')
+    <div class="space-y-4">
+        <div class="flex items-center justify-between">
+            <p class="text-sm text-muted-foreground">Preview how the question paper looks. Verify all questions before sharing the link.</p>
+            <a href="{{ route('institution.tests.answer-key', $test) }}" wire:navigate
+               class="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline">
+                View Answer Key →
+            </a>
+        </div>
+
+        {{-- Paper header --}}
+        <div class="rounded-xl border border-border bg-card p-6 text-center">
+            <h2 class="text-xl font-bold">{{ $test->title }}</h2>
+            <p class="text-muted-foreground text-sm mt-1">
+                {{ strtoupper(str_replace('_',' ',$test->exam_type)) }} ·
+                Duration: {{ $test->duration_minutes }} minutes ·
+                Total Marks: {{ $test->total_marks ?? '—' }}
+            </p>
+        </div>
+
+        {{-- Sections --}}
+        @foreach($test->sections as $section)
+        <div class="rounded-xl border border-border bg-card overflow-hidden">
+            <div class="px-5 py-3 border-b border-border bg-muted/20 flex items-center justify-between">
+                <div class="font-semibold">{{ $section->name }}</div>
+                <div class="text-xs text-muted-foreground">
+                    {{ $section->testQuestions->count() }} questions ·
+                    +{{ $section->testQuestions->first()?->positive_marks ?? 4 }} /
+                    -{{ $section->testQuestions->first()?->negative_marks ?? 1 }}
+                </div>
+            </div>
+            <div class="divide-y divide-border/40">
+                @foreach($section->testQuestions->sortBy('question_number') as $tq)
+                @php $q = $tq->question; @endphp
+                @if($q)
+                <div class="p-5 hover:bg-muted/20 transition-colors">
+                    <div class="flex gap-3">
+                        <span class="font-bold text-primary shrink-0 w-8">{{ $tq->question_number }}.</span>
+                        <div class="flex-1">
+                            <div class="text-sm leading-relaxed mb-3">{!! $q->question_text !!}</div>
+                            @if($q->options)
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-sm">
+                                @foreach($q->options as $key => $text)
+                                <div class="flex items-start gap-2 text-muted-foreground">
+                                    <span class="font-semibold text-foreground shrink-0">({{ $key }})</span>
+                                    <span>{{ $text }}</span>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @endforeach
+            </div>
         </div>
         @endforeach
     </div>

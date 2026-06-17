@@ -104,7 +104,7 @@ new #[Layout('layouts.institution')] class extends Component {
         @if($attempts->isNotEmpty())
         <div class="rounded-xl border border-border bg-card p-5">
             <h3 class="font-semibold mb-4">Score Trend</h3>
-            @php $maxScore = $attempts->max('total_score') ?: 1; @endphp
+            @php $maxScore = max(1, (float)($attempts->max('total_score') ?? 0)); @endphp
             <div class="space-y-2">
                 @foreach($attempts->take(8)->reverse() as $a)
                 <div class="flex items-center gap-3 text-xs">

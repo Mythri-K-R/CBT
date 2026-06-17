@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Volt::route('institutions', 'pages.admin.institutions')->name('institutions');
         Volt::route('institutions/{institution}', 'pages.admin.institutions.show')->name('institutions.show');
         Volt::route('subjects', 'pages.admin.subjects')->name('subjects');
+        Volt::route('questions', 'pages.admin.questions')->name('questions');
         Volt::route('exam-templates', 'pages.admin.exam-templates')->name('exam-templates');
         Volt::route('settings', 'pages.admin.settings')->name('settings');
     });
@@ -59,6 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Volt::route('questions/{question}/edit', 'pages.institution.questions.edit')->name('questions.edit');
         Volt::route('tests', 'pages.institution.tests.index')->name('tests');
         Volt::route('tests/create', 'pages.institution.tests.create')->name('tests.create');
+        Volt::route('tests/{test}/answer-key', 'pages.institution.tests.answer-key')->name('tests.answer-key');
         Volt::route('tests/{test}', 'pages.institution.tests.show')->name('tests.show');
         Volt::route('papers', 'pages.institution.papers.index')->name('papers');
         Volt::route('papers/{examType}', 'pages.institution.papers.list')->name('papers.list');

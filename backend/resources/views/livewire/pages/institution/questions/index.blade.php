@@ -5,258 +5,327 @@ use Livewire\Attributes\Layout;
 use App\Models\Question;
 use App\Models\Subject;
 use App\Models\Chapter;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Topic;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 new #[Layout('layouts.institution')] class extends Component {
     use WithPagination;
 
-    public $examType = '';
-    public $subjectId = '';
-    public array $chapterIds = [];
-    public $difficulty = '';
-    public $search = '';
+    public string $examType  = '';
+    public string $subjectId = '';
+    public string $chapterId = '';
+    public string $topicId   = '';
+    public string $difficulty = '';
+    public string $search     = '';
+
+    public function selectExam(string $exam): void
+    {
+        $this->examType  = $exam;
+        $this->subjectId = '';
+        $this->chapterId = '';
+        $this->topicId   = '';
+        $this->resetPage();
+    }
+
+    public function selectSubject(string $id): void
+    {
+        $this->subjectId = ($this->subjectId === $id) ? '' : $id;
+        $this->chapterId = '';
+        $this->topicId   = '';
+        $this->resetPage();
+    }
+
+    public function selectChapter(string $id): void
+    {
+        $this->chapterId = ($this->chapterId === $id) ? '' : $id;
+        $this->topicId   = '';
+        $this->resetPage();
+    }
+
+    public function updatedSearch(): void { $this->resetPage(); }
+    public function updatedDifficulty(): void { $this->resetPage(); }
+
+    public function deleteQuestion(int $id): void
+    {
+        $question = Question::withoutGlobalScopes()->find($id);
+        if (!$question) return;
+        if ($question->institution_id && $question->institution_id !== Auth::user()->institution_id) abort(403);
+        $question->delete();
+        session()->flash('status', 'Question deleted.');
+    }
 
     public function with(): array
     {
-        $query = Question::with(['subject', 'chapter']);
+        // ── Hierarchy sidebar data ─────────────────────────────────────────────
+        $examTypes = ['neet' => 'NEET', 'jee_main' => 'JEE Main', 'kcet' => 'KCET'];
 
+        // Subject tree for selected exam type
+        $subjectTree = [];
+        if ($this->examType) {
+            $subjects = Subject::withoutGlobalScopes()
+                ->where('exam_type', $this->examType)
+                ->where(function($q) {
+                    $q->whereNull('institution_id')
+                      ->orWhere('institution_id', Auth::user()->institution_id);
+                })
+                ->orderBy('display_order')
+                ->withCount(['questions as q_count' => fn($q) => $q->withoutGlobalScopes()
+                    ->where('exam_type', $this->examType)
+                    ->where(function($sq) {
+                        $sq->whereNull('institution_id')
+                           ->orWhere('institution_id', Auth::user()->institution_id);
+                    })
+                ])
+                ->get();
+
+            foreach ($subjects as $sub) {
+                $chapters = [];
+                if ((string)$sub->id === $this->subjectId) {
+                    $chapters = Chapter::where('subject_id', $sub->id)
+                        ->withCount(['questions as q_count' => fn($q) => $q->withoutGlobalScopes()
+                            ->where('exam_type', $this->examType)
+                            ->where(function($sq) {
+                                $sq->whereNull('institution_id')
+                                   ->orWhere('institution_id', Auth::user()->institution_id);
+                            })
+                        ])
+                        ->orderBy('display_order')
+                        ->get();
+                }
+                $subjectTree[] = ['subject' => $sub, 'chapters' => $chapters];
+            }
+        }
+
+        // ── Question list ──────────────────────────────────────────────────────
+        $query = Question::withoutGlobalScopes()
+            ->with(['subject', 'chapter', 'topic'])
+            ->where(function($q) {
+                $q->whereNull('institution_id')
+                  ->orWhere('institution_id', Auth::user()->institution_id);
+            });
+
+        if ($this->examType)  $query->where('exam_type', $this->examType);
+        if ($this->subjectId) $query->where('subject_id', $this->subjectId);
+        if ($this->chapterId) $query->where('chapter_id', $this->chapterId);
+        if ($this->topicId)   $query->where('topic_id',   $this->topicId);
+        if ($this->difficulty) $query->where('difficulty', $this->difficulty);
         if ($this->search) {
             $query->where('question_text', 'like', '%' . $this->search . '%');
         }
 
-        if ($this->examType) {
-            $query->where('exam_type', $this->examType);
-        }
-
-        if ($this->subjectId) {
-            $query->where('subject_id', $this->subjectId);
-        }
-
-        if (!empty($this->chapterIds)) {
-            $query->whereIn('chapter_id', $this->chapterIds);
-        }
-
-        if ($this->difficulty) {
-            $query->where('difficulty', $this->difficulty);
-        }
+        // Stat counts
+        $totalByExam = DB::table('questions')
+            ->whereNull('institution_id')
+            ->orWhere('institution_id', Auth::user()->institution_id)
+            ->selectRaw('exam_type, count(*) as cnt')
+            ->groupBy('exam_type')
+            ->pluck('cnt', 'exam_type')
+            ->toArray();
 
         return [
-            'questions' => $query->orderBy('created_at', 'desc')->paginate(10),
-            'subjects' => Subject::where('is_active', true)->get(),
-            'chapters' => $this->subjectId ? Chapter::where('subject_id', $this->subjectId)->get() : [],
+            'questions'   => $query->orderByDesc('created_at')->paginate(15),
+            'examTypes'   => $examTypes,
+            'subjectTree' => $subjectTree,
+            'totalByExam' => $totalByExam,
         ];
-    }
-
-    public function updatedSubjectId(): void
-    {
-        $this->chapterIds = [];
-        $this->resetPage();
-    }
-
-    public function updated(string $property): void
-    {
-        if (in_array($property, ['examType', 'difficulty', 'search']) || str_starts_with($property, 'chapterIds')) {
-            $this->resetPage();
-        }
-    }
-
-    public function deleteQuestion(int $id): void
-    {
-        $question = Question::find($id);
-        if (!$question) return;
-        abort_if($question->institution_id !== auth()->user()->institution_id, 403);
-        $question->delete();
-        session()->flash('status', 'Question deleted.');
     }
 }; ?>
 
-<div class="space-y-6">
-    <!-- Header -->
-    <div class="flex items-center justify-between">
+<div class="space-y-5">
+
+    {{-- Header --}}
+    <div class="flex items-center justify-between gap-4">
         <div>
-            <h1 class="text-3xl font-display font-bold tracking-tight">Question Bank</h1>
-            <p class="text-muted-foreground mt-1">Manage and organize your repository of examination questions.</p>
+            <h1 class="text-2xl font-display font-bold">Question Bank</h1>
+            <p class="text-sm text-muted-foreground mt-0.5">Browse questions by exam type, subject, and chapter</p>
         </div>
-        <div class="flex items-center gap-3">
-            <button class="inline-flex items-center justify-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-semibold shadow-sm hover:bg-accent hover:text-accent-foreground transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                Import
-            </button>
-            <a href="{{ route('institution.questions.create') }}" wire:navigate class="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                Create Question
-            </a>
-        </div>
+        <a href="{{ route('institution.questions.create') }}" wire:navigate
+           class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            Add Question
+        </a>
     </div>
 
-    <!-- Filters -->
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 rounded-xl border border-border bg-card shadow-sm">
-        <div class="relative col-span-1 md:col-span-1">
-            <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search questions..." class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground">
-        </div>
-        <div>
-            <select wire:model.live="examType" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground">
-                <option value="">All Exams</option>
-                <option value="neet">NEET</option>
-                <option value="jee_main">JEE Main</option>
-            </select>
-        </div>
-        <div>
-            <select wire:model.live="subjectId" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground">
-                <option value="">All Subjects</option>
-                @foreach($subjects as $subject)
-                    <option value="{{ $subject->id }}">{{ $subject->name }} ({{ strtoupper($subject->exam_type) }})</option>
+    @if(session('status'))
+    <div class="rounded-lg bg-success/10 border border-success/30 text-success px-4 py-2.5 text-sm">{{ session('status') }}</div>
+    @endif
+
+    {{-- Exam type pills --}}
+    <div class="flex flex-wrap gap-2">
+        <button wire:click="selectExam('')"
+                class="px-4 py-1.5 rounded-full text-sm font-semibold transition-colors {{ $examType === '' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80' }}">
+            All <span class="ml-1 text-xs opacity-70">{{ array_sum($totalByExam) }}</span>
+        </button>
+        @foreach(['neet' => 'NEET', 'jee_main' => 'JEE Main', 'kcet' => 'KCET'] as $key => $label)
+        <button wire:click="selectExam('{{ $key }}')"
+                class="px-4 py-1.5 rounded-full text-sm font-semibold transition-colors {{ $examType === $key ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80' }}">
+            {{ $label }} <span class="ml-1 text-xs opacity-70">{{ $totalByExam[$key] ?? 0 }}</span>
+        </button>
+        @endforeach
+    </div>
+
+    <div class="flex gap-5 items-start">
+
+        {{-- ── LEFT: Subject / Chapter tree ─────────────────────────────── --}}
+        @if($examType && !empty($subjectTree))
+        <div class="w-56 flex-shrink-0 rounded-xl border border-border bg-card overflow-hidden shadow-sm">
+            <div class="px-4 py-3 border-b border-border/50 text-xs font-bold uppercase text-muted-foreground tracking-wide">
+                {{ ['neet'=>'NEET','jee_main'=>'JEE Main','kcet'=>'KCET'][$examType] }} Subjects
+            </div>
+            <div class="divide-y divide-border/30 max-h-[70vh] overflow-y-auto">
+                @foreach($subjectTree as $entry)
+                @php $sub = $entry['subject']; $isSubSel = (string)$sub->id === $subjectId; @endphp
+                <div>
+                    <button wire:click="selectSubject('{{ $sub->id }}')"
+                            class="w-full text-left px-4 py-2.5 text-sm font-medium flex items-center justify-between hover:bg-muted/50 transition-colors
+                                {{ $isSubSel ? 'text-primary bg-primary/5' : 'text-foreground' }}">
+                        <span class="truncate">{{ $sub->name }}</span>
+                        <span class="text-xs font-normal text-muted-foreground ml-1 shrink-0">{{ $sub->q_count }}</span>
+                    </button>
+
+                    {{-- Chapters --}}
+                    @if($isSubSel && !empty($entry['chapters']))
+                    <div class="bg-muted/20 border-t border-border/30">
+                        @foreach($entry['chapters'] as $ch)
+                        @php $isChSel = (string)$ch->id === $chapterId; @endphp
+                        <button wire:click="selectChapter('{{ $ch->id }}')"
+                                class="w-full text-left pl-7 pr-4 py-2 text-xs flex items-center justify-between hover:bg-muted/60 transition-colors
+                                    {{ $isChSel ? 'text-primary font-semibold bg-primary/10' : 'text-muted-foreground' }}">
+                            <span class="truncate">{{ $ch->name }}</span>
+                            <span class="shrink-0 ml-1">{{ $ch->q_count }}</span>
+                        </button>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
                 @endforeach
-            </select>
+            </div>
         </div>
-        <div class="relative group">
-            <button type="button" class="flex w-full items-center justify-between rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground disabled:opacity-50" {{ empty($chapters) ? 'disabled' : '' }}>
-                <span class="truncate">{{ empty($chapterIds) ? 'All Chapters' : count($chapterIds) . ' Chapters Selected' }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            @if(!empty($chapters))
-            <div class="absolute left-0 top-full z-50 mt-1 hidden w-full md:w-64 max-h-60 overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md group-hover:block hover:block">
-                @foreach($chapters as $chapter)
-                    <label class="flex cursor-pointer items-start gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground">
-                        <input type="checkbox" wire:model.live="chapterIds" value="{{ $chapter->id }}" class="mt-0.5 rounded border-input text-primary focus:ring-primary">
-                        <span class="leading-none">{{ $chapter->name }}</span>
-                    </label>
-                @endforeach
+        @endif
+
+        {{-- ── RIGHT: Question list ──────────────────────────────────────── --}}
+        <div class="flex-1 min-w-0 space-y-4">
+
+            {{-- Search + filter bar --}}
+            <div class="flex gap-2 flex-wrap">
+                <input wire:model.live.debounce.400ms="search" type="text" placeholder="Search questions..."
+                       class="flex-1 min-w-48 rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none">
+                <select wire:model.live="difficulty"
+                        class="rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none">
+                    <option value="">Any difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
+            {{-- Breadcrumb --}}
+            @if($examType)
+            <div class="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">
+                <button wire:click="selectExam('')" class="hover:text-foreground transition-colors">All</button>
+                <span>›</span>
+                <button wire:click="selectExam('{{ $examType }}')" class="{{ !$subjectId ? 'text-foreground font-medium' : 'hover:text-foreground' }}">
+                    {{ ['neet'=>'NEET','jee_main'=>'JEE Main','kcet'=>'KCET'][$examType] }}
+                </button>
+                @if($subjectId)
+                @php
+                    $selSubEntry = collect($subjectTree)->first(fn($e) => (string)$e['subject']->id === $subjectId);
+                    $selSubName  = $selSubEntry ? $selSubEntry['subject']->name : '—';
+                @endphp
+                <span>›</span>
+                <button wire:click="selectSubject('{{ $subjectId }}')" class="{{ !$chapterId ? 'text-foreground font-medium' : 'hover:text-foreground' }}">
+                    {{ $selSubName }}
+                </button>
+                @if($chapterId)
+                @php $selCh = collect($selSubEntry['chapters'] ?? [])->firstWhere(fn($c) => (string)$c->id === $chapterId); @endphp
+                <span>›</span>
+                <span class="text-foreground font-medium">{{ $selCh?->name ?? '—' }}</span>
+                @endif
+                @endif
             </div>
             @endif
-        </div>
-        <div>
-            <select wire:model.live="difficulty" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground">
-                <option value="">All Difficulties</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
+
+            {{-- Questions --}}
+            <div class="space-y-2">
+                @forelse($questions as $question)
+                @php
+                    $opts = is_array($question->options) ? $question->options : (json_decode($question->options ?? '{}', true) ?? []);
+                    $diffClr = match($question->difficulty) { 'easy' => 'bg-success/10 text-success', 'hard' => 'bg-destructive/10 text-destructive', default => 'bg-warning/10 text-warning' };
+                    $isPlatform = is_null($question->institution_id);
+                @endphp
+                <div class="rounded-xl border border-border bg-card p-4 hover:border-primary/30 transition-colors group">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm leading-relaxed line-clamp-2 mb-2">{!! strip_tags($question->question_text) !!}</p>
+
+                            @if(!empty($opts))
+                            <div class="grid grid-cols-2 gap-x-4 gap-y-0.5 text-xs text-muted-foreground mb-2">
+                                @foreach($opts as $k => $v)
+                                <div class="truncate {{ $question->correct_answer === $k ? 'text-success font-semibold' : '' }}">
+                                    ({{ $k }}) {{ $v }}
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+
+                            <div class="flex items-center gap-2 flex-wrap">
+                                @if($question->chapter)
+                                <span class="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded-full">{{ $question->chapter->name }}</span>
+                                @endif
+                                @if($question->topic)
+                                <span class="text-[10px] text-muted-foreground">{{ $question->topic->name }}</span>
+                                @endif
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold {{ $diffClr }}">{{ ucfirst($question->difficulty ?? 'medium') }}</span>
+                                @if($isPlatform)
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-info/10 text-info font-medium">Platform</span>
+                                @endif
+                                <span class="text-[10px] text-muted-foreground">{{ strtoupper($question->exam_type) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                            @if(!$isPlatform)
+                            <a href="{{ route('institution.questions.edit', $question) }}" wire:navigate
+                               class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors" title="Edit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            </a>
+                            <button wire:click="deleteQuestion({{ $question->id }})"
+                                    wire:confirm="Delete this question?"
+                                    class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors" title="Delete">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                            </button>
+                            @else
+                            <span class="text-[10px] text-muted-foreground italic px-2">Platform Q</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto text-muted-foreground mb-3 opacity-40"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <p class="text-muted-foreground text-sm">
+                        @if($search || $difficulty || $chapterId || $subjectId)
+                            No questions match your filters.
+                        @else
+                            {{ $examType ? 'No questions for this exam type yet.' : 'Select an exam type to browse questions.' }}
+                        @endif
+                    </p>
+                    @if(!$search && !$difficulty)
+                    <a href="{{ route('institution.questions.create') }}" wire:navigate
+                       class="inline-block mt-4 text-sm font-medium text-primary hover:underline">Add your first question →</a>
+                    @endif
+                </div>
+                @endforelse
+            </div>
+
+            {{-- Pagination --}}
+            @if($questions->hasPages())
+            <div class="mt-4">{{ $questions->links() }}</div>
+            @endif
+
         </div>
     </div>
 
-    <!-- Questions Table -->
-    <div class="rounded-xl border border-border bg-card shadow-sm overflow-hidden relative">
-        <div wire:loading.delay class="absolute inset-0 bg-card/50 backdrop-blur-sm z-10 flex items-center justify-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border shadow-sm text-primary font-medium text-sm">
-                <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                Loading...
-            </div>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left">
-                <thead class="bg-muted/50 text-muted-foreground font-medium">
-                    <tr>
-                        <th class="px-6 py-3 w-16 text-center">ID</th>
-                        <th class="px-6 py-3">Question</th>
-                        <th class="px-6 py-3 w-28">Difficulty</th>
-                        <th class="px-6 py-3 w-24 text-right">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-border/50">
-                    
-                    @forelse($questions as $question)
-                        <tr class="hover:bg-muted/50 transition-colors">
-                            <td class="px-6 py-4 text-center font-mono text-xs text-muted-foreground">#{{ $question->id }}</td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-xs font-medium px-2 py-0.5 bg-primary/10 text-primary rounded-full">{{ $question->subject->name ?? 'N/A' }}</span>
-                                    <span class="text-xs text-muted-foreground">{{ $question->chapter->name ?? 'N/A' }}</span>
-                                    <span class="text-xs text-muted-foreground border-l border-border pl-2 ml-1">{{ str_replace('_', ' ', strtoupper($question->type)) }}</span>
-                                </div>
-                                
-                                <p class="text-foreground font-medium text-base mb-3 leading-relaxed">
-                                    {!! nl2br(e(strip_tags($question->question_text))) !!}
-                                </p>
-
-                                @if(is_array($question->options) && count($question->options) > 0)
-                                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-2 mt-2">
-                                        @foreach($question->options as $key => $value)
-                                            @php 
-                                                $isCorrect = false;
-                                                if ($question->type === 'multiple_mcq') {
-                                                    $isCorrect = in_array((string)$key, array_map('trim', explode(',', strtoupper($question->correct_answer))));
-                                                } else {
-                                                    $isCorrect = strtoupper(trim($question->correct_answer)) === strtoupper(trim((string)$key));
-                                                }
-                                            @endphp
-                                            <div class="flex items-start gap-2 p-2 rounded-md border {{ $isCorrect ? 'bg-success/10 border-success/30' : 'bg-muted/30 border-border/50' }}">
-                                                <span class="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold {{ $isCorrect ? 'bg-success text-success-foreground' : 'bg-muted-foreground/20 text-muted-foreground' }}">
-                                                    {{ $key }}
-                                                </span>
-                                                <span class="text-sm pt-0.5 {{ $isCorrect ? 'text-success-foreground font-medium' : 'text-foreground' }}">
-                                                    {{ $value }}
-                                                </span>
-                                                @if($isCorrect)
-                                                    <svg class="ml-auto w-4 h-4 text-success flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @elseif($question->type === 'numerical' || $question->type === 'integer')
-                                    <div class="mt-2 p-3 rounded-md bg-success/5 border border-success/20 inline-flex items-center gap-2">
-                                        <span class="text-xs font-bold text-muted-foreground uppercase tracking-wider">Correct Answer:</span>
-                                        <span class="text-sm font-semibold text-success">{{ $question->correct_answer }}</span>
-                                        @if($question->answer_tolerance)
-                                            <span class="text-xs text-muted-foreground">(±{{ $question->answer_tolerance }})</span>
-                                        @endif
-                                    </div>
-                                @endif
-                                
-                                @if($question->explanation)
-                                    <div class="mt-3 p-3 rounded-md bg-accent/30 border border-border/50">
-                                        <span class="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Explanation:</span>
-                                        <p class="text-sm text-foreground/80 leading-relaxed">{{ strip_tags($question->explanation) }}</p>
-                                    </div>
-                                @endif
-
-                                @if($question->has_image)
-                                    <span class="inline-flex items-center gap-1 text-xs text-muted-foreground mt-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                                        Contains Image attached
-                                    </span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4">
-                                @php
-                                    $color = match($question->difficulty) {
-                                        'easy' => 'text-success bg-success/10 ring-success/20',
-                                        'medium' => 'text-warning bg-warning/10 ring-warning/20',
-                                        'hard' => 'text-destructive bg-destructive/10 ring-destructive/20',
-                                        default => 'text-muted-foreground bg-muted ring-border'
-                                    };
-                                @endphp
-                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset {{ $color }}">
-                                    {{ ucfirst($question->difficulty) }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-1">
-                                    <a href="{{ route('institution.questions.edit', $question) }}" wire:navigate class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-                                    </a>
-                                    <button wire:click="deleteQuestion({{ $question->id }})" wire:confirm="Delete this question permanently?" class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="m19 6-.867 12.142A2 2 0 0 1 16.138 20H7.862a2 2 0 0 1-1.995-1.858L5 6"/></svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="px-6 py-12 text-center text-muted-foreground">
-                                No questions found matching your filters.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        
-        @if($questions->hasPages())
-            <div class="px-6 py-4 border-t border-border/50">
-                {{ $questions->links(data: ['scrollTo' => false]) }}
-            </div>
-        @endif
-    </div>
 </div>

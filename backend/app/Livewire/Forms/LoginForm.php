@@ -36,7 +36,9 @@ class LoginForm extends Form
             return;
         }
 
-        if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
+        $field = filter_var($this->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if (! Auth::attempt([$field => $this->email, 'password' => $this->password], $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
