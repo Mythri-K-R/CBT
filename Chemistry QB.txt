@@ -1,0 +1,5753 @@
+[
+  {
+    "question_id": "CHEM_MC_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Mole Concept",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "One mole of any substance contains:",
+    "options": [
+      "6.022 × 10^20 particles",
+      "6.022 × 10^22 particles",
+      "6.022 × 10^23 particles",
+      "6.022 × 10^24 particles"
+    ],
+    "correct_answer": "6.022 × 10^23 particles",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "One mole contains Avogadro's number of particles, 6.022 × 10^23.",
+    "tags": ["Mole Concept", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Molar Mass",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The molar mass of CO₂ is:",
+    "options": [
+      "22 g/mol",
+      "44 g/mol",
+      "28 g/mol",
+      "32 g/mol"
+    ],
+    "correct_answer": "44 g/mol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Molar mass = 12 + (16 × 2) = 44 g/mol.",
+    "tags": ["Molar Mass", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Number of Moles",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The number of moles present in 36 g of water is:",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct_answer": "2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Moles = Mass/Molar mass = 36/18 = 2.",
+    "tags": ["Mole Concept", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Atomic Mass",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "One atomic mass unit (amu) is equal to:",
+    "options": [
+      "1/12th mass of carbon-12 atom",
+      "Mass of proton",
+      "Mass of electron",
+      "1 gram"
+    ],
+    "correct_answer": "1/12th mass of carbon-12 atom",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The atomic mass unit is defined relative to carbon-12.",
+    "tags": ["Atomic Mass", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Percentage Composition",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The percentage by mass of hydrogen in water is:",
+    "options": [
+      "11.11%",
+      "22.22%",
+      "33.33%",
+      "5.56%"
+    ],
+    "correct_answer": "11.11%",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Percentage H = (2/18) × 100 = 11.11%.",
+    "tags": ["Percentage Composition", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Gas Laws",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "At STP, one mole of an ideal gas occupies:",
+    "options": [
+      "11.2 L",
+      "22.4 L",
+      "44.8 L",
+      "1 L"
+    ],
+    "correct_answer": "22.4 L",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "One mole of an ideal gas occupies 22.4 L at STP.",
+    "tags": ["Gas Laws", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Empirical Formula",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The empirical formula of glucose (C₆H₁₂O₆) is:",
+    "options": [
+      "CH₂O",
+      "C₂H₄O₂",
+      "C₆H₁₂O₆",
+      "CHO"
+    ],
+    "correct_answer": "CH₂O",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Dividing subscripts by 6 gives CH₂O.",
+    "tags": ["Empirical Formula", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Molecular Formula",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "If empirical formula is CH₂O and molecular mass is 180, molecular formula is:",
+    "options": [
+      "CH₂O",
+      "C₂H₄O₂",
+      "C₆H₁₂O₆",
+      "C₃H₆O₃"
+    ],
+    "correct_answer": "C₆H₁₂O₆",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Empirical mass = 30. Factor = 180/30 = 6.",
+    "tags": ["Molecular Formula", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Limiting Reagent",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The reactant that gets completely consumed first in a chemical reaction is called:",
+    "options": [
+      "Excess reagent",
+      "Catalyst",
+      "Limiting reagent",
+      "Product"
+    ],
+    "correct_answer": "Limiting reagent",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The limiting reagent determines the maximum amount of product formed.",
+    "tags": ["Limiting Reagent", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Stoichiometry",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "How many moles of O₂ are required to completely burn 2 moles of CH₄?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "correct_answer": "4",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CH₄ + 2O₂ → CO₂ + 2H₂O. Therefore 2 mol CH₄ requires 4 mol O₂.",
+    "tags": ["Stoichiometry", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_MC_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Avogadro Number",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "How many molecules are present in 0.5 mol of H₂O?",
+    "options": [
+      "3.011 × 10^23",
+      "6.022 × 10^23",
+      "1.204 × 10^24",
+      "2.011 × 10^23"
+    ],
+    "correct_answer": "3.011 × 10^23",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Number of molecules = 0.5 × 6.022 × 10^23 = 3.011 × 10^23.",
+    "tags": ["Avogadro Number", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Moles and Atoms",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The number of atoms present in 1 mole of helium is:",
+    "options": [
+      "3.011 × 10^23",
+      "6.022 × 10^23",
+      "12.044 × 10^23",
+      "1"
+    ],
+    "correct_answer": "6.022 × 10^23",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "One mole of any monoatomic substance contains Avogadro's number of atoms.",
+    "tags": ["Moles", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Equivalent Mass",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The equivalent mass of H₂SO₄ in acid-base reactions is:",
+    "options": [
+      "98",
+      "49",
+      "24.5",
+      "196"
+    ],
+    "correct_answer": "49",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Equivalent mass = Molecular mass / Basicity = 98/2 = 49.",
+    "tags": ["Equivalent Mass", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Molar Mass",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The molar mass of NaOH is:",
+    "options": [
+      "23 g/mol",
+      "40 g/mol",
+      "56 g/mol",
+      "58.5 g/mol"
+    ],
+    "correct_answer": "40 g/mol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NaOH = 23 + 16 + 1 = 40 g/mol.",
+    "tags": ["Molar Mass", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Percentage Composition",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The percentage of oxygen in H₂SO₄ is:",
+    "options": [
+      "32.65%",
+      "65.31%",
+      "49%",
+      "16%"
+    ],
+    "correct_answer": "65.31%",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Mass of oxygen = 64; Total molar mass = 98. Percentage = (64/98)×100 = 65.31%.",
+    "tags": ["Percentage Composition", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Stoichiometry",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "According to the reaction 2H₂ + O₂ → 2H₂O, the mole ratio of H₂ to O₂ is:",
+    "options": [
+      "1:1",
+      "1:2",
+      "2:1",
+      "2:2"
+    ],
+    "correct_answer": "2:1",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The balanced equation shows 2 moles of H₂ react with 1 mole of O₂.",
+    "tags": ["Stoichiometry", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Gas Volume",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The volume occupied by 2 moles of an ideal gas at STP is:",
+    "options": [
+      "22.4 L",
+      "11.2 L",
+      "44.8 L",
+      "2.24 L"
+    ],
+    "correct_answer": "44.8 L",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "One mole occupies 22.4 L at STP, so 2 moles occupy 44.8 L.",
+    "tags": ["Gas Laws", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Limiting Reagent",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "In the reaction N₂ + 3H₂ → 2NH₃, if 1 mol N₂ reacts with 2 mol H₂, the limiting reagent is:",
+    "options": [
+      "N₂",
+      "H₂",
+      "NH₃",
+      "None"
+    ],
+    "correct_answer": "H₂",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "1 mol N₂ requires 3 mol H₂, but only 2 mol H₂ is available.",
+    "tags": ["Limiting Reagent", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Empirical Formula",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "A compound contains 40% carbon, 6.67% hydrogen and 53.33% oxygen. Its empirical formula is:",
+    "options": [
+      "CH₂O",
+      "C₂H₄O",
+      "CHO",
+      "C₂H₂O₂"
+    ],
+    "correct_answer": "CH₂O",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Converting percentages to mole ratio gives C:H:O = 1:2:1.",
+    "tags": ["Empirical Formula", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Stoichiometric Calculation",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "How many grams of O₂ are required to completely burn 16 g of CH₄?",
+    "options": [
+      "16 g",
+      "32 g",
+      "48 g",
+      "64 g"
+    ],
+    "correct_answer": "64 g",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CH₄ + 2O₂ → CO₂ + 2H₂O. 16 g CH₄ (1 mol) requires 2 mol O₂ = 64 g.",
+    "tags": ["Stoichiometry", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_MC_0021",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Mole Concept",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "How many moles are present in 11.2 L of O₂ at STP?",
+    "options": [
+      "0.5",
+      "1",
+      "2",
+      "4"
+    ],
+    "correct_answer": "0.5",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "At STP, 22.4 L = 1 mol. Therefore 11.2 L = 0.5 mol.",
+    "tags": ["Mole Concept", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0022",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Atomic Mass",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The atomic mass of oxygen is:",
+    "options": [
+      "8 u",
+      "16 u",
+      "32 u",
+      "18 u"
+    ],
+    "correct_answer": "16 u",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The standard atomic mass of oxygen is approximately 16 u.",
+    "tags": ["Atomic Mass", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0023",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Mole and Particles",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The number of atoms present in 0.25 mol of helium is:",
+    "options": [
+      "1.505 × 10^23",
+      "3.011 × 10^23",
+      "6.022 × 10^23",
+      "9.033 × 10^23"
+    ],
+    "correct_answer": "1.505 × 10^23",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "0.25 × 6.022 × 10^23 = 1.505 × 10^23 atoms.",
+    "tags": ["Particles", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0024",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Formula Mass",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The formula mass of NaCl is:",
+    "options": [
+      "58.5 u",
+      "35.5 u",
+      "23 u",
+      "46 u"
+    ],
+    "correct_answer": "58.5 u",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NaCl = 23 + 35.5 = 58.5 u.",
+    "tags": ["Formula Mass", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0025",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Percentage Composition",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The percentage of carbon in CO₂ is:",
+    "options": [
+      "27.27%",
+      "72.73%",
+      "50%",
+      "12%"
+    ],
+    "correct_answer": "27.27%",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Percentage of carbon = (12/44) × 100 = 27.27%.",
+    "tags": ["Percentage Composition", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0026",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Limiting Reagent",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "For the reaction 2H₂ + O₂ → 2H₂O, if 4 mol H₂ and 1 mol O₂ are mixed, the limiting reagent is:",
+    "options": [
+      "H₂",
+      "O₂",
+      "H₂O",
+      "None"
+    ],
+    "correct_answer": "O₂",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "1 mol O₂ requires only 2 mol H₂. Since 4 mol H₂ is available, O₂ is limiting.",
+    "tags": ["Limiting Reagent", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0027",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Gas Volume",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The volume occupied by 0.25 mol of an ideal gas at STP is:",
+    "options": [
+      "2.8 L",
+      "5.6 L",
+      "11.2 L",
+      "22.4 L"
+    ],
+    "correct_answer": "5.6 L",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Volume = 0.25 × 22.4 = 5.6 L.",
+    "tags": ["Gas Laws", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0028",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Empirical Formula",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The empirical formula of H₂O₂ is:",
+    "options": [
+      "H₂O₂",
+      "HO",
+      "HO₂",
+      "H₂O"
+    ],
+    "correct_answer": "HO",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Dividing the subscripts by 2 gives HO.",
+    "tags": ["Empirical Formula", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0029",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Stoichiometry",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "According to N₂ + 3H₂ → 2NH₃, how many moles of NH₃ are produced from 6 mol H₂ (assuming excess N₂)?",
+    "options": [
+      "2 mol",
+      "3 mol",
+      "4 mol",
+      "6 mol"
+    ],
+    "correct_answer": "4 mol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "3 mol H₂ produces 2 mol NH₃. Therefore 6 mol H₂ produces 4 mol NH₃.",
+    "tags": ["Stoichiometry", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0030",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Mole Concept Numerical",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "How many molecules are present in 18 g of water?",
+    "options": [
+      "3.011 × 10^23",
+      "6.022 × 10^23",
+      "12.044 × 10^23",
+      "18 × 10^23"
+    ],
+    "correct_answer": "6.022 × 10^23",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "18 g of water = 1 mole. One mole contains 6.022 × 10^23 molecules.",
+    "tags": ["Mole Concept", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_MC_0031",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Molar Mass",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The molar mass of NH₃ is:",
+    "options": [
+      "14 g/mol",
+      "17 g/mol",
+      "18 g/mol",
+      "20 g/mol"
+    ],
+    "correct_answer": "17 g/mol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Molar mass = 14 + (3 × 1) = 17 g/mol.",
+    "tags": ["Molar Mass", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0032",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Avogadro Number",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "One mole of O₂ contains:",
+    "options": [
+      "6.022 × 10^23 oxygen atoms",
+      "3.011 × 10^23 oxygen molecules",
+      "6.022 × 10^23 oxygen molecules",
+      "12.044 × 10^23 oxygen molecules"
+    ],
+    "correct_answer": "6.022 × 10^23 oxygen molecules",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "One mole of any substance contains Avogadro's number of molecules.",
+    "tags": ["Avogadro Number", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0033",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Atoms and Molecules",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "How many oxygen atoms are present in 1 mole of O₂?",
+    "options": [
+      "6.022 × 10^23",
+      "12.044 × 10^23",
+      "3.011 × 10^23",
+      "24.088 × 10^23"
+    ],
+    "correct_answer": "12.044 × 10^23",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Each O₂ molecule contains 2 atoms, so total atoms = 2 × 6.022 × 10^23.",
+    "tags": ["Atoms", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0034",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Percentage Composition",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The percentage of hydrogen in NH₃ is approximately:",
+    "options": [
+      "17.6%",
+      "11.1%",
+      "5.9%",
+      "25%"
+    ],
+    "correct_answer": "17.6%",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Percentage H = (3/17) × 100 ≈ 17.6%.",
+    "tags": ["Percentage Composition", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0035",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Stoichiometry",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "According to 2H₂ + O₂ → 2H₂O, 1 mole of O₂ produces:",
+    "options": [
+      "1 mole H₂O",
+      "2 moles H₂O",
+      "3 moles H₂O",
+      "4 moles H₂O"
+    ],
+    "correct_answer": "2 moles H₂O",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The balanced equation shows 1 mole O₂ forms 2 moles H₂O.",
+    "tags": ["Stoichiometry", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0036",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Empirical Formula",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "A compound contains 80% carbon and 20% hydrogen. Its empirical formula is:",
+    "options": [
+      "CH",
+      "CH₂",
+      "CH₃",
+      "C₂H₃"
+    ],
+    "correct_answer": "CH₃",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "For 100 g compound: C = 80/12 = 6.67 mol, H = 20/1 = 20 mol. Ratio ≈ 1:3.",
+    "tags": ["Empirical Formula", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0037",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Gas Laws",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The volume occupied by 3 moles of an ideal gas at STP is:",
+    "options": [
+      "33.6 L",
+      "44.8 L",
+      "67.2 L",
+      "22.4 L"
+    ],
+    "correct_answer": "67.2 L",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Volume = 3 × 22.4 = 67.2 L.",
+    "tags": ["Gas Laws", "KCET"]
+  },
+  {
+    "question_id": "CHEM_MC_0038",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Limiting Reagent",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "In the reaction 2CO + O₂ → 2CO₂, if 4 mol CO and 1 mol O₂ are present, the limiting reagent is:",
+    "options": [
+      "CO",
+      "O₂",
+      "CO₂",
+      "None"
+    ],
+    "correct_answer": "O₂",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "1 mol O₂ reacts with only 2 mol CO. Since 4 mol CO is available, O₂ is limiting.",
+    "tags": ["Limiting Reagent", "NEET"]
+  },
+  {
+    "question_id": "CHEM_MC_0039",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Mole Concept Numerical",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "How many moles are present in 98 g of H₂SO₄?",
+    "options": [
+      "0.5",
+      "1",
+      "2",
+      "98"
+    ],
+    "correct_answer": "1",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Moles = 98/98 = 1 mol.",
+    "tags": ["Mole Concept", "JEE"]
+  },
+  {
+    "question_id": "CHEM_MC_0040",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "topic": "Mixed Concept",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The number of hydrogen atoms present in 1 mole of H₂SO₄ is:",
+    "options": [
+      "6.022 × 10^23",
+      "12.044 × 10^23",
+      "3.011 × 10^23",
+      "24.088 × 10^23"
+    ],
+    "correct_answer": "12.044 × 10^23",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Each H₂SO₄ molecule contains 2 hydrogen atoms. Therefore total H atoms = 2 × 6.022 × 10^23.",
+    "tags": ["Mole Concept", "NEET"]
+  }
+]
+
+
+[
+  {
+    "question_id": "CHEM_CB_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Octet Rule",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "According to the octet rule, atoms tend to achieve:",
+    "options": [
+      "2 electrons in the valence shell",
+      "4 electrons in the valence shell",
+      "8 electrons in the valence shell",
+      "18 electrons in the valence shell"
+    ],
+    "correct_answer": "8 electrons in the valence shell",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Atoms gain, lose or share electrons to attain a stable noble gas configuration of 8 electrons.",
+    "tags": ["Octet Rule", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Ionic Bond",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Which of the following compounds contains predominantly ionic bonding?",
+    "options": [
+      "HCl",
+      "NH3",
+      "NaCl",
+      "CH4"
+    ],
+    "correct_answer": "NaCl",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NaCl is formed by transfer of electrons from Na to Cl, producing ions.",
+    "tags": ["Ionic Bond", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Formal Charge",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The formal charge on nitrogen in NH4+ is:",
+    "options": [
+      "-1",
+      "0",
+      "+1",
+      "+2"
+    ],
+    "correct_answer": "+1",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Formal charge = 5 − 0 − (8/2) = +1.",
+    "tags": ["Formal Charge", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Lewis Structure",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The total number of valence electrons in CO2 is:",
+    "options": [
+      "12",
+      "14",
+      "16",
+      "18"
+    ],
+    "correct_answer": "16",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carbon contributes 4 and two oxygens contribute 12 electrons, total = 16.",
+    "tags": ["Lewis Structure", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "VSEPR Theory",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The shape of CH4 according to VSEPR theory is:",
+    "options": [
+      "Trigonal planar",
+      "Tetrahedral",
+      "Square planar",
+      "Bent"
+    ],
+    "correct_answer": "Tetrahedral",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CH4 has four bond pairs around carbon and no lone pair, giving tetrahedral geometry.",
+    "tags": ["VSEPR", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "VSEPR Theory",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The shape of NH3 is:",
+    "options": [
+      "Trigonal planar",
+      "Linear",
+      "Trigonal pyramidal",
+      "Tetrahedral"
+    ],
+    "correct_answer": "Trigonal pyramidal",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NH3 has three bond pairs and one lone pair on nitrogen.",
+    "tags": ["VSEPR", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Bond Angle",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The H–O–H bond angle in water is approximately:",
+    "options": [
+      "104.5°",
+      "109.5°",
+      "120°",
+      "180°"
+    ],
+    "correct_answer": "104.5°",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Two lone pairs on oxygen reduce the bond angle from the tetrahedral value.",
+    "tags": ["Bond Angle", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hybridization",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon in CH4 is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "dsp2"
+    ],
+    "correct_answer": "sp3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carbon forms four equivalent sigma bonds using sp3 hybrid orbitals.",
+    "tags": ["Hybridization", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hybridization",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon atoms in C2H4 is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "sp3d"
+    ],
+    "correct_answer": "sp2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Each carbon in ethene forms three sigma bonds and one pi bond, corresponding to sp2 hybridization.",
+    "tags": ["Hybridization", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Bond Order",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The bond order of O2 is:",
+    "options": [
+      "1",
+      "1.5",
+      "2",
+      "3"
+    ],
+    "correct_answer": "2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Molecular orbital theory predicts a bond order of 2 for O2.",
+    "tags": ["Bond Order", "MOT", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_CB_0021",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "VSEPR Theory",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The shape of BF3 molecule is:",
+    "options": [
+      "Trigonal planar",
+      "Tetrahedral",
+      "Linear",
+      "Bent"
+    ],
+    "correct_answer": "Trigonal planar",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "BF3 has three bond pairs and no lone pair on boron, resulting in trigonal planar geometry.",
+    "tags": ["VSEPR", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0022",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Geometry",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The geometry of CO2 molecule is:",
+    "options": [
+      "Bent",
+      "Trigonal planar",
+      "Linear",
+      "Tetrahedral"
+    ],
+    "correct_answer": "Linear",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carbon in CO2 has two regions of electron density, giving a linear geometry.",
+    "tags": ["Geometry", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0023",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hybridization",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon in CO2 is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "dsp2"
+    ],
+    "correct_answer": "sp",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carbon forms two double bonds and has sp hybridization.",
+    "tags": ["Hybridization", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0024",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hybridization",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of phosphorus in PCl5 is:",
+    "options": [
+      "sp3",
+      "sp3d",
+      "sp3d2",
+      "dsp2"
+    ],
+    "correct_answer": "sp3d",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "PCl5 has five bond pairs around phosphorus resulting in sp3d hybridization.",
+    "tags": ["Hybridization", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0025",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Shape",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The shape of PCl5 is:",
+    "options": [
+      "Square pyramidal",
+      "Trigonal bipyramidal",
+      "Tetrahedral",
+      "Octahedral"
+    ],
+    "correct_answer": "Trigonal bipyramidal",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Five bond pairs around phosphorus arrange themselves in a trigonal bipyramidal geometry.",
+    "tags": ["Molecular Shape", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0026",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hybridization",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of sulfur in SF6 is:",
+    "options": [
+      "sp3",
+      "sp3d",
+      "sp3d2",
+      "d2sp3"
+    ],
+    "correct_answer": "sp3d2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "SF6 contains six bond pairs around sulfur, leading to sp3d2 hybridization.",
+    "tags": ["Hybridization", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0027",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Shape",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The geometry of SF6 is:",
+    "options": [
+      "Trigonal bipyramidal",
+      "Octahedral",
+      "Square planar",
+      "Tetrahedral"
+    ],
+    "correct_answer": "Octahedral",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Six bonding pairs around sulfur arrange themselves octahedrally.",
+    "tags": ["Molecular Shape", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0028",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hydrogen Bonding",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which of the following shows intermolecular hydrogen bonding?",
+    "options": [
+      "CH4",
+      "HF",
+      "HCl",
+      "CO2"
+    ],
+    "correct_answer": "HF",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "HF molecules are associated through strong intermolecular hydrogen bonding.",
+    "tags": ["Hydrogen Bonding", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0029",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Orbital Theory",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The bond order of O2+ is:",
+    "options": [
+      "1.5",
+      "2",
+      "2.5",
+      "3"
+    ],
+    "correct_answer": "2.5",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Removal of one electron from antibonding π* orbital increases bond order from 2 to 2.5.",
+    "tags": ["MOT", "Bond Order", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0030",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Orbital Theory",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which species has the highest bond order?",
+    "options": [
+      "O2",
+      "O2−",
+      "O2+",
+      "O22−"
+    ],
+    "correct_answer": "O2+",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Bond orders are: O2 = 2, O2− = 1.5, O2+ = 2.5, O22− = 1.",
+    "tags": ["MOT", "Bond Order", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_CB_0031",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Shape",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The shape of NH4+ ion is:",
+    "options": [
+      "Trigonal pyramidal",
+      "Square planar",
+      "Tetrahedral",
+      "Bent"
+    ],
+    "correct_answer": "Tetrahedral",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NH4+ has four bond pairs and no lone pair on nitrogen, giving tetrahedral geometry.",
+    "tags": ["VSEPR", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0032",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Shape",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The shape of ClF3 molecule is:",
+    "options": [
+      "Trigonal planar",
+      "T-shaped",
+      "Linear",
+      "Tetrahedral"
+    ],
+    "correct_answer": "T-shaped",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "ClF3 has 5 electron pairs (3 bond pairs + 2 lone pairs) with a T-shaped molecular geometry.",
+    "tags": ["VSEPR", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0033",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Shape",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The geometry of XeF4 is:",
+    "options": [
+      "Tetrahedral",
+      "Square planar",
+      "Octahedral",
+      "Trigonal bipyramidal"
+    ],
+    "correct_answer": "Square planar",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "XeF4 has six electron pairs with two lone pairs opposite each other, resulting in square planar geometry.",
+    "tags": ["VSEPR", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0034",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hybridization",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of xenon in XeF4 is:",
+    "options": [
+      "sp3",
+      "sp3d",
+      "sp3d2",
+      "dsp2"
+    ],
+    "correct_answer": "sp3d2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "XeF4 has six electron pair domains around xenon, corresponding to sp3d2 hybridization.",
+    "tags": ["Hybridization", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0035",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Hydrogen Bonding",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The unusually high boiling point of water is mainly due to:",
+    "options": [
+      "Ionic bonding",
+      "Hydrogen bonding",
+      "Coordinate bonding",
+      "Metallic bonding"
+    ],
+    "correct_answer": "Hydrogen bonding",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Extensive intermolecular hydrogen bonding raises the boiling point of water.",
+    "tags": ["Hydrogen Bonding", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0036",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Fajan's Rule",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which compound has the maximum covalent character?",
+    "options": [
+      "NaCl",
+      "KCl",
+      "LiCl",
+      "CsCl"
+    ],
+    "correct_answer": "LiCl",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "According to Fajan's rule, the small Li+ ion has high polarizing power, increasing covalent character.",
+    "tags": ["Fajan Rule", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0037",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Sigma and Pi Bonds",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The number of π bonds present in N2 molecule is:",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct_answer": "2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "N≡N contains one sigma bond and two pi bonds.",
+    "tags": ["Sigma Bond", "Pi Bond", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CB_0038",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Sigma and Pi Bonds",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Ethene (C2H4) contains:",
+    "options": [
+      "5σ, 1π",
+      "4σ, 2π",
+      "6σ, 1π",
+      "5σ, 2π"
+    ],
+    "correct_answer": "5σ, 1π",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ethene has four C–H sigma bonds and one C–C sigma bond plus one π bond.",
+    "tags": ["Sigma Bond", "Pi Bond", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CB_0039",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Molecular Orbital Theory",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which of the following species is diamagnetic?",
+    "options": [
+      "O2",
+      "NO",
+      "O2−",
+      "N2"
+    ],
+    "correct_answer": "N2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "N2 has all electrons paired in its molecular orbitals and is diamagnetic.",
+    "tags": ["MOT", "Diamagnetism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CB_0040",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): NH3 has a higher boiling point than PH3. Reason (R): NH3 molecules are associated through hydrogen bonding.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NH3 exhibits intermolecular hydrogen bonding whereas PH3 does not, resulting in a higher boiling point.",
+    "tags": ["Assertion Reason", "Hydrogen Bonding", "NEET"]
+  }
+]
+
+
+[
+  {
+    "question_id": "CHEM_EQ_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Chemical Equilibrium",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "At chemical equilibrium, the rate of forward reaction is:",
+    "options": [
+      "Greater than reverse reaction",
+      "Less than reverse reaction",
+      "Equal to reverse reaction",
+      "Zero"
+    ],
+    "correct_answer": "Equal to reverse reaction",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "At equilibrium, forward and reverse reactions occur at equal rates.",
+    "tags": ["Chemical Equilibrium", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Dynamic Equilibrium",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Chemical equilibrium is said to be:",
+    "options": [
+      "Static",
+      "Dynamic",
+      "Permanent",
+      "Irreversible"
+    ],
+    "correct_answer": "Dynamic",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Reactants and products continue to interconvert at equilibrium.",
+    "tags": ["Dynamic Equilibrium", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Law of Mass Action",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "For the reaction aA + bB ⇌ cC + dD, the equilibrium constant Kc is:",
+    "options": [
+      "[A]^a[B]^b/[C]^c[D]^d",
+      "[C]^c[D]^d/[A]^a[B]^b",
+      "[A+B]/[C+D]",
+      "[C+D]/[A+B]"
+    ],
+    "correct_answer": "[C]^c[D]^d/[A]^a[B]^b",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Kc is the ratio of product concentrations to reactant concentrations raised to stoichiometric coefficients.",
+    "tags": ["Kc", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Equilibrium Constant",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The value of equilibrium constant for a given reaction depends on:",
+    "options": [
+      "Initial concentration",
+      "Catalyst",
+      "Temperature",
+      "Pressure"
+    ],
+    "correct_answer": "Temperature",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Equilibrium constant changes only with temperature.",
+    "tags": ["Equilibrium Constant", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Le Chatelier Principle",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Le Chatelier's principle predicts the effect of changes in:",
+    "options": [
+      "Color only",
+      "Pressure, concentration and temperature",
+      "Volume only",
+      "Catalyst only"
+    ],
+    "correct_answer": "Pressure, concentration and temperature",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The principle explains how equilibrium shifts under external changes.",
+    "tags": ["Le Chatelier Principle", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Reaction Quotient",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "If Qc < Kc, the reaction will proceed:",
+    "options": [
+      "In reverse direction",
+      "In forward direction",
+      "Stop completely",
+      "Become irreversible"
+    ],
+    "correct_answer": "In forward direction",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The system moves forward to increase Qc until it becomes equal to Kc.",
+    "tags": ["Reaction Quotient", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Equilibrium Constant",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "If Kc >> 1, the reaction at equilibrium contains mostly:",
+    "options": [
+      "Reactants",
+      "Products",
+      "Catalyst",
+      "Equal amounts of reactants and products"
+    ],
+    "correct_answer": "Products",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A large Kc indicates product-favored equilibrium.",
+    "tags": ["Kc", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Le Chatelier Principle",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Increasing pressure favors the side having:",
+    "options": [
+      "More moles of gas",
+      "Fewer moles of gas",
+      "Equal moles of gas",
+      "No gases"
+    ],
+    "correct_answer": "Fewer moles of gas",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The system shifts to reduce pressure by decreasing gaseous moles.",
+    "tags": ["Pressure Effect", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Kp and Kc",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The relation between Kp and Kc is:",
+    "options": [
+      "Kp = Kc(RT)^Δn",
+      "Kp = Kc/RT",
+      "Kp = Kc(RT)",
+      "Kp = Kc"
+    ],
+    "correct_answer": "Kp = Kc(RT)^Δn",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "For gaseous equilibria, Kp and Kc are related through Δn and temperature.",
+    "tags": ["Kp", "Kc", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): A catalyst does not change the equilibrium constant. Reason (R): A catalyst increases the rate of both forward and reverse reactions equally.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Catalysts only help the system reach equilibrium faster without altering equilibrium composition.",
+    "tags": ["Assertion Reason", "Catalyst", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_EQ_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Equilibrium Constant",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "If Kc = 1 for a reaction, it generally indicates:",
+    "options": [
+      "Only reactants are present",
+      "Only products are present",
+      "Comparable amounts of reactants and products",
+      "Reaction cannot occur"
+    ],
+    "correct_answer": "Comparable amounts of reactants and products",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A Kc value near 1 suggests neither reactants nor products are strongly favored.",
+    "tags": ["Equilibrium Constant", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Le Chatelier Principle",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "For an exothermic reaction, increasing temperature shifts equilibrium towards:",
+    "options": [
+      "Products",
+      "Reactants",
+      "No change",
+      "Catalyst"
+    ],
+    "correct_answer": "Reactants",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Heat acts as a product in exothermic reactions, so increasing temperature shifts equilibrium backward.",
+    "tags": ["Le Chatelier Principle", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Reaction Quotient",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "If Qc > Kc, the reaction mixture will:",
+    "options": [
+      "Move in forward direction",
+      "Move in reverse direction",
+      "Remain unchanged forever",
+      "Become irreversible"
+    ],
+    "correct_answer": "Move in reverse direction",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "When Qc exceeds Kc, products convert into reactants until equilibrium is reached.",
+    "tags": ["Reaction Quotient", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Ionic Equilibrium",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The pH of a neutral solution at 25°C is:",
+    "options": [
+      "0",
+      "7",
+      "14",
+      "1"
+    ],
+    "correct_answer": "7",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "For neutral water at 25°C, [H+] = [OH−] = 10⁻⁷ M, giving pH = 7.",
+    "tags": ["pH", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "pH",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The pH of a solution having [H+] = 10⁻³ M is:",
+    "options": [
+      "3",
+      "7",
+      "11",
+      "1"
+    ],
+    "correct_answer": "3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "pH = −log[H+] = −log(10⁻³) = 3.",
+    "tags": ["pH", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Ionic Product of Water",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The value of Kw at 25°C is:",
+    "options": [
+      "1 × 10⁻⁷",
+      "1 × 10⁻¹⁴",
+      "1 × 10⁻¹",
+      "14"
+    ],
+    "correct_answer": "1 × 10⁻¹⁴",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Kw = [H+][OH−] = 10⁻¹⁴ at 25°C.",
+    "tags": ["Kw", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Acids and Bases",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "A solution with pH less than 7 is:",
+    "options": [
+      "Basic",
+      "Neutral",
+      "Acidic",
+      "Buffer"
+    ],
+    "correct_answer": "Acidic",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Acidic solutions have hydrogen ion concentration greater than 10⁻⁷ M.",
+    "tags": ["Acidic Solution", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Common Ion Effect",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The suppression of ionization of a weak electrolyte by adding a strong electrolyte having a common ion is called:",
+    "options": [
+      "Hydrolysis",
+      "Buffer action",
+      "Common ion effect",
+      "Neutralization"
+    ],
+    "correct_answer": "Common ion effect",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Addition of a common ion shifts equilibrium according to Le Chatelier's principle.",
+    "tags": ["Common Ion Effect", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Buffer Solution",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "A buffer solution resists changes in:",
+    "options": [
+      "Temperature",
+      "Pressure",
+      "pH",
+      "Volume"
+    ],
+    "correct_answer": "pH",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Buffers maintain nearly constant pH upon addition of small amounts of acid or base.",
+    "tags": ["Buffer", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Addition of an inert gas at constant volume does not affect equilibrium. Reason (R): Partial pressures of reactants and products remain unchanged.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "At constant volume, adding an inert gas changes total pressure but not the partial pressures of reacting gases.",
+    "tags": ["Assertion Reason", "Le Chatelier Principle", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_EQ_0021",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "pOH",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "At 25°C, if pH = 9, the pOH of the solution is:",
+    "options": [
+      "3",
+      "5",
+      "7",
+      "9"
+    ],
+    "correct_answer": "5",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "At 25°C, pH + pOH = 14. Therefore pOH = 14 − 9 = 5.",
+    "tags": ["pOH", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0022",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Acid Strength",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "A strong acid is one that:",
+    "options": [
+      "Has high concentration",
+      "Completely ionizes in water",
+      "Has low pH only",
+      "Contains hydrogen"
+    ],
+    "correct_answer": "Completely ionizes in water",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Strong acids dissociate almost completely in aqueous solution.",
+    "tags": ["Strong Acid", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0023",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Acid Dissociation Constant",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "A larger value of Ka indicates:",
+    "options": [
+      "Weaker acid",
+      "Stronger acid",
+      "Neutral solution",
+      "Stronger base"
+    ],
+    "correct_answer": "Stronger acid",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A larger Ka means greater ionization and hence stronger acidic character.",
+    "tags": ["Ka", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0024",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Buffer Solution",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "A basic buffer consists of:",
+    "options": [
+      "Strong acid + strong base",
+      "Weak acid + its salt",
+      "Weak base + its salt",
+      "Strong acid + weak acid"
+    ],
+    "correct_answer": "Weak base + its salt",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A basic buffer is commonly prepared from a weak base and its conjugate acid salt.",
+    "tags": ["Buffer Solution", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0025",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Solubility Product",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The solubility product of a sparingly soluble salt is represented by:",
+    "options": [
+      "Kc",
+      "Kp",
+      "Kw",
+      "Ksp"
+    ],
+    "correct_answer": "Ksp",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ksp is the equilibrium constant for dissolution of sparingly soluble salts.",
+    "tags": ["Ksp", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0026",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Solubility Product",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "For AgCl(s) ⇌ Ag⁺ + Cl⁻, Ksp is equal to:",
+    "options": [
+      "[AgCl]",
+      "[Ag⁺][Cl⁻]",
+      "[Ag⁺]+[Cl⁻]",
+      "[Ag⁺]/[Cl⁻]"
+    ],
+    "correct_answer": "[Ag⁺][Cl⁻]",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The concentration of solid AgCl is omitted from the equilibrium expression.",
+    "tags": ["Ksp", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0027",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Le Chatelier Principle",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "For N₂(g) + 3H₂(g) ⇌ 2NH₃(g), increasing pressure shifts equilibrium towards:",
+    "options": [
+      "Reactants",
+      "Products",
+      "No change",
+      "Nitrogen only"
+    ],
+    "correct_answer": "Products",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The product side contains fewer moles of gas (2 vs 4), so higher pressure favors NH₃ formation.",
+    "tags": ["Le Chatelier Principle", "KCET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0028",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Buffer Solution",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which of the following is an acidic buffer?",
+    "options": [
+      "NH₄OH + NH₄Cl",
+      "NaOH + NaCl",
+      "CH₃COOH + CH₃COONa",
+      "HCl + NaCl"
+    ],
+    "correct_answer": "CH₃COOH + CH₃COONa",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "An acidic buffer consists of a weak acid and its salt with a strong base.",
+    "tags": ["Buffer", "NEET"]
+  },
+  {
+    "question_id": "CHEM_EQ_0029",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Numerical pH",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The pH of a solution having [H⁺] = 10⁻⁵ M is:",
+    "options": [
+      "3",
+      "5",
+      "7",
+      "9"
+    ],
+    "correct_answer": "5",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "pH = −log(10⁻⁵) = 5.",
+    "tags": ["pH", "Numerical", "JEE"]
+  },
+  {
+    "question_id": "CHEM_EQ_0030",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Equilibrium",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): The value of Kc remains constant for a reaction at a fixed temperature. Reason (R): Kc is independent of initial concentrations of reactants and products.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "At a given temperature, Kc has a fixed value regardless of starting concentrations.",
+    "tags": ["Assertion Reason", "Equilibrium Constant", "NEET"]
+  }
+]
+
+
+[
+  {
+    "question_id": "CHEM_CC_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Basic Terminology",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The atom or ion to which a fixed number of ligands are attached is called:",
+    "options": [
+      "Ligand",
+      "Coordination sphere",
+      "Central metal atom/ion",
+      "Counter ion"
+    ],
+    "correct_answer": "Central metal atom/ion",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The central metal atom or ion accepts electron pairs from ligands to form coordinate bonds.",
+    "tags": ["Central Metal Ion", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Ligands",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Which of the following is a neutral ligand?",
+    "options": [
+      "Cl⁻",
+      "CN⁻",
+      "NH₃",
+      "OH⁻"
+    ],
+    "correct_answer": "NH₃",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NH₃ is a neutral ligand that donates a lone pair to the metal ion.",
+    "tags": ["Ligands", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Coordination Number",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The coordination number of Co in [Co(NH₃)₆]Cl₃ is:",
+    "options": [
+      "3",
+      "4",
+      "6",
+      "9"
+    ],
+    "correct_answer": "6",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Six NH₃ ligands are directly attached to cobalt, so coordination number is 6.",
+    "tags": ["Coordination Number", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Oxidation Number",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The oxidation state of Fe in [Fe(CN)₆]⁴⁻ is:",
+    "options": [
+      "+2",
+      "+3",
+      "+4",
+      "0"
+    ],
+    "correct_answer": "+2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Let oxidation state be x. x + 6(-1) = -4, therefore x = +2.",
+    "tags": ["Oxidation State", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Werner Theory",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "According to Werner's theory, primary valency corresponds to:",
+    "options": [
+      "Coordination number",
+      "Oxidation state",
+      "Geometry",
+      "Magnetic moment"
+    ],
+    "correct_answer": "Oxidation state",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Primary valency is ionizable and corresponds to the oxidation state of the metal.",
+    "tags": ["Werner Theory", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "IUPAC Nomenclature",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of [Co(NH₃)₆]Cl₃ is:",
+    "options": [
+      "Hexaamminecobalt(III) chloride",
+      "Hexaamminecobalt(II) chloride",
+      "Cobalt hexaammine chloride",
+      "Hexaammine cobalt chloride"
+    ],
+    "correct_answer": "Hexaamminecobalt(III) chloride",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NH₃ is neutral and three chloride ions are outside the coordination sphere, so Co is in +3 oxidation state.",
+    "tags": ["IUPAC Nomenclature", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Types of Ligands",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Ethylenediamine (en) is a:",
+    "options": [
+      "Monodentate ligand",
+      "Bidentate ligand",
+      "Tridentate ligand",
+      "Ambidentate ligand"
+    ],
+    "correct_answer": "Bidentate ligand",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ethylenediamine donates two lone pairs through two nitrogen atoms.",
+    "tags": ["Ligands", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Chelation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Complexes containing multidentate ligands are called:",
+    "options": [
+      "Double salts",
+      "Chelates",
+      "Hydrates",
+      "Organometallic compounds"
+    ],
+    "correct_answer": "Chelates",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Multidentate ligands form ring structures with metal ions, known as chelates.",
+    "tags": ["Chelation", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Isomerism",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Geometrical isomerism is commonly shown by:",
+    "options": [
+      "[Zn(NH₃)₄]²⁺",
+      "[Ni(CO)₄]",
+      "[Pt(NH₃)₂Cl₂]",
+      "[Ag(NH₃)₂]⁺"
+    ],
+    "correct_answer": "[Pt(NH₃)₂Cl₂]",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Square planar complexes like [Pt(NH₃)₂Cl₂] exhibit cis-trans isomerism.",
+    "tags": ["Geometrical Isomerism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Coordination compounds are often colored. Reason (R): d–d electronic transitions occur in many transition metal complexes.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Absorption of visible light due to d–d transitions imparts color to many coordination compounds.",
+    "tags": ["Color", "Assertion Reason", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_CC_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Ligands",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Which of the following is an ambidentate ligand?",
+    "options": [
+      "NH3",
+      "H2O",
+      "NO2−",
+      "en"
+    ],
+    "correct_answer": "NO2−",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NO2− can coordinate through either nitrogen or oxygen atom.",
+    "tags": ["Ambidentate Ligand", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Coordination Number",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The coordination number of Cr in [Cr(H2O)6]3+ is:",
+    "options": [
+      "3",
+      "4",
+      "6",
+      "8"
+    ],
+    "correct_answer": "6",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Six water molecules are directly bonded to chromium.",
+    "tags": ["Coordination Number", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Oxidation State",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The oxidation state of Co in [Co(NH3)5Cl]2+ is:",
+    "options": [
+      "+2",
+      "+3",
+      "+4",
+      "+1"
+    ],
+    "correct_answer": "+3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Let oxidation state be x. x + 5(0) + (-1) = +2, therefore x = +3.",
+    "tags": ["Oxidation State", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "IUPAC Nomenclature",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The ligand NH3 is named as:",
+    "options": [
+      "Amine",
+      "Ammine",
+      "Amino",
+      "Amido"
+    ],
+    "correct_answer": "Ammine",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "In coordination chemistry, NH3 is named ammine.",
+    "tags": ["IUPAC", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "IUPAC Nomenclature",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The ligand H2O is named as:",
+    "options": [
+      "Hydroxo",
+      "Aqua",
+      "Hydro",
+      "Water"
+    ],
+    "correct_answer": "Aqua",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Water acts as a neutral ligand and is named aqua.",
+    "tags": ["Ligands", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Werner Theory",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "According to Werner's theory, secondary valency corresponds to:",
+    "options": [
+      "Oxidation state",
+      "Charge",
+      "Coordination number",
+      "Atomic number"
+    ],
+    "correct_answer": "Coordination number",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Secondary valency is non-ionizable and corresponds to coordination number.",
+    "tags": ["Werner Theory", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Chelation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "EDTA acts as a:",
+    "options": [
+      "Monodentate ligand",
+      "Bidentate ligand",
+      "Hexadentate ligand",
+      "Ambidentate ligand"
+    ],
+    "correct_answer": "Hexadentate ligand",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "EDTA can coordinate through six donor atoms to a metal ion.",
+    "tags": ["EDTA", "Chelation", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Magnetic Properties",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The magnetic moment of a complex mainly depends on:",
+    "options": [
+      "Number of ligands",
+      "Number of unpaired electrons",
+      "Coordination number",
+      "Molecular weight"
+    ],
+    "correct_answer": "Number of unpaired electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Magnetic moment is determined by the number of unpaired electrons present.",
+    "tags": ["Magnetic Properties", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Crystal Field Theory",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "In an octahedral field, the d-orbitals split into:",
+    "options": [
+      "eg and t2g",
+      "t2g and eg",
+      "sp and sp2",
+      "dx and dy"
+    ],
+    "correct_answer": "t2g and eg",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "In octahedral complexes, lower-energy t2g and higher-energy eg sets are formed.",
+    "tags": ["CFT", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): EDTA forms very stable complexes with metal ions. Reason (R): EDTA is a hexadentate ligand and exhibits chelate effect.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The chelate effect and multiple donor sites make EDTA complexes highly stable.",
+    "tags": ["EDTA", "Assertion Reason", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_CC_0021",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Ligands",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Which of the following is a monodentate ligand?",
+    "options": [
+      "EDTA",
+      "en",
+      "NH3",
+      "Oxalate"
+    ],
+    "correct_answer": "NH3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NH3 donates only one lone pair and hence is a monodentate ligand.",
+    "tags": ["Monodentate Ligand", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0022",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Oxidation State",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The oxidation state of Fe in K4[Fe(CN)6] is:",
+    "options": [
+      "+2",
+      "+3",
+      "+4",
+      "0"
+    ],
+    "correct_answer": "+2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "For [Fe(CN)6]4−: x + 6(−1) = −4, therefore x = +2.",
+    "tags": ["Oxidation State", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0023",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "IUPAC Nomenclature",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of [Cu(NH3)4]SO4 is:",
+    "options": [
+      "Tetraamminecopper(II) sulfate",
+      "Tetraamminecopper(I) sulfate",
+      "Copper tetraammine sulfate",
+      "Tetraammine copper sulfate"
+    ],
+    "correct_answer": "Tetraamminecopper(II) sulfate",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "SO4²⁻ is outside the coordination sphere, so Cu has oxidation state +2.",
+    "tags": ["IUPAC", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0024",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Coordination Sphere",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "In K3[Fe(CN)6], the coordination sphere is:",
+    "options": [
+      "K3",
+      "[Fe(CN)6]",
+      "CN",
+      "Fe"
+    ],
+    "correct_answer": "[Fe(CN)6]",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The species enclosed within square brackets forms the coordination sphere.",
+    "tags": ["Coordination Sphere", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0025",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Isomerism",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The cis-trans isomerism shown by [Pt(NH3)2Cl2] is an example of:",
+    "options": [
+      "Ionization isomerism",
+      "Linkage isomerism",
+      "Geometrical isomerism",
+      "Hydrate isomerism"
+    ],
+    "correct_answer": "Geometrical isomerism",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The arrangement of ligands differs in space, giving cis and trans forms.",
+    "tags": ["Geometrical Isomerism", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0026",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Linkage Isomerism",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Linkage isomerism is exhibited by complexes containing:",
+    "options": [
+      "Neutral ligands only",
+      "Bidentate ligands only",
+      "Ambidentate ligands",
+      "Hexadentate ligands"
+    ],
+    "correct_answer": "Ambidentate ligands",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ambidentate ligands can coordinate through different donor atoms, producing linkage isomers.",
+    "tags": ["Linkage Isomerism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0027",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Chelation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Oxalate ion (C2O4²⁻) acts as a:",
+    "options": [
+      "Monodentate ligand",
+      "Bidentate ligand",
+      "Tridentate ligand",
+      "Hexadentate ligand"
+    ],
+    "correct_answer": "Bidentate ligand",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Oxalate coordinates through two oxygen donor atoms.",
+    "tags": ["Chelation", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0028",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Crystal Field Theory",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "In tetrahedral complexes, the splitting of d-orbitals is:",
+    "options": [
+      "Greater than octahedral splitting",
+      "Equal to octahedral splitting",
+      "Less than octahedral splitting",
+      "Zero"
+    ],
+    "correct_answer": "Less than octahedral splitting",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Tetrahedral crystal field splitting (Δt) is smaller than octahedral splitting (Δo).",
+    "tags": ["Crystal Field Theory", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0029",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Magnetic Properties",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which complex is expected to be diamagnetic?",
+    "options": [
+      "[FeF6]3−",
+      "[CoF6]3−",
+      "[Ni(CN)4]2−",
+      "[Mn(H2O)6]2+"
+    ],
+    "correct_answer": "[Ni(CN)4]2−",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CN− is a strong field ligand, causing electron pairing and formation of a diamagnetic square planar complex.",
+    "tags": ["Diamagnetism", "CFT", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0030",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): CN− is a strong field ligand. Reason (R): CN− causes pairing of d-electrons in many transition metal complexes.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Strong field ligands like CN− produce large crystal field splitting and often pair d-electrons.",
+    "tags": ["Strong Field Ligand", "Assertion Reason", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_CC_0031",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Coordination Number",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The coordination number of Ni in [Ni(CO)4] is:",
+    "options": [
+      "2",
+      "4",
+      "6",
+      "8"
+    ],
+    "correct_answer": "4",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Four CO ligands are directly attached to nickel, giving coordination number 4.",
+    "tags": ["Coordination Number", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0032",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Oxidation State",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The oxidation state of chromium in K3[Cr(C2O4)3] is:",
+    "options": [
+      "+2",
+      "+3",
+      "+4",
+      "+6"
+    ],
+    "correct_answer": "+3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Let oxidation state be x. x + 3(-2) = -3, therefore x = +3.",
+    "tags": ["Oxidation State", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0033",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "IUPAC Nomenclature",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The correct IUPAC name of K4[Fe(CN)6] is:",
+    "options": [
+      "Potassium hexacyanoferrate(II)",
+      "Potassium hexacyanoferrate(III)",
+      "Tetrapotassium ferricyanide",
+      "Potassium ferrocyanide"
+    ],
+    "correct_answer": "Potassium hexacyanoferrate(II)",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Fe is in +2 oxidation state and CN− is named cyanido in IUPAC nomenclature.",
+    "tags": ["IUPAC", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0034",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Ligands",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Carbon monoxide (CO) acts as a:",
+    "options": [
+      "Anionic ligand",
+      "Neutral ligand",
+      "Cationic ligand",
+      "Bidentate ligand"
+    ],
+    "correct_answer": "Neutral ligand",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CO is a neutral ligand that donates a lone pair from carbon.",
+    "tags": ["Neutral Ligand", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0035",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Color of Complexes",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Many coordination compounds are colored due to:",
+    "options": [
+      "Nuclear transitions",
+      "d-d electronic transitions",
+      "Proton transfer",
+      "Ionization only"
+    ],
+    "correct_answer": "d-d electronic transitions",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Absorption of visible light due to d-d transitions imparts color to transition metal complexes.",
+    "tags": ["Color", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0036",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Crystal Field Theory",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which ligand among the following is strongest according to the spectrochemical series?",
+    "options": [
+      "I−",
+      "Br−",
+      "H2O",
+      "CN−"
+    ],
+    "correct_answer": "CN−",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CN− is a strong field ligand and causes large crystal field splitting.",
+    "tags": ["Spectrochemical Series", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0037",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Chelation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The increased stability of complexes containing multidentate ligands is known as:",
+    "options": [
+      "Common ion effect",
+      "Chelate effect",
+      "Inductive effect",
+      "Resonance effect"
+    ],
+    "correct_answer": "Chelate effect",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Chelating ligands form stable ring structures around the metal ion.",
+    "tags": ["Chelate Effect", "KCET"]
+  },
+  {
+    "question_id": "CHEM_CC_0038",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Magnetic Properties",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "A diamagnetic complex contains:",
+    "options": [
+      "One unpaired electron",
+      "Two unpaired electrons",
+      "Only paired electrons",
+      "At least three unpaired electrons"
+    ],
+    "correct_answer": "Only paired electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Diamagnetic substances are repelled by magnetic fields because all electrons are paired.",
+    "tags": ["Diamagnetism", "NEET"]
+  },
+  {
+    "question_id": "CHEM_CC_0039",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Crystal Field Theory",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "For octahedral complexes, crystal field splitting energy is represented by:",
+    "options": [
+      "Δt",
+      "Δo",
+      "Δp",
+      "Δs"
+    ],
+    "correct_answer": "Δo",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The splitting energy in octahedral complexes is denoted by Δo (or 10Dq).",
+    "tags": ["Crystal Field Splitting", "JEE"]
+  },
+  {
+    "question_id": "CHEM_CC_0040",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Coordination Compounds",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): [Ni(CO)4] is diamagnetic. Reason (R): CO is a strong field ligand that causes pairing of electrons in nickel.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Strong-field CO pairs the electrons of Ni, resulting in a diamagnetic tetrahedral complex.",
+    "tags": ["Assertion Reason", "Diamagnetism", "NEET"]
+  }
+]
+
+
+[
+  {
+    "question_id": "CHEM_DB_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Electronic Configuration",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The general electronic configuration of d-block elements is:",
+    "options": [
+      "(n−1)d1−10 ns0−2",
+      "ns2 np1−6",
+      "ns1",
+      "nf1−14"
+    ],
+    "correct_answer": "(n−1)d1−10 ns0−2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "d-block elements have electrons entering the (n−1)d subshell.",
+    "tags": ["Electronic Configuration", "NEET"]
+  },
+  {
+    "question_id": "CHEM_DB_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Transition Elements",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "A transition element is one which has:",
+    "options": [
+      "Completely filled d-orbitals in atom and ions",
+      "Partially filled d-orbitals in atom or common oxidation state",
+      "Only s-electrons",
+      "Only p-electrons"
+    ],
+    "correct_answer": "Partially filled d-orbitals in atom or common oxidation state",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Transition elements possess partially filled d-orbitals in their atom or common ions.",
+    "tags": ["Transition Elements", "KCET"]
+  },
+  {
+    "question_id": "CHEM_DB_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Electronic Configuration",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The electronic configuration of Cr (Z = 24) is:",
+    "options": [
+      "[Ar] 3d4 4s2",
+      "[Ar] 3d5 4s1",
+      "[Ar] 3d6 4s0",
+      "[Ar] 3d3 4s3"
+    ],
+    "correct_answer": "[Ar] 3d5 4s1",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Chromium attains extra stability due to half-filled d-subshell.",
+    "tags": ["Chromium", "JEE"]
+  },
+  {
+    "question_id": "CHEM_DB_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Electronic Configuration",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The electronic configuration of Cu (Z = 29) is:",
+    "options": [
+      "[Ar] 3d9 4s2",
+      "[Ar] 3d10 4s1",
+      "[Ar] 3d8 4s3",
+      "[Ar] 3d10 4s2"
+    ],
+    "correct_answer": "[Ar] 3d10 4s1",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Copper achieves extra stability with a completely filled d-subshell.",
+    "tags": ["Copper", "NEET"]
+  },
+  {
+    "question_id": "CHEM_DB_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Oxidation States",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Transition elements show variable oxidation states due to:",
+    "options": [
+      "Large atomic size",
+      "Participation of both ns and (n−1)d electrons",
+      "Presence of p-electrons",
+      "Low density"
+    ],
+    "correct_answer": "Participation of both ns and (n−1)d electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The energies of ns and (n−1)d orbitals are comparable.",
+    "tags": ["Oxidation State", "KCET"]
+  },
+  {
+    "question_id": "CHEM_DB_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Oxidation States",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The highest oxidation state exhibited by manganese is:",
+    "options": [
+      "+2",
+      "+4",
+      "+6",
+      "+7"
+    ],
+    "correct_answer": "+7",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Manganese shows a maximum oxidation state of +7 in KMnO4.",
+    "tags": ["Manganese", "JEE"]
+  },
+  {
+    "question_id": "CHEM_DB_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Color",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The color of transition metal ions is mainly due to:",
+    "options": [
+      "Nuclear transitions",
+      "d-d transitions",
+      "s-s transitions",
+      "Proton transfer"
+    ],
+    "correct_answer": "d-d transitions",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Absorption of visible light causes d-electron excitation between split d-orbitals.",
+    "tags": ["Color", "NEET"]
+  },
+  {
+    "question_id": "CHEM_DB_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Magnetic Properties",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Paramagnetism in transition elements is due to:",
+    "options": [
+      "Paired electrons",
+      "Unpaired electrons",
+      "Protons",
+      "Neutrons"
+    ],
+    "correct_answer": "Unpaired electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Unpaired electrons generate magnetic moments causing paramagnetism.",
+    "tags": ["Paramagnetism", "KCET"]
+  },
+  {
+    "question_id": "CHEM_DB_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Catalytic Properties",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Transition metals act as good catalysts because of:",
+    "options": [
+      "High melting points only",
+      "Variable oxidation states and adsorption properties",
+      "Large atomic size only",
+      "Low density"
+    ],
+    "correct_answer": "Variable oxidation states and adsorption properties",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Transition metals form intermediate complexes and provide active surfaces.",
+    "tags": ["Catalysis", "JEE"]
+  },
+  {
+    "question_id": "CHEM_DB_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Transition metals exhibit variable oxidation states. Reason (R): The energies of ns and (n−1)d orbitals are comparable.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Both ns and d electrons can participate in bonding due to similar energies.",
+    "tags": ["Assertion Reason", "Oxidation States", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_DB_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Transition Elements",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Which of the following is not a transition element?",
+    "options": [
+      "Fe",
+      "Cu",
+      "Zn",
+      "Cr"
+    ],
+    "correct_answer": "Zn",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Zn and Zn²⁺ possess completely filled d-orbitals (3d¹⁰), so Zn is not considered a transition element.",
+    "tags": ["Transition Elements", "KCET"]
+  },
+  {
+    "question_id": "CHEM_DB_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Oxidation States",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The most common oxidation state of zinc is:",
+    "options": [
+      "+1",
+      "+2",
+      "+3",
+      "+4"
+    ],
+    "correct_answer": "+2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Zinc readily loses two 4s electrons to form Zn²⁺.",
+    "tags": ["Oxidation State", "NEET"]
+  },
+  {
+    "question_id": "CHEM_DB_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Magnetic Properties",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The number of unpaired electrons in Fe³⁺ (Z = 26) is:",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_answer": "5",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Fe³⁺ = [Ar]3d⁵, which contains five unpaired electrons.",
+    "tags": ["Magnetism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_DB_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Color",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Sc³⁺ ions are generally colorless because:",
+    "options": [
+      "They have a d¹ configuration",
+      "They have a d⁰ configuration",
+      "They have a d⁵ configuration",
+      "They are radioactive"
+    ],
+    "correct_answer": "They have a d⁰ configuration",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "No d-electrons are available for d-d transitions.",
+    "tags": ["Color", "KCET"]
+  },
+  {
+    "question_id": "CHEM_DB_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Catalysis",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Iron is used as a catalyst in:",
+    "options": [
+      "Contact process",
+      "Haber process",
+      "Ostwald process",
+      "Hydrogenation of oils"
+    ],
+    "correct_answer": "Haber process",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Finely divided iron is the catalyst used in the Haber process for ammonia manufacture.",
+    "tags": ["Catalysis", "NEET"]
+  },
+  {
+    "question_id": "CHEM_DB_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Catalysis",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Vanadium pentoxide (V₂O₅) is used as a catalyst in:",
+    "options": [
+      "Haber process",
+      "Contact process",
+      "Ostwald process",
+      "Fischer-Tropsch process"
+    ],
+    "correct_answer": "Contact process",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "V₂O₅ catalyzes the oxidation of SO₂ to SO₃ in the Contact process.",
+    "tags": ["Catalysis", "JEE"]
+  },
+  {
+    "question_id": "CHEM_DB_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Intermetallic Compounds",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "An alloy of copper and zinc is known as:",
+    "options": [
+      "Bronze",
+      "Steel",
+      "Brass",
+      "Solder"
+    ],
+    "correct_answer": "Brass",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Brass is primarily composed of copper and zinc.",
+    "tags": ["Alloys", "KCET"]
+  },
+  {
+    "question_id": "CHEM_DB_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Potassium Dichromate",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The oxidation state of chromium in K₂Cr₂O₇ is:",
+    "options": [
+      "+3",
+      "+4",
+      "+6",
+      "+7"
+    ],
+    "correct_answer": "+6",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "In dichromate ion, each chromium atom has an oxidation state of +6.",
+    "tags": ["Potassium Dichromate", "NEET"]
+  },
+  {
+    "question_id": "CHEM_DB_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Potassium Permanganate",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The oxidation state of manganese in KMnO₄ is:",
+    "options": [
+      "+4",
+      "+5",
+      "+6",
+      "+7"
+    ],
+    "correct_answer": "+7",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Mn in permanganate exhibits its highest oxidation state, +7.",
+    "tags": ["Potassium Permanganate", "JEE"]
+  },
+  {
+    "question_id": "CHEM_DB_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "d-Block Elements",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Zn²⁺ ions are colorless. Reason (R): Zn²⁺ has a completely filled 3d¹⁰ configuration and cannot undergo d-d transitions.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Because Zn²⁺ possesses a completely filled d-subshell, d-d transitions are not possible.",
+    "tags": ["Assertion Reason", "Color", "NEET"]
+  }
+]
+
+
+
+[
+  {
+    "question_id": "CHEM_GOC_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Classification of Organic Compounds",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Compounds containing only carbon and hydrogen are called:",
+    "options": [
+      "Alcohols",
+      "Hydrocarbons",
+      "Aldehydes",
+      "Amines"
+    ],
+    "correct_answer": "Hydrocarbons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Hydrocarbons are organic compounds composed exclusively of carbon and hydrogen atoms.",
+    "tags": ["Hydrocarbons", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Hybridization",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon in methane (CH4) is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "sp3d"
+    ],
+    "correct_answer": "sp3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carbon forms four equivalent sigma bonds using sp3 hybrid orbitals.",
+    "tags": ["Hybridization", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Electronic Effects",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The electron-withdrawing effect transmitted through sigma bonds is called:",
+    "options": [
+      "Resonance effect",
+      "Hyperconjugation",
+      "Inductive effect",
+      "Mesomeric effect"
+    ],
+    "correct_answer": "Inductive effect",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Inductive effect operates through sigma bonds due to electronegativity differences.",
+    "tags": ["Inductive Effect", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Inductive Effect",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Which group shows a strong -I effect?",
+    "options": [
+      "-CH3",
+      "-C2H5",
+      "-NO2",
+      "-OH"
+    ],
+    "correct_answer": "-NO2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The nitro group strongly withdraws electrons through the inductive effect.",
+    "tags": ["Inductive Effect", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Resonance",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Resonance involves delocalization of:",
+    "options": [
+      "Sigma electrons",
+      "Pi electrons",
+      "Neutrons",
+      "Protons"
+    ],
+    "correct_answer": "Pi electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Resonance occurs due to delocalization of pi electrons or lone pairs.",
+    "tags": ["Resonance", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Carbocations",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The most stable carbocation among the following is:",
+    "options": [
+      "CH3+",
+      "1° carbocation",
+      "2° carbocation",
+      "3° carbocation"
+    ],
+    "correct_answer": "3° carbocation",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Tertiary carbocations are stabilized by hyperconjugation and +I effect.",
+    "tags": ["Carbocation", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Carbanions",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The stability order of carbanions is:",
+    "options": [
+      "3° > 2° > 1° > CH3−",
+      "CH3− > 1° > 2° > 3°",
+      "2° > 1° > 3° > CH3−",
+      "1° > CH3− > 2° > 3°"
+    ],
+    "correct_answer": "CH3− > 1° > 2° > 3°",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alkyl groups destabilize carbanions due to their electron-donating nature.",
+    "tags": ["Carbanion", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Free Radicals",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The most stable free radical is:",
+    "options": [
+      "Methyl",
+      "Primary",
+      "Secondary",
+      "Tertiary"
+    ],
+    "correct_answer": "Tertiary",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Tertiary radicals are stabilized by hyperconjugation and inductive effects.",
+    "tags": ["Free Radical", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Acidity",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which of the following is the strongest acid?",
+    "options": [
+      "CH4",
+      "NH3",
+      "H2O",
+      "HF"
+    ],
+    "correct_answer": "HF",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "HF is the strongest acid among the given species due to high bond polarity and stability of F−.",
+    "tags": ["Acidity", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Resonance stabilizes molecules. Reason (R): Delocalization of electrons lowers the overall energy of the molecule.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Electron delocalization distributes charge and lowers molecular energy, increasing stability.",
+    "tags": ["Assertion Reason", "Resonance", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_GOC_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Hybridization",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon in ethene (C2H4) is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "sp3d"
+    ],
+    "correct_answer": "sp2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Each carbon atom in ethene forms three sigma bonds and one pi bond, resulting in sp2 hybridization.",
+    "tags": ["Hybridization", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Hybridization",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon in ethyne (C2H2) is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "sp3d"
+    ],
+    "correct_answer": "sp",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Each carbon in ethyne forms two sigma bonds and two pi bonds, resulting in sp hybridization.",
+    "tags": ["Hybridization", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Hyperconjugation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Hyperconjugation is also known as:",
+    "options": [
+      "No-bond resonance",
+      "Inductive effect",
+      "Electromeric effect",
+      "Mesomeric effect"
+    ],
+    "correct_answer": "No-bond resonance",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Hyperconjugation involves delocalization of sigma electrons and is often called no-bond resonance.",
+    "tags": ["Hyperconjugation", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Resonance",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Among the resonance structures, the most stable contributor is the one with:",
+    "options": [
+      "Maximum charge separation",
+      "Incomplete octet",
+      "Minimum charge separation and complete octet",
+      "Maximum positive charge"
+    ],
+    "correct_answer": "Minimum charge separation and complete octet",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Structures with complete octets and minimum charge separation contribute most to the resonance hybrid.",
+    "tags": ["Resonance", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Carbocations",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which carbocation is most stable?",
+    "options": [
+      "CH3+",
+      "CH3CH2+",
+      "(CH3)2CH+",
+      "(CH3)3C+"
+    ],
+    "correct_answer": "(CH3)3C+",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Tertiary carbocations are stabilized by maximum hyperconjugation and +I effect.",
+    "tags": ["Carbocation", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Reaction Intermediates",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "A carbocation is:",
+    "options": [
+      "Positively charged carbon species",
+      "Negatively charged carbon species",
+      "Neutral radical",
+      "Neutral molecule"
+    ],
+    "correct_answer": "Positively charged carbon species",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A carbocation contains a positively charged carbon atom with six electrons in its valence shell.",
+    "tags": ["Reaction Intermediate", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Electrophiles and Nucleophiles",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which of the following acts as a nucleophile?",
+    "options": [
+      "H+",
+      "BF3",
+      "OH−",
+      "AlCl3"
+    ],
+    "correct_answer": "OH−",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "OH− donates an electron pair and acts as a nucleophile.",
+    "tags": ["Nucleophile", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Electrophiles",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which species acts as an electrophile?",
+    "options": [
+      "OH−",
+      "CN−",
+      "NH3",
+      "NO2+"
+    ],
+    "correct_answer": "NO2+",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "NO2+ is electron deficient and accepts electron pairs from nucleophiles.",
+    "tags": ["Electrophile", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Acidity Order",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The correct acidic strength order is:",
+    "options": [
+      "HF > H2O > NH3 > CH4",
+      "CH4 > NH3 > H2O > HF",
+      "NH3 > HF > H2O > CH4",
+      "H2O > HF > NH3 > CH4"
+    ],
+    "correct_answer": "HF > H2O > NH3 > CH4",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Acidic strength increases with the stability of the conjugate base and electronegativity of the atom.",
+    "tags": ["Acidity", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Tertiary carbocations are more stable than primary carbocations. Reason (R): Hyperconjugation stabilizes carbocations.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Tertiary carbocations have more adjacent C–H bonds available for hyperconjugation, increasing stability.",
+    "tags": ["Assertion Reason", "Carbocation", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_GOC_0021",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Reaction Intermediates",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "A carbon species containing an unpaired electron is called:",
+    "options": [
+      "Carbocation",
+      "Carbanion",
+      "Free radical",
+      "Electrophile"
+    ],
+    "correct_answer": "Free radical",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Free radicals are neutral species containing one or more unpaired electrons.",
+    "tags": ["Free Radical", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0022",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Reaction Intermediates",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "A carbon species carrying a negative charge is called:",
+    "options": [
+      "Carbocation",
+      "Carbanion",
+      "Free radical",
+      "Electrophile"
+    ],
+    "correct_answer": "Carbanion",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carbanions contain a negatively charged carbon atom with a lone pair of electrons.",
+    "tags": ["Carbanion", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0023",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Carbanion Stability",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which carbanion is most stable?",
+    "options": [
+      "(CH3)3C−",
+      "(CH3)2CH−",
+      "CH3CH2−",
+      "CH3−"
+    ],
+    "correct_answer": "CH3−",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alkyl groups destabilize carbanions due to their electron-donating (+I) effect.",
+    "tags": ["Carbanion", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0024",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Hyperconjugation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Hyperconjugation involves delocalization of:",
+    "options": [
+      "π-electrons only",
+      "σ-electrons of C–H bonds",
+      "Lone pair electrons only",
+      "Core electrons"
+    ],
+    "correct_answer": "σ-electrons of C–H bonds",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Hyperconjugation occurs through overlap of σ(C–H) bonds with adjacent empty or partially filled orbitals.",
+    "tags": ["Hyperconjugation", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0025",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Electromeric Effect",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The electromeric effect is:",
+    "options": [
+      "Permanent effect",
+      "Temporary complete transfer of π-electrons",
+      "Transfer of σ-electrons",
+      "Delocalization of lone pairs only"
+    ],
+    "correct_answer": "Temporary complete transfer of π-electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Electromeric effect occurs only in the presence of an attacking reagent and involves complete transfer of π-electrons.",
+    "tags": ["Electromeric Effect", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0026",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Mesomeric Effect",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which group shows a +M (positive mesomeric) effect?",
+    "options": [
+      "-NO2",
+      "-CN",
+      "-OH",
+      "-CHO"
+    ],
+    "correct_answer": "-OH",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The hydroxyl group donates electron density through resonance, exhibiting a +M effect.",
+    "tags": ["Mesomeric Effect", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0027",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Mesomeric Effect",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which group shows a −M (negative mesomeric) effect?",
+    "options": [
+      "-NH2",
+      "-OH",
+      "-OCH3",
+      "-NO2"
+    ],
+    "correct_answer": "-NO2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The nitro group withdraws electron density through resonance and shows a strong −M effect.",
+    "tags": ["Mesomeric Effect", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0028",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Bond Fission",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Homolytic bond cleavage produces:",
+    "options": [
+      "Carbocations",
+      "Carbanions",
+      "Free radicals",
+      "Ions only"
+    ],
+    "correct_answer": "Free radicals",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "In homolytic cleavage, each bonded atom takes one electron, forming free radicals.",
+    "tags": ["Bond Fission", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0029",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Bond Fission",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Heterolytic bond cleavage produces:",
+    "options": [
+      "Only radicals",
+      "Ions",
+      "Only molecules",
+      "Atoms only"
+    ],
+    "correct_answer": "Ions",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "One atom takes both bonding electrons, resulting in formation of ions.",
+    "tags": ["Bond Fission", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0030",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Homolytic fission generally occurs in non-polar covalent bonds. Reason (R): Both atoms have similar electronegativities and share bonding electrons equally.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Non-polar bonds undergo symmetrical bond cleavage because the bonded atoms have similar electron-attracting tendencies.",
+    "tags": ["Assertion Reason", "Bond Fission", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_GOC_0031",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Isomerism",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Compounds having the same molecular formula but different structural formulas are called:",
+    "options": [
+      "Isotopes",
+      "Isobars",
+      "Structural isomers",
+      "Homologues"
+    ],
+    "correct_answer": "Structural isomers",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Structural isomers have the same molecular formula but different connectivity of atoms.",
+    "tags": ["Structural Isomerism", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0032",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Chain Isomerism",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Chain isomerism arises due to difference in:",
+    "options": [
+      "Functional group",
+      "Carbon skeleton",
+      "Position of substituent",
+      "Spatial arrangement"
+    ],
+    "correct_answer": "Carbon skeleton",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Chain isomers differ in the arrangement of the carbon chain.",
+    "tags": ["Chain Isomerism", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0033",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Position Isomerism",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Position isomerism occurs when compounds differ in the position of:",
+    "options": [
+      "Carbon chain",
+      "Functional group or substituent",
+      "Molecular formula",
+      "Number of atoms"
+    ],
+    "correct_answer": "Functional group or substituent",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Position isomers have the same carbon skeleton but differ in the location of a substituent or functional group.",
+    "tags": ["Position Isomerism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0034",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Functional Isomerism",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Ethanol and dimethyl ether are examples of:",
+    "options": [
+      "Chain isomers",
+      "Position isomers",
+      "Functional isomers",
+      "Geometrical isomers"
+    ],
+    "correct_answer": "Functional isomers",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Both have the formula C2H6O but contain different functional groups.",
+    "tags": ["Functional Isomerism", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0035",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Homologous Series",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Successive members of a homologous series differ by:",
+    "options": [
+      "CH",
+      "CH2",
+      "CH3",
+      "C2H2"
+    ],
+    "correct_answer": "CH2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Adjacent members of a homologous series differ by one methylene (-CH2-) group.",
+    "tags": ["Homologous Series", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0036",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Geometrical Isomerism",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Geometrical isomerism is possible due to restricted rotation around:",
+    "options": [
+      "Single bond",
+      "Double bond",
+      "Triple bond only",
+      "Ionic bond"
+    ],
+    "correct_answer": "Double bond",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The π bond in a double bond restricts rotation, giving rise to cis-trans isomerism.",
+    "tags": ["Geometrical Isomerism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0037",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Optical Isomerism",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "A carbon atom attached to four different groups is called:",
+    "options": [
+      "Primary carbon",
+      "Secondary carbon",
+      "Tertiary carbon",
+      "Chiral carbon"
+    ],
+    "correct_answer": "Chiral carbon",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A chiral (asymmetric) carbon leads to optical isomerism.",
+    "tags": ["Optical Isomerism", "KCET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0038",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Optical Activity",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Optically active compounds rotate:",
+    "options": [
+      "UV light",
+      "Infrared light",
+      "Plane polarized light",
+      "X-rays"
+    ],
+    "correct_answer": "Plane polarized light",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Optically active compounds rotate the plane of polarized light due to chirality.",
+    "tags": ["Optical Activity", "NEET"]
+  },
+  {
+    "question_id": "CHEM_GOC_0039",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Reaction Mechanism",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "The slowest step in a multistep reaction mechanism is called:",
+    "options": [
+      "Fast step",
+      "Equilibrium step",
+      "Rate-determining step",
+      "Termination step"
+    ],
+    "correct_answer": "Rate-determining step",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The overall reaction rate is governed by the slowest elementary step.",
+    "tags": ["Reaction Mechanism", "JEE"]
+  },
+  {
+    "question_id": "CHEM_GOC_0040",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "General Organic Chemistry",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Optical isomers have identical physical properties except for their action on plane polarized light. Reason (R): Optical isomers are non-superimposable mirror images of each other.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Enantiomers possess identical physical properties in achiral environments but rotate plane polarized light in opposite directions.",
+    "tags": ["Assertion Reason", "Optical Isomerism", "NEET"]
+  }
+]
+
+
+
+
+[
+  {
+    "question_id": "CHEM_HC_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkanes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The general formula of alkanes is:",
+    "options": [
+      "CnH2n",
+      "CnH2n−2",
+      "CnH2n+2",
+      "CnHn"
+    ],
+    "correct_answer": "CnH2n+2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alkanes are saturated hydrocarbons having the general formula CnH2n+2.",
+    "tags": ["Alkanes", "NEET"]
+  },
+  {
+    "question_id": "CHEM_HC_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkenes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The general formula of alkenes is:",
+    "options": [
+      "CnH2n+2",
+      "CnH2n",
+      "CnH2n−2",
+      "CnHn"
+    ],
+    "correct_answer": "CnH2n",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alkenes contain one carbon-carbon double bond and follow the formula CnH2n.",
+    "tags": ["Alkenes", "KCET"]
+  },
+  {
+    "question_id": "CHEM_HC_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkynes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The general formula of alkynes is:",
+    "options": [
+      "CnH2n+2",
+      "CnH2n",
+      "CnH2n−2",
+      "CnHn"
+    ],
+    "correct_answer": "CnH2n−2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alkynes contain one carbon-carbon triple bond and follow the formula CnH2n−2.",
+    "tags": ["Alkynes", "JEE"]
+  },
+  {
+    "question_id": "CHEM_HC_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkanes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Methane belongs to the homologous series of:",
+    "options": [
+      "Alkenes",
+      "Alkynes",
+      "Alkanes",
+      "Arenes"
+    ],
+    "correct_answer": "Alkanes",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Methane (CH4) is the first member of the alkane series.",
+    "tags": ["Methane", "NEET"]
+  },
+  {
+    "question_id": "CHEM_HC_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Unsaturation",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which hydrocarbon decolorizes bromine water immediately?",
+    "options": [
+      "Methane",
+      "Ethane",
+      "Ethene",
+      "Cyclohexane"
+    ],
+    "correct_answer": "Ethene",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alkenes undergo addition reactions with bromine, causing decolorization.",
+    "tags": ["Unsaturation Test", "KCET"]
+  },
+  {
+    "question_id": "CHEM_HC_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "IUPAC Nomenclature",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of CH3–CH=CH2 is:",
+    "options": [
+      "Propane",
+      "Propene",
+      "Propyne",
+      "Cyclopropane"
+    ],
+    "correct_answer": "Propene",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The molecule contains three carbon atoms and one double bond.",
+    "tags": ["IUPAC Nomenclature", "JEE"]
+  },
+  {
+    "question_id": "CHEM_HC_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Aromatic Hydrocarbons",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The molecular formula of benzene is:",
+    "options": [
+      "C6H6",
+      "C6H12",
+      "C6H10",
+      "C6H14"
+    ],
+    "correct_answer": "C6H6",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Benzene is the simplest aromatic hydrocarbon with formula C6H6.",
+    "tags": ["Benzene", "NEET"]
+  },
+  {
+    "question_id": "CHEM_HC_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Combustion",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Complete combustion of hydrocarbons produces:",
+    "options": [
+      "CO and H2",
+      "CO2 and H2O",
+      "C and H2O",
+      "CO and O2"
+    ],
+    "correct_answer": "CO2 and H2O",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Complete oxidation of hydrocarbons yields carbon dioxide and water.",
+    "tags": ["Combustion", "KCET"]
+  },
+  {
+    "question_id": "CHEM_HC_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Markovnikov Rule",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "According to Markovnikov's rule, addition of HBr to propene gives mainly:",
+    "options": [
+      "1-Bromopropane",
+      "2-Bromopropane",
+      "1,2-Dibromopropane",
+      "Propane"
+    ],
+    "correct_answer": "2-Bromopropane",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Hydrogen adds to the carbon having more hydrogens, while Br attaches to the more substituted carbon.",
+    "tags": ["Markovnikov Rule", "JEE"]
+  },
+  {
+    "question_id": "CHEM_HC_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Benzene undergoes substitution reactions more readily than addition reactions. Reason (R): Addition reactions destroy aromaticity of benzene.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Substitution preserves aromatic stability, whereas addition destroys the aromatic ring system.",
+    "tags": ["Assertion Reason", "Aromaticity", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_HC_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkanes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of CH3–CH2–CH3 is:",
+    "options": [
+      "Methane",
+      "Ethane",
+      "Propane",
+      "Butane"
+    ],
+    "correct_answer": "Propane",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The compound contains three carbon atoms connected by single bonds.",
+    "tags": ["Alkanes", "KCET"]
+  },
+  {
+    "question_id": "CHEM_HC_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkenes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Ethene contains:",
+    "options": [
+      "One single bond between carbon atoms",
+      "One double bond between carbon atoms",
+      "One triple bond between carbon atoms",
+      "Two double bonds between carbon atoms"
+    ],
+    "correct_answer": "One double bond between carbon atoms",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ethene (C2H4) contains one C=C double bond.",
+    "tags": ["Alkenes", "NEET"]
+  },
+  {
+    "question_id": "CHEM_HC_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Alkynes",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The hybridization of carbon atoms in ethyne is:",
+    "options": [
+      "sp",
+      "sp2",
+      "sp3",
+      "sp3d"
+    ],
+    "correct_answer": "sp",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Each carbon in ethyne forms two sigma bonds and two pi bonds, resulting in sp hybridization.",
+    "tags": ["Hybridization", "JEE"]
+  },
+  {
+    "question_id": "CHEM_HC_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Unsaturation Test",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Baeyer's reagent is:",
+    "options": [
+      "Acidified K2Cr2O7",
+      "Dilute HCl",
+      "Alkaline KMnO4",
+      "Concentrated H2SO4"
+    ],
+    "correct_answer": "Alkaline KMnO4",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Baeyer's reagent (cold dilute alkaline KMnO4) is used to detect unsaturation.",
+    "tags": ["Baeyer Test", "KCET"]
+  },
+  {
+    "question_id": "CHEM_HC_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Aromaticity",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Benzene contains how many π electrons?",
+    "options": [
+      "2",
+      "4",
+      "6",
+      "8"
+    ],
+    "correct_answer": "6",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Benzene has three double bonds contributing six delocalized π electrons.",
+    "tags": ["Aromaticity", "NEET"]
+  },
+  {
+    "question_id": "CHEM_HC_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Hückel Rule",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "According to Hückel's rule, an aromatic compound must contain:",
+    "options": [
+      "2n π electrons",
+      "(4n + 2) π electrons",
+      "4n π electrons",
+      "(2n + 2) π electrons"
+    ],
+    "correct_answer": "(4n + 2) π electrons",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "A cyclic, planar, conjugated system is aromatic if it contains (4n + 2) π electrons.",
+    "tags": ["Hückel Rule", "JEE"]
+  },
+  {
+    "question_id": "CHEM_HC_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Electrophilic Substitution",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The characteristic reaction of benzene is:",
+    "options": [
+      "Addition",
+      "Substitution",
+      "Polymerization",
+      "Elimination"
+    ],
+    "correct_answer": "Substitution",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Benzene prefers electrophilic substitution reactions to preserve aromaticity.",
+    "tags": ["Benzene Reactions", "KCET"]
+  },
+  {
+    "question_id": "CHEM_HC_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Nitration",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Nitration of benzene produces:",
+    "options": [
+      "Nitrobenzene",
+      "Aniline",
+      "Phenol",
+      "Benzoic acid"
+    ],
+    "correct_answer": "Nitrobenzene",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Benzene reacts with concentrated HNO3 in the presence of H2SO4 to form nitrobenzene.",
+    "tags": ["Nitration", "NEET"]
+  },
+  {
+    "question_id": "CHEM_HC_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Ozonolysis",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Ozonolysis of ethene followed by reductive hydrolysis gives:",
+    "options": [
+      "Methanal",
+      "Ethanal",
+      "Methanol",
+      "Ethanol"
+    ],
+    "correct_answer": "Methanal",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Cleavage of the C=C bond in ethene produces two molecules of methanal (HCHO).",
+    "tags": ["Ozonolysis", "JEE"]
+  },
+  {
+    "question_id": "CHEM_HC_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Hydrocarbons",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Alkenes are more reactive than alkanes. Reason (R): Alkenes contain a π bond which is weaker and more easily attacked than a σ bond.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The π bond of alkenes is electron-rich and less stable than a σ bond, making alkenes more reactive.",
+    "tags": ["Assertion Reason", "Alkenes", "NEET"]
+  }
+]
+
+
+
+[
+  {
+    "question_id": "CHEM_APE_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Alcohols",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The functional group present in alcohols is:",
+    "options": [
+      "-CHO",
+      "-COOH",
+      "-OH",
+      "-NH2"
+    ],
+    "correct_answer": "-OH",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Alcohols contain the hydroxyl (-OH) functional group attached to a saturated carbon atom.",
+    "tags": ["Alcohols", "NEET"]
+  },
+  {
+    "question_id": "CHEM_APE_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Classification of Alcohols",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Ethanol is classified as:",
+    "options": [
+      "Primary alcohol",
+      "Secondary alcohol",
+      "Tertiary alcohol",
+      "Phenol"
+    ],
+    "correct_answer": "Primary alcohol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The carbon bearing the -OH group is attached to only one other carbon atom.",
+    "tags": ["Alcohols", "KCET"]
+  },
+  {
+    "question_id": "CHEM_APE_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Acidity",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which is more acidic?",
+    "options": [
+      "Ethanol",
+      "Methanol",
+      "Phenol",
+      "Diethyl ether"
+    ],
+    "correct_answer": "Phenol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Phenoxide ion is resonance stabilized, making phenol more acidic than alcohols.",
+    "tags": ["Acidity", "JEE"]
+  },
+  {
+    "question_id": "CHEM_APE_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Phenols",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "Phenol reacts with NaOH because phenol is:",
+    "options": [
+      "Neutral",
+      "Basic",
+      "Weakly acidic",
+      "Strongly acidic"
+    ],
+    "correct_answer": "Weakly acidic",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Phenol forms sodium phenoxide with NaOH due to its acidic nature.",
+    "tags": ["Phenol", "NEET"]
+  },
+  {
+    "question_id": "CHEM_APE_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Ethers",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The functional group present in ethers is:",
+    "options": [
+      "R-O-R'",
+      "R-COOH",
+      "R-CHO",
+      "R-NH2"
+    ],
+    "correct_answer": "R-O-R'",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ethers contain an oxygen atom bonded to two alkyl or aryl groups.",
+    "tags": ["Ethers", "KCET"]
+  },
+  {
+    "question_id": "CHEM_APE_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Lucas Test",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Lucas reagent consists of:",
+    "options": [
+      "ZnCl2 + HCl",
+      "NaOH + HCl",
+      "KOH + H2SO4",
+      "NaCl + HNO3"
+    ],
+    "correct_answer": "ZnCl2 + HCl",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Lucas reagent is a mixture of anhydrous ZnCl2 and concentrated HCl used to distinguish alcohols.",
+    "tags": ["Lucas Test", "JEE"]
+  },
+  {
+    "question_id": "CHEM_APE_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Alcohol Reactions",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Dehydration of ethanol produces:",
+    "options": [
+      "Ethane",
+      "Ethene",
+      "Ethyne",
+      "Acetaldehyde"
+    ],
+    "correct_answer": "Ethene",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "On heating with concentrated H2SO4, ethanol undergoes dehydration to form ethene.",
+    "tags": ["Dehydration", "NEET"]
+  },
+  {
+    "question_id": "CHEM_APE_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Phenol Reactions",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Phenol gives a violet coloration with:",
+    "options": [
+      "FeCl3",
+      "CuSO4",
+      "AgNO3",
+      "NaCl"
+    ],
+    "correct_answer": "FeCl3",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Phenols give characteristic colored complexes with neutral ferric chloride solution.",
+    "tags": ["Ferric Chloride Test", "KCET"]
+  },
+  {
+    "question_id": "CHEM_APE_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Williamson Ether Synthesis",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Williamson synthesis is used for the preparation of:",
+    "options": [
+      "Alcohols",
+      "Phenols",
+      "Ethers",
+      "Aldehydes"
+    ],
+    "correct_answer": "Ethers",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ethers are prepared by reacting sodium alkoxides with alkyl halides.",
+    "tags": ["Williamson Synthesis", "JEE"]
+  },
+  {
+    "question_id": "CHEM_APE_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Phenol is more acidic than ethanol. Reason (R): Phenoxide ion is resonance stabilized whereas ethoxide ion is not.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Resonance stabilization of phenoxide ion increases the acidity of phenol.",
+    "tags": ["Assertion Reason", "Phenol", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_APE_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Alcohol Classification",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "2-Propanol is classified as:",
+    "options": [
+      "Primary alcohol",
+      "Secondary alcohol",
+      "Tertiary alcohol",
+      "Phenol"
+    ],
+    "correct_answer": "Secondary alcohol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The carbon bearing the -OH group is attached to two other carbon atoms.",
+    "tags": ["Alcohols", "KCET"]
+  },
+  {
+    "question_id": "CHEM_APE_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Alcohol Classification",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "tert-Butyl alcohol is an example of:",
+    "options": [
+      "Primary alcohol",
+      "Secondary alcohol",
+      "Tertiary alcohol",
+      "Dihydric alcohol"
+    ],
+    "correct_answer": "Tertiary alcohol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The carbon containing the hydroxyl group is attached to three carbon atoms.",
+    "tags": ["Alcohols", "NEET"]
+  },
+  {
+    "question_id": "CHEM_APE_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Boiling Points",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Alcohols have higher boiling points than corresponding hydrocarbons because of:",
+    "options": [
+      "Resonance",
+      "Hydrogen bonding",
+      "Hyperconjugation",
+      "Inductive effect"
+    ],
+    "correct_answer": "Hydrogen bonding",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Intermolecular hydrogen bonding increases the boiling points of alcohols.",
+    "tags": ["Boiling Point", "JEE"]
+  },
+  {
+    "question_id": "CHEM_APE_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Phenol Reactions",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Phenol reacts with bromine water to give:",
+    "options": [
+      "Bromobenzene",
+      "2,4,6-Tribromophenol",
+      "1,2-Dibromobenzene",
+      "Benzoic acid"
+    ],
+    "correct_answer": "2,4,6-Tribromophenol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Phenol readily undergoes electrophilic substitution with bromine water forming a white precipitate of 2,4,6-tribromophenol.",
+    "tags": ["Phenol", "KCET"]
+  },
+  {
+    "question_id": "CHEM_APE_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Phenol Reactions",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The white precipitate formed when phenol reacts with bromine water is:",
+    "options": [
+      "Bromobenzene",
+      "2,4,6-Tribromophenol",
+      "Benzene hexabromide",
+      "Phenyl bromide"
+    ],
+    "correct_answer": "2,4,6-Tribromophenol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The reaction is a characteristic test for phenol.",
+    "tags": ["Phenol Test", "NEET"]
+  },
+  {
+    "question_id": "CHEM_APE_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Kolbe Reaction",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Kolbe-Schmitt reaction of sodium phenoxide with CO2 followed by acidification gives:",
+    "options": [
+      "Benzoic acid",
+      "Salicylic acid",
+      "Phenol",
+      "Aniline"
+    ],
+    "correct_answer": "Salicylic acid",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Kolbe-Schmitt reaction is used industrially for the preparation of salicylic acid.",
+    "tags": ["Kolbe Reaction", "JEE"]
+  },
+  {
+    "question_id": "CHEM_APE_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Reimer-Tiemann Reaction",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Reimer-Tiemann reaction converts phenol into:",
+    "options": [
+      "Benzaldehyde",
+      "Salicylaldehyde",
+      "Benzoic acid",
+      "Anisole"
+    ],
+    "correct_answer": "Salicylaldehyde",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Phenol reacts with chloroform and NaOH to form o-hydroxybenzaldehyde (salicylaldehyde).",
+    "tags": ["Reimer-Tiemann", "KCET"]
+  },
+  {
+    "question_id": "CHEM_APE_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Ethers",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Diethyl ether on heating with excess HI produces:",
+    "options": [
+      "Only ethanol",
+      "Only ethyl iodide",
+      "Ethanol and ethyl iodide",
+      "Ethene only"
+    ],
+    "correct_answer": "Only ethyl iodide",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "With excess HI, ether cleavage proceeds completely to form ethyl iodide and water.",
+    "tags": ["Ethers", "NEET"]
+  },
+  {
+    "question_id": "CHEM_APE_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Ether Preparation",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Williamson ether synthesis proceeds mainly through:",
+    "options": [
+      "SN1 mechanism",
+      "SN2 mechanism",
+      "E1 mechanism",
+      "Free radical mechanism"
+    ],
+    "correct_answer": "SN2 mechanism",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "An alkoxide ion attacks a primary alkyl halide via a backside attack in an SN2 reaction.",
+    "tags": ["Williamson Synthesis", "JEE"]
+  },
+  {
+    "question_id": "CHEM_APE_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Alcohols, Phenols & Ethers",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Phenol undergoes electrophilic substitution more readily than benzene. Reason (R): The -OH group activates the benzene ring by donating electron density through resonance.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The hydroxyl group exhibits a +M effect, increasing electron density at the ortho and para positions.",
+    "tags": ["Assertion Reason", "Phenol", "NEET"]
+  }
+]
+
+
+
+[
+  {
+    "question_id": "CHEM_AKC_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Aldehydes",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The functional group present in aldehydes is:",
+    "options": [
+      "-COOH",
+      "-CHO",
+      ">C=O",
+      "-OH"
+    ],
+    "correct_answer": "-CHO",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Aldehydes contain the formyl (-CHO) functional group.",
+    "tags": ["Aldehydes", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Ketones",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The functional group present in ketones is:",
+    "options": [
+      "-CHO",
+      "-COOH",
+      ">C=O",
+      "-NH2"
+    ],
+    "correct_answer": ">C=O",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ketones contain a carbonyl group bonded to two carbon atoms.",
+    "tags": ["Ketones", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Carboxylic Acids",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The functional group present in carboxylic acids is:",
+    "options": [
+      "-OH",
+      "-COOH",
+      "-CHO",
+      "-O-"
+    ],
+    "correct_answer": "-COOH",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carboxylic acids contain the carboxyl (-COOH) functional group.",
+    "tags": ["Carboxylic Acids", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AKC_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Nomenclature",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of HCHO is:",
+    "options": [
+      "Methanal",
+      "Ethanal",
+      "Methanone",
+      "Methanoic acid"
+    ],
+    "correct_answer": "Methanal",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "HCHO is the simplest aldehyde and is named methanal.",
+    "tags": ["Nomenclature", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Nomenclature",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of CH3COCH3 is:",
+    "options": [
+      "Propanal",
+      "Propanone",
+      "Propanoic acid",
+      "Methanone"
+    ],
+    "correct_answer": "Propanone",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "CH3COCH3 is a three-carbon ketone known as propanone.",
+    "tags": ["Ketones", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Tests",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Tollens' reagent gives a silver mirror test with:",
+    "options": [
+      "Ketones only",
+      "Aldehydes",
+      "Carboxylic acids",
+      "Ethers"
+    ],
+    "correct_answer": "Aldehydes",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Aldehydes reduce Tollens' reagent to metallic silver.",
+    "tags": ["Tollens Test", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AKC_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Tests",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Fehling's solution is generally used to distinguish:",
+    "options": [
+      "Aldehydes from ketones",
+      "Alcohols from ethers",
+      "Phenols from alcohols",
+      "Alkanes from alkenes"
+    ],
+    "correct_answer": "Aldehydes from ketones",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Most aldehydes reduce Fehling's solution whereas ketones do not.",
+    "tags": ["Fehling Test", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Acidity",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which is the strongest acid among the following?",
+    "options": [
+      "Ethanol",
+      "Phenol",
+      "Ethanoic acid",
+      "Water"
+    ],
+    "correct_answer": "Ethanoic acid",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carboxylate ions are resonance stabilized, making carboxylic acids more acidic.",
+    "tags": ["Acidity", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Reaction",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Reduction of ethanal produces:",
+    "options": [
+      "Ethanoic acid",
+      "Ethanol",
+      "Ethene",
+      "Ethyne"
+    ],
+    "correct_answer": "Ethanol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Reduction converts the aldehyde group into a primary alcohol.",
+    "tags": ["Reduction", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AKC_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Aldehydes are generally more reactive than ketones towards nucleophilic addition. Reason (R): Aldehydes have less steric hindrance and a greater positive charge on the carbonyl carbon.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Ketones have two electron-donating alkyl groups, reducing electrophilicity and increasing steric hindrance.",
+    "tags": ["Assertion Reason", "Nucleophilic Addition", "NEET"]
+  }
+]
+[
+  {
+    "question_id": "CHEM_AKC_0011",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Nomenclature",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The common name of methanal is:",
+    "options": [
+      "Acetaldehyde",
+      "Formaldehyde",
+      "Propionaldehyde",
+      "Acetone"
+    ],
+    "correct_answer": "Formaldehyde",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Methanal (HCHO) is commonly known as formaldehyde.",
+    "tags": ["Aldehydes", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0012",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Nomenclature",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The common name of propanone is:",
+    "options": [
+      "Acetaldehyde",
+      "Acetone",
+      "Formalin",
+      "Acetic acid"
+    ],
+    "correct_answer": "Acetone",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Propanone (CH3COCH3) is commonly called acetone.",
+    "tags": ["Ketones", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0013",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Tests",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The reagent used in Schiff's test is:",
+    "options": [
+      "Fehling's solution",
+      "Tollens' reagent",
+      "Schiff's reagent",
+      "Lucas reagent"
+    ],
+    "correct_answer": "Schiff's reagent",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Aldehydes restore the pink color of Schiff's reagent.",
+    "tags": ["Schiff Test", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AKC_0014",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Carboxylic Acids",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Ethanoic acid reacts with sodium bicarbonate to produce:",
+    "options": [
+      "Hydrogen gas",
+      "Carbon dioxide gas",
+      "Oxygen gas",
+      "Chlorine gas"
+    ],
+    "correct_answer": "Carbon dioxide gas",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Carboxylic acids react with bicarbonates liberating CO2 gas.",
+    "tags": ["Carboxylic Acids", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0015",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Reaction",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Oxidation of ethanol first produces:",
+    "options": [
+      "Methanal",
+      "Ethanal",
+      "Ethanoic acid",
+      "Acetone"
+    ],
+    "correct_answer": "Ethanal",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Primary alcohols are first oxidized to aldehydes and then to acids.",
+    "tags": ["Oxidation", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0016",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Cannizzaro Reaction",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Cannizzaro reaction is shown by aldehydes which:",
+    "options": [
+      "Contain α-hydrogen",
+      "Do not contain α-hydrogen",
+      "Are aromatic only",
+      "Are ketones"
+    ],
+    "correct_answer": "Do not contain α-hydrogen",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Aldehydes lacking α-hydrogen undergo disproportionation in concentrated alkali.",
+    "tags": ["Cannizzaro Reaction", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AKC_0017",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Aldol Condensation",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Aldol condensation is shown by aldehydes and ketones containing:",
+    "options": [
+      "No α-hydrogen",
+      "At least one α-hydrogen",
+      "A benzene ring",
+      "A carboxyl group"
+    ],
+    "correct_answer": "At least one α-hydrogen",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The reaction proceeds through formation of an enolate ion requiring α-hydrogen.",
+    "tags": ["Aldol Condensation", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0018",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Carboxylic Acids",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "The IUPAC name of HCOOH is:",
+    "options": [
+      "Methanoic acid",
+      "Ethanoic acid",
+      "Propanoic acid",
+      "Benzoic acid"
+    ],
+    "correct_answer": "Methanoic acid",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "HCOOH is the simplest carboxylic acid and is named methanoic acid.",
+    "tags": ["Carboxylic Acids", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AKC_0019",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Acidity",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Which of the following is the strongest acid?",
+    "options": [
+      "CH3COOH",
+      "ClCH2COOH",
+      "CH2ClCOOH",
+      "CCl3COOH"
+    ],
+    "correct_answer": "CCl3COOH",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The strong −I effect of three chlorine atoms greatly stabilizes the carboxylate ion.",
+    "tags": ["Acidity", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AKC_0020",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Carboxylic acids are more acidic than alcohols. Reason (R): The carboxylate ion formed after deprotonation is resonance stabilized.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Resonance delocalization of negative charge over two oxygen atoms stabilizes the conjugate base.",
+    "tags": ["Assertion Reason", "Acidity", "NEET"]
+  }
+]
+
+
+ [
+  {
+    "question_id": "CHEM_AM_0001",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Functional Group",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The functional group present in primary amines is:",
+    "options": [
+      "-OH",
+      "-CHO",
+      "-NH2",
+      "-COOH"
+    ],
+    "correct_answer": "-NH2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Primary amines contain the amino (-NH2) functional group attached to one alkyl or aryl group.",
+    "tags": ["Amines", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AM_0002",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Classification",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "CH3NH2 is classified as:",
+    "options": [
+      "Primary amine",
+      "Secondary amine",
+      "Tertiary amine",
+      "Quaternary ammonium salt"
+    ],
+    "correct_answer": "Primary amine",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Methylamine contains one alkyl group attached to the nitrogen atom.",
+    "tags": ["Primary Amine", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AM_0003",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Basicity",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Which of the following is the strongest base in aqueous solution?",
+    "options": [
+      "NH3",
+      "CH3NH2",
+      "C6H5NH2",
+      "NH2OH"
+    ],
+    "correct_answer": "CH3NH2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "The +I effect of the methyl group increases electron density on nitrogen, enhancing basicity.",
+    "tags": ["Basicity", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AM_0004",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Aniline",
+    "difficulty": "Easy",
+    "question_type": "Single Correct",
+    "question": "The molecular formula of aniline is:",
+    "options": [
+      "C6H5NH2",
+      "C6H6",
+      "C6H5OH",
+      "C6H5NO2"
+    ],
+    "correct_answer": "C6H5NH2",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Aniline is an aromatic amine consisting of a benzene ring attached to an amino group.",
+    "tags": ["Aniline", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AM_0005",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Basicity",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Aniline is less basic than methylamine because:",
+    "options": [
+      "Nitrogen is absent",
+      "Lone pair is involved in resonance with benzene ring",
+      "Aniline is acidic",
+      "Methylamine has no lone pair"
+    ],
+    "correct_answer": "Lone pair is involved in resonance with benzene ring",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Resonance delocalization reduces the availability of the lone pair for protonation.",
+    "tags": ["Basicity", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AM_0006",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Diazotization",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Aniline on diazotization with NaNO2/HCl at 0–5°C forms:",
+    "options": [
+      "Nitrobenzene",
+      "Benzenediazonium chloride",
+      "Phenol",
+      "Benzene"
+    ],
+    "correct_answer": "Benzenediazonium chloride",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Primary aromatic amines react with nitrous acid at low temperature to form diazonium salts.",
+    "tags": ["Diazotization", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AM_0007",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Carbylamine Test",
+    "difficulty": "Medium",
+    "question_type": "Single Correct",
+    "question": "Carbylamine test is given by:",
+    "options": [
+      "Primary amines",
+      "Secondary amines",
+      "Tertiary amines",
+      "All amines"
+    ],
+    "correct_answer": "Primary amines",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Only primary amines produce foul-smelling isocyanides in the carbylamine reaction.",
+    "tags": ["Carbylamine Test", "NEET"]
+  },
+  {
+    "question_id": "CHEM_AM_0008",
+    "exam_category": "KCET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Hinsberg Test",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Hinsberg reagent used for distinguishing amines is:",
+    "options": [
+      "Benzene sulfonyl chloride",
+      "Acetyl chloride",
+      "Bromine water",
+      "Lucas reagent"
+    ],
+    "correct_answer": "Benzene sulfonyl chloride",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Hinsberg's reagent is benzenesulfonyl chloride, used to differentiate primary, secondary and tertiary amines.",
+    "tags": ["Hinsberg Test", "KCET"]
+  },
+  {
+    "question_id": "CHEM_AM_0009",
+    "exam_category": "JEE",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Reaction",
+    "difficulty": "Hard",
+    "question_type": "Single Correct",
+    "question": "Benzenediazonium chloride on hydrolysis gives:",
+    "options": [
+      "Aniline",
+      "Nitrobenzene",
+      "Phenol",
+      "Benzene"
+    ],
+    "correct_answer": "Phenol",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Diazonium salts undergo hydrolysis to form phenols.",
+    "tags": ["Diazonium Salts", "JEE"]
+  },
+  {
+    "question_id": "CHEM_AM_0010",
+    "exam_category": "NEET",
+    "subject": "Chemistry",
+    "chapter": "Amines",
+    "topic": "Assertion Reason",
+    "difficulty": "Hard",
+    "question_type": "Assertion Reason",
+    "question": "Assertion (A): Aniline is less basic than ammonia. Reason (R): The lone pair on nitrogen in aniline is delocalized into the benzene ring through resonance.",
+    "options": [
+      "A and R both true, R explains A",
+      "A and R both true, R does not explain A",
+      "A true, R false",
+      "A false, R true"
+    ],
+    "correct_answer": "A and R both true, R explains A",
+    "marks": 4,
+    "negative_marks": 1,
+    "explanation": "Resonance reduces the availability of the nitrogen lone pair for accepting a proton, lowering basicity.",
+    "tags": ["Assertion Reason", "Aniline", "NEET"]
+  }
+]
+
+
+
+
+
+
