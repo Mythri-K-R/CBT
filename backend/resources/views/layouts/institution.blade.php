@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ auth()->user()?->institution?->name ?? 'Institution' }} — ExamSphere</title>
+    @php $__inst = auth()->user()?->institution; @endphp
+    <title>{{ $__inst ? 'your-institute_' . $__inst->id : 'Institution' }} — Examsphere</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>aside nav::-webkit-scrollbar { display: none; }</style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"></script>
 </head>
 <body class="font-sans antialiased bg-background text-foreground" x-data="{ sidebarOpen: false, collapsed: false }">
@@ -12,13 +14,16 @@
     <div x-show="sidebarOpen" @click="sidebarOpen=false" class="fixed inset-0 z-40 bg-black/40 lg:hidden" x-cloak></div>
 
     <aside :class="collapsed ? 'w-[72px]' : 'w-64'"
-           class="fixed inset-y-0 left-0 z-50 flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border transition-all duration-200 lg:relative lg:translate-x-0"
+           class="fixed inset-y-0 left-0 z-50 flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border transition-all duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0"
            :class="{'translate-x-0': sidebarOpen, '-translate-x-full lg:translate-x-0': !sidebarOpen}">
 
         <div class="flex items-center justify-between px-4 py-4 border-b border-sidebar-border">
-            <div class="flex items-center gap-2 font-display font-bold text-primary" x-show="!collapsed">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                ExamSphere
+            <div class="flex items-center gap-2 font-display" x-show="!collapsed">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
+                <div>
+                    <div class="text-sm leading-tight font-bold text-white">Examsphere</div>
+                    <div class="text-[9px] font-normal text-sidebar-foreground/50 leading-tight">by Mitra Softwares</div>
+                </div>
             </div>
             <div x-show="collapsed" class="text-primary w-full flex justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
@@ -33,12 +38,12 @@
         </div>
 
         <div class="px-4 py-2.5 border-b border-sidebar-border" x-show="!collapsed">
-            <p class="text-xs font-semibold truncate">{{ auth()->user()?->institution?->name ?? 'Institution' }}</p>
+            <p class="text-xs font-semibold truncate">{{ $__inst ? 'your-institute_' . $__inst->id : 'Institution' }}</p>
             <p class="text-[10px] text-sidebar-foreground/50 mt-0.5">{{ ucfirst(str_replace('_',' ',auth()->user()?->role ?? '')) }}</p>
         </div>
 
         @php $u = auth()->user(); @endphp
-        <nav class="flex-1 overflow-y-auto flex flex-col gap-0.5 px-3 py-3">
+        <nav class="flex-1 overflow-y-auto flex flex-col gap-0.5 px-3 py-3" style="scrollbar-width:none;-ms-overflow-style:none;" onmouseover="this.style.scrollbarWidth='none'" >
             <a href="{{ route('institution.dashboard') }}" wire:navigate class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors {{ request()->routeIs('institution.dashboard') ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm' : 'text-sidebar-foreground hover:bg-sidebar-accent' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
                 <span x-show="!collapsed">Dashboard</span>

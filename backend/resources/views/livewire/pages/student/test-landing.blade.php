@@ -8,6 +8,7 @@ use App\Models\Student;
 new #[Layout('layouts.exam')] class extends Component {
     public string $slug = '';
     public string $rollNumber = '';
+    public string $dob = '';
     public ?string $errorMessage = null;
 
     public ?TestLink $testLink = null;
@@ -35,7 +36,10 @@ new #[Layout('layouts.exam')] class extends Component {
 
     public function verify(): void
     {
-        $this->validate(['rollNumber' => 'required|string|max:50']);
+        $this->validate([
+            'rollNumber' => 'required|string|max:50',
+            'dob'        => ['required', 'string', 'regex:/^\d{8}$/'],
+        ]);
         $this->errorMessage = null;
 
         $test = $this->testLink->test;
@@ -61,8 +65,22 @@ new #[Layout('layouts.exam')] class extends Component {
             ->first();
 
         if (!$student) {
-            $this->errorMessage = 'Invalid Roll Number. Please check and try again.';
+            $this->errorMessage = 'Invalid credentials. Please check your roll number and date of birth.';
             return;
+        }
+
+        // Verify date of birth (entered as DDMMYYYY)
+        if ($student->date_of_birth) {
+            try {
+                $enteredDob = \Carbon\Carbon::createFromFormat('dmY', $this->dob)->startOfDay();
+            } catch (\Exception $e) {
+                $this->errorMessage = 'Invalid credentials. Please check your roll number and date of birth.';
+                return;
+            }
+            if (!$enteredDob->isSameDay($student->date_of_birth)) {
+                $this->errorMessage = 'Invalid credentials. Please check your roll number and date of birth.';
+                return;
+            }
         }
 
         // Batch check: if test has no batches, it is open to all institution students
@@ -104,7 +122,7 @@ new #[Layout('layouts.exam')] class extends Component {
     }
 }; ?>
 
-@push('title')<title>{{ $testLink->test->title ?? 'ExamSphere' }} — Test Portal</title>@endpush
+@push('title')<title>{{ $testLink->test->title ?? 'Examsphere' }} — Test Portal</title>@endpush
 @push('styles')
 <style>
     body { font-family: Arial, Helvetica, sans-serif; margin: 0; background: #f0f2f5; }
@@ -129,7 +147,7 @@ new #[Layout('layouts.exam')] class extends Component {
         @if($testLink->test->institution?->logo_path)
         <img src="{{ asset('storage/'.$testLink->test->institution->logo_path) }}" class="h-8 w-auto" alt="">
         @endif
-        <span class="text-white font-bold text-base">{{ $testLink->test->institution?->name ?? 'ExamSphere' }}</span>
+        <span class="text-white font-bold text-base">{{ $testLink->test->institution?->name ?? 'Examsphere' }}</span>
     </div>
     <span class="text-white/60 text-sm font-semibold">CBT Examination Portal</span>
 </div>
@@ -223,10 +241,10 @@ new #[Layout('layouts.exam')] class extends Component {
             <div class="p-6">
                 @if($isScheduled)
                 <p class="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-4">
-                    Enter your roll number now so you are ready when the test begins.
+                    Enter your credentials now so you are ready when the test begins.
                 </p>
                 @else
-                <p class="text-sm text-gray-600 mb-4">Enter your roll number to begin the examination.</p>
+                <p class="text-sm text-gray-600 mb-4">Enter your credentials to begin the examination.</p>
                 @endif
 
                 <form wire:submit="verify" class="space-y-4">
@@ -241,6 +259,21 @@ new #[Layout('layouts.exam')] class extends Component {
                             style="width:100%;border:1px solid #d1d5db;border-radius:6px;padding:10px 14px;font-size:15px;outline:none;"
                             onfocus="this.style.borderColor='#1a3c5e'"
                             onblur="this.style.borderColor='#d1d5db'"
+                        >
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">Date of Birth <span style="font-weight:400;color:#6b7280;font-size:12px;">(DDMMYYYY)</span></label>
+                        <input
+                            wire:model="dob"
+                            type="text"
+                            maxlength="8"
+                            inputmode="numeric"
+                            placeholder="e.g. 01012005"
+                            autocomplete="off"
+                            style="width:100%;border:1px solid #d1d5db;border-radius:6px;padding:10px 14px;font-size:15px;outline:none;letter-spacing:2px;"
+                            onfocus="this.style.borderColor='#1a3c5e'"
+                            onblur="this.style.borderColor='#d1d5db'"
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
                         >
                         @if($errorMessage)
                         <p class="text-red-600 text-sm mt-2 flex items-center gap-1.5">
@@ -270,7 +303,7 @@ new #[Layout('layouts.exam')] class extends Component {
         </div>
 
         <p class="text-center text-xs text-gray-400">
-            Powered by <strong>ExamSphere</strong> CBT Platform
+            Powered by <strong>Examsphere</strong> · Mitra Softwares
         </p>
     </div>
 </div>

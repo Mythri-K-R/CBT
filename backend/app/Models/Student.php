@@ -13,12 +13,13 @@ class Student extends Model
     use BelongsToInstitution, SoftDeletes;
 
     protected $fillable = [
-        'institution_id', 'name', 'roll_number', 'phone', 'parent_phone',
+        'institution_id', 'name', 'roll_number', 'date_of_birth', 'phone', 'parent_phone',
         'photo_path', 'is_active',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
+        'is_active'     => 'boolean',
+        'date_of_birth' => 'date',
     ];
 
     public function batches(): BelongsToMany

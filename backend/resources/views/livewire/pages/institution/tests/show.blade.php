@@ -27,7 +27,6 @@ new #[Layout('layouts.institution')] class extends Component {
     // Schedule
     public bool $showScheduleModal = false;
     public string $editStart = '';
-    public string $editEnd   = '';
 
     // Inline question writing
     public ?int $addingToSection = null;
@@ -56,26 +55,26 @@ new #[Layout('layouts.institution')] class extends Component {
     public function openScheduleModal(): void
     {
         $this->editStart = $this->test->scheduled_start?->format('Y-m-d\TH:i') ?? '';
-        $this->editEnd   = $this->test->scheduled_end?->format('Y-m-d\TH:i') ?? '';
         $this->showScheduleModal = true;
     }
 
     public function saveSchedule(): void
     {
-        $this->validate([
-            'editStart' => 'required|date',
-            'editEnd'   => 'required|date|after:editStart',
-        ]);
+        $this->validate(['editStart' => 'required|date']);
+
+        $start = \Carbon\Carbon::parse($this->editStart);
+        $end   = $start->copy()->addMinutes($this->test->duration_minutes);
 
         $newStatus = $this->test->status === 'draft' ? 'scheduled' : $this->test->status;
 
         $this->test->update([
-            'scheduled_start' => \Carbon\Carbon::parse($this->editStart),
-            'scheduled_end'   => \Carbon\Carbon::parse($this->editEnd),
+            'scheduled_start' => $start,
+            'scheduled_end'   => $end,
             'status'          => $newStatus,
         ]);
         $this->test->refresh();
         $this->showScheduleModal = false;
+        session()->flash('scheduleSaved', true);
     }
 
     // ── Approval ─────────────────────────────────────────────────────────────
@@ -88,9 +87,24 @@ new #[Layout('layouts.institution')] class extends Component {
 
     // ── Link management ───────────────────────────────────────────────────────
 
+    public function openGenerateModal(): void
+    {
+        $this->editStart = $this->test->scheduled_start?->format('Y-m-d\TH:i') ?? '';
+        $this->expiresOption = 'never';
+        $this->expiresAt = '';
+        $this->showGenerateModal = true;
+    }
+
     public function generateLink(): void
     {
-        abort_unless($this->test->is_paper_approved, 403);
+        if (!$this->test->is_paper_approved) {
+            return;
+        }
+
+        $this->validate(['editStart' => 'required|date']);
+
+        $start = \Carbon\Carbon::parse($this->editStart);
+        $end   = $start->copy()->addMinutes($this->test->duration_minutes);
 
         $expires = null;
         if ($this->expiresOption !== 'never' && $this->expiresAt) {
@@ -100,6 +114,15 @@ new #[Layout('layouts.institution')] class extends Component {
         } elseif ($this->expiresOption === '7d') {
             $expires = now()->addDays(7);
         }
+
+        // Save schedule to the test
+        $newStatus = $this->test->status === 'draft' ? 'scheduled' : $this->test->status;
+        $this->test->update([
+            'scheduled_start' => $start,
+            'scheduled_end'   => $end,
+            'status'          => $newStatus,
+        ]);
+        $this->test->refresh();
 
         $slug = Str::lower(Str::slug($this->test->title).'-'.Str::random(6));
 
@@ -281,7 +304,7 @@ new #[Layout('layouts.institution')] class extends Component {
                 Answer Key
             </a>
             @if($test->is_paper_approved)
-            <button wire:click="$set('showGenerateModal', true)"
+            <button wire:click="openGenerateModal"
                     class="h-9 rounded-lg bg-primary text-primary-foreground px-4 text-sm font-medium hover:bg-primary/90 transition-colors flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                 Generate Link
@@ -326,6 +349,13 @@ new #[Layout('layouts.institution')] class extends Component {
 
     {{-- ── OVERVIEW ────────────────────────────────────────────────────────── --}}
     @if($tab === 'overview')
+
+    @if(session('scheduleSaved'))
+    <div class="rounded-lg bg-success/10 border border-success/30 text-success px-4 py-2.5 text-sm font-medium flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Exam schedule saved successfully.
+    </div>
+    @endif
 
     {{-- Schedule alert when not yet set --}}
     @if(!$test->scheduled_start)
@@ -619,7 +649,6 @@ new #[Layout('layouts.institution')] class extends Component {
                 </div>
             </div>
             <button wire:click="approveP"
-                    wire:confirm="Approve this paper? You'll be able to generate the test link after approval."
                     class="shrink-0 rounded-lg bg-primary text-primary-foreground px-5 py-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
                 Approve Paper →
             </button>
@@ -633,7 +662,7 @@ new #[Layout('layouts.institution')] class extends Component {
                     <p class="text-sm text-muted-foreground mt-0.5">Ready to share with students.</p>
                 </div>
             </div>
-            <button wire:click="$set('showGenerateModal', true)"
+            <button wire:click="openGenerateModal"
                     class="shrink-0 rounded-lg bg-primary text-primary-foreground px-5 py-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
                 Generate Test Link →
             </button>
@@ -758,9 +787,11 @@ new #[Layout('layouts.institution')] class extends Component {
                         <input type="text" readonly value="{{ $url }}"
                                class="flex-1 rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm font-mono text-foreground"
                                onclick="this.select()">
-                        <button onclick="navigator.clipboard.writeText('{{ $url }}').then(() => { this.textContent='Copied!'; setTimeout(() => this.textContent='Copy', 2000); })"
+                        <button x-data="{ copied: false }"
+                                @click="navigator.clipboard.writeText('{{ $url }}').then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
                                 class="shrink-0 rounded-lg border border-border bg-background hover:bg-muted px-3 py-2 text-sm font-medium transition-colors">
-                            Copy
+                            <span x-show="!copied">Copy</span>
+                            <span x-show="copied" class="text-success">Copied!</span>
                         </button>
                     </div>
                 </div>
@@ -772,10 +803,12 @@ new #[Layout('layouts.institution')] class extends Component {
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         Share on WhatsApp
                     </a>
-                    <button onclick="navigator.clipboard.writeText('{{ $url }}')"
+                    <button x-data="{ copied: false }"
+                            @click="navigator.clipboard.writeText('{{ $url }}').then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
                             class="inline-flex items-center gap-2 rounded-lg border border-border bg-background hover:bg-muted px-3 py-2 text-sm font-medium transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                        Copy Link
+                        <span x-show="!copied">Copy Link</span>
+                        <span x-show="copied" class="text-success">Copied!</span>
                     </button>
                 </div>
 
@@ -794,7 +827,7 @@ new #[Layout('layouts.institution')] class extends Component {
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto text-muted-foreground mb-3"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
             <h3 class="font-semibold text-muted-foreground">No test links yet</h3>
             <p class="text-sm text-muted-foreground mt-1 mb-4">Generate a link to share this test with your students.</p>
-            <button wire:click="$set('showGenerateModal', true)"
+            <button wire:click="openGenerateModal"
                     class="rounded-lg bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition-colors">
                 Generate Test Link
             </button>
@@ -822,32 +855,16 @@ new #[Layout('layouts.institution')] class extends Component {
                 <p class="mt-0.5">Duration: {{ $test->duration_minutes }} minutes</p>
             </div>
             <div class="space-y-2">
-                <label class="block text-sm font-medium">Start Date &amp; Time</label>
-                <input type="datetime-local" wire:model.live="editStart"
+                <label class="block text-sm font-medium">Exam Start Date &amp; Time</label>
+                <input type="datetime-local" wire:model="editStart"
                        class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                 @error('editStart') <span class="text-[11px] text-destructive">{{ $message }}</span> @enderror
             </div>
-            <div class="space-y-2">
-                <label class="block text-sm font-medium">End Date &amp; Time</label>
-                <input type="datetime-local" wire:model.live="editEnd"
-                       class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
-                @error('editEnd') <span class="text-[11px] text-destructive">{{ $message }}</span> @enderror
+            <div class="rounded-lg bg-muted/30 border border-border px-3 py-2.5 flex items-center gap-2 text-sm text-muted-foreground">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>End time auto-calculated: start + {{ $test->duration_minutes }} minutes</span>
             </div>
-            @if($editStart && $editEnd)
-            @php
-                try {
-                    $s = \Carbon\Carbon::parse($editStart);
-                    $e = \Carbon\Carbon::parse($editEnd);
-                    $diffMins = $s->diffInMinutes($e, false);
-                } catch (\Exception $ex) { $diffMins = 0; }
-            @endphp
-            @if($diffMins > 0)
-            <div class="text-xs text-muted-foreground bg-muted/30 rounded-lg px-3 py-2">
-                Window: {{ $diffMins }} minutes
-            </div>
-            @endif
-            @endif
-            <div class="flex gap-3 pt-2">
+            <div class="flex gap-3 pt-1">
                 <button wire:click="$set('showScheduleModal', false)"
                         class="flex-1 rounded-lg border border-border bg-background hover:bg-muted px-4 py-2 text-sm font-medium transition-colors">
                     Cancel
@@ -876,12 +893,29 @@ new #[Layout('layouts.institution')] class extends Component {
 
         <div class="p-5 space-y-4">
             <div class="p-3 bg-muted/40 rounded-lg text-sm text-muted-foreground">
-                <p class="font-medium text-foreground mb-1">{{ $test->title }}</p>
-                <p>{{ strtoupper($test->exam_type) }} · {{ $test->duration_minutes }} min</p>
+                <p class="font-medium text-foreground">{{ $test->title }}</p>
+                <p class="mt-0.5">{{ strtoupper($test->exam_type) }} · {{ $test->duration_minutes }} min</p>
             </div>
 
-            <div>
-                <label class="block text-sm font-medium mb-1.5">Link Expiry</label>
+            {{-- Exam schedule --}}
+            <div class="space-y-3">
+                <p class="text-sm font-semibold border-b border-border pb-2">Exam Schedule</p>
+                <div class="space-y-1.5">
+                    <label class="block text-sm font-medium">Exam Start Date &amp; Time</label>
+                    <input type="datetime-local" wire:model="editStart"
+                           class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+                    @error('editStart') <span class="text-[11px] text-destructive">{{ $message }}</span> @enderror
+                </div>
+                <div class="rounded-lg bg-muted/30 border border-border px-3 py-2 flex items-center gap-2 text-xs text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    End time = start + {{ $test->duration_minutes }} minutes (auto-calculated)
+                </div>
+            </div>
+
+            {{-- Link expiry --}}
+            <div class="space-y-1.5">
+                <p class="text-sm font-semibold border-b border-border pb-2">Link Settings</p>
+                <label class="block text-sm font-medium">Link Expiry</label>
                 <select wire:model="expiresOption" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm">
                     <option value="never">Never expires</option>
                     <option value="24h">Expires in 24 hours</option>
@@ -897,14 +931,15 @@ new #[Layout('layouts.institution')] class extends Component {
             </div>
             @endif
 
-            <div class="flex gap-3 pt-2">
+            <div class="flex gap-3 pt-1">
                 <button wire:click="$set('showGenerateModal', false)"
                         class="flex-1 rounded-lg border border-border bg-background hover:bg-muted px-4 py-2 text-sm font-medium transition-colors">
                     Cancel
                 </button>
-                <button wire:click="generateLink"
-                        class="flex-1 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 text-sm font-medium transition-colors">
-                    Generate Link →
+                <button wire:click="generateLink" wire:loading.attr="disabled"
+                        class="flex-1 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 text-sm font-medium transition-colors disabled:opacity-60">
+                    <span wire:loading.remove wire:target="generateLink">Generate Link →</span>
+                    <span wire:loading wire:target="generateLink">Generating...</span>
                 </button>
             </div>
         </div>

@@ -59,7 +59,7 @@ new #[Layout('layouts.exam')] class extends Component {
         $this->studentName      = $attempt->student->name;
         $this->rollNumber       = $attempt->student->roll_number;
         $this->testTitle        = $attempt->test->title;
-        $this->institutionName  = $attempt->test->institution?->name ?? 'ExamSphere';
+        $this->institutionName  = $attempt->test->institution?->name ?? 'Examsphere';
         $this->remainingSeconds = $attempt->getRemainingSeconds();
 
         // Load existing responses
@@ -325,7 +325,7 @@ new #[Layout('layouts.exam')] class extends Component {
     }
 }; ?>
 
-@push('title')<title>{{ $testTitle }} — ExamSphere CBT</title>@endpush
+@push('title')<title>{{ $testTitle }} — Examsphere CBT</title>@endpush
 @push('styles')
 <style>
     * { box-sizing: border-box; }
@@ -616,7 +616,7 @@ new #[Layout('layouts.exam')] class extends Component {
 
     {{-- ── FOOTER (desktop only) ── --}}
     <div class="hidden md:flex" style="background:#1a3c5e;color:rgba(255,255,255,.45);padding:2px 16px;font-size:10px;justify-content:space-between;flex-shrink:0;">
-        <span>© ExamSphere CBT</span><span>{{ $institutionName }}</span>
+        <span>© Examsphere CBT</span><span>{{ $institutionName }}</span>
     </div>
 
     {{-- ── MOBILE PALETTE DRAWER (top-down, inside Alpine scope) ── --}}

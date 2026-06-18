@@ -45,6 +45,21 @@ new #[Layout('layouts.admin')] class extends Component {
         $this->showSuccess = true;
     }
 
+    public function resetPassword(int $userId): void
+    {
+        $user = \App\Models\User::find($userId);
+        if (!$user || $user->institution_id !== $this->institution->id) return;
+
+        $password = \Illuminate\Support\Str::password(8, true, true, false, false);
+        $user->update(['password' => \Illuminate\Support\Facades\Hash::make($password)]);
+
+        $this->generatedEmail    = $user->email;
+        $this->generatedPassword = $password;
+        $this->showSuccess       = true;
+        $this->tab               = 'overview';
+        session()->flash('resetDone', true);
+    }
+
     public function with(): array
     {
         return [
@@ -118,12 +133,54 @@ new #[Layout('layouts.admin')] class extends Component {
         @endif
         @if($showSuccess)
         <div class="mt-4 p-4 rounded-lg bg-success/10 border border-success/30">
-            <p class="font-semibold text-success mb-2">Credentials Generated!</p>
+            <div class="flex items-center justify-between mb-3">
+                <p class="font-semibold text-success">{{ session('resetDone') ? 'Password Reset!' : 'Credentials Generated!' }}</p>
+                <button onclick="downloadCredentialsPDF('{{ $institution->name }}','{{ route('login') }}','{{ $generatedEmail }}','{{ $generatedPassword }}')"
+                        class="inline-flex items-center gap-1.5 rounded-lg bg-primary text-primary-foreground px-3 py-1.5 text-xs font-semibold hover:bg-primary/90 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Download PDF
+                </button>
+            </div>
             <p class="text-sm font-mono"><strong>Login URL:</strong> {{ route('login') }}</p>
             <p class="text-sm font-mono"><strong>Email:</strong> {{ $generatedEmail }}</p>
             <p class="text-sm font-mono"><strong>Password:</strong> {{ $generatedPassword }}</p>
-            <p class="text-xs text-muted-foreground mt-2">Copy and send these details securely to the institution.</p>
+            <p class="text-xs text-muted-foreground mt-2">Download and send the PDF securely to the institution.</p>
         </div>
+        <script>
+        function downloadCredentialsPDF(institution, url, email, password) {
+            const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Login Credentials — ${institution}</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .card { background: white; border-radius: 12px; padding: 40px 48px; max-width: 480px; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  .logo { font-size: 22px; font-weight: 900; color: #1a3c5e; margin-bottom: 4px; }
+  .sub { font-size: 11px; color: #888; margin-bottom: 32px; }
+  h2 { font-size: 18px; color: #111; margin: 0 0 6px; }
+  .subtitle { font-size: 13px; color: #666; margin-bottom: 28px; }
+  .field { margin-bottom: 18px; }
+  .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .value { font-size: 15px; font-family: monospace; color: #1a3c5e; background: #f0f4f8; padding: 10px 14px; border-radius: 6px; border-left: 3px solid #1a3c5e; }
+  .footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid #eee; font-size: 11px; color: #aaa; }
+  @media print { body { background: white; } .card { box-shadow: none; } }
+</style></head>
+<body><div class="card">
+  <div class="logo">Examsphere</div>
+  <div class="sub">by Mitra Softwares</div>
+  <h2>Login Credentials</h2>
+  <p class="subtitle">Institution: <strong>${institution}</strong></p>
+  <div class="field"><div class="label">Login URL</div><div class="value">${url}</div></div>
+  <div class="field"><div class="label">Email / Username</div><div class="value">${email}</div></div>
+  <div class="field"><div class="label">Password</div><div class="value">${password}</div></div>
+  <div class="footer">Keep these credentials confidential. To reset the password, contact Examsphere support.<br>Generated on ${new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'})}</div>
+</div>
+<script>window.onload = () => { window.print(); }<\/script>
+</body></html>`;
+            const w = window.open('', '_blank');
+            w.document.write(html);
+            w.document.close();
+        }
+        </script>
         @endif
     </div>
     @endif
@@ -181,6 +238,7 @@ new #[Layout('layouts.admin')] class extends Component {
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground">User</th>
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground">Role</th>
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground">Email</th>
+                    <th class="text-right px-4 py-3 font-semibold text-muted-foreground">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-border">
@@ -189,9 +247,16 @@ new #[Layout('layouts.admin')] class extends Component {
                     <td class="px-4 py-3 font-medium">{{ $user->name }}</td>
                     <td class="px-4 py-3 text-muted-foreground">{{ ucfirst(str_replace('_',' ',$user->role)) }}</td>
                     <td class="px-4 py-3 text-muted-foreground">{{ $user->email }}</td>
+                    <td class="px-4 py-3 text-right">
+                        <button wire:click="resetPassword({{ $user->id }})"
+                                wire:confirm="Reset password for {{ $user->name }}? A new password will be generated."
+                                class="text-xs font-medium text-warning hover:underline">
+                            Reset Password
+                        </button>
+                    </td>
                 </tr>
                 @empty
-                <tr><td colspan="3" class="px-4 py-8 text-center text-muted-foreground">No users.</td></tr>
+                <tr><td colspan="4" class="px-4 py-8 text-center text-muted-foreground">No users.</td></tr>
                 @endforelse
             </tbody>
         </table>

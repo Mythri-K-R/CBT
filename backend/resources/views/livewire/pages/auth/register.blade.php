@@ -91,7 +91,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="relative">
             <a href="/" class="inline-flex items-center gap-2 text-xl font-bold font-display text-primary-foreground">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                ExamSphere
+                Examsphere
             </a>
         </div>
         <div class="relative space-y-8">
@@ -114,7 +114,7 @@ new #[Layout('layouts.guest')] class extends Component
                 </div>
             </div>
         </div>
-        <div class="relative text-xs opacity-80">© {{ date('Y') }} ExamSphere Technologies Pvt Ltd</div>
+        <div class="relative text-xs opacity-80">© {{ date('Y') }} Examsphere by Mitra Softwares</div>
     </div>
 
     <!-- Right panel -->
@@ -122,7 +122,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="flex items-center justify-between p-4 lg:p-6 shrink-0">
             <a href="/" class="lg:hidden items-center gap-2 text-xl font-bold font-display text-primary flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                ExamSphere
+                Examsphere
             </a>
             <div class="ml-auto">
                 <!-- Theme Toggle Placeholder -->
@@ -132,7 +132,7 @@ new #[Layout('layouts.guest')] class extends Component
             <div class="w-full max-w-md">
                 <div class="mb-6">
                     <h2 class="font-display text-2xl sm:text-3xl font-bold tracking-tight">Create an Account</h2>
-                    <p class="mt-1.5 text-sm text-muted-foreground">Register your institution to get started with ExamSphere.</p>
+                    <p class="mt-1.5 text-sm text-muted-foreground">Register your institution to get started with Examsphere.</p>
                 </div>
 
                 <form wire:submit="register" class="space-y-4">

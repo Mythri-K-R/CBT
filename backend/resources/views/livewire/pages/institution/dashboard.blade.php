@@ -21,7 +21,8 @@ new #[Layout('layouts.institution')] class extends Component {
 <div class="space-y-6">
     <div class="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 mb-6">
         <div class="min-w-0">
-            <h1 class="font-display text-2xl sm:text-3xl font-bold tracking-tight truncate">{{ auth()->user()->institution->name ?? 'Institution' }}</h1>
+            @php $__di = auth()->user()->institution; @endphp
+            <h1 class="font-display text-2xl sm:text-3xl font-bold tracking-tight truncate">{{ $__di ? 'your-institute_' . $__di->id : 'Institution' }}</h1>
             <p class="mt-1 text-sm text-muted-foreground">Good morning — here’s what is happening across your institute this week.</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap justify-end">

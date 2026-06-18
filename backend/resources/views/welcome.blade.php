@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ExamSphere — India's Most Realistic CBT Exam Platform</title>
+    <title>Examsphere — India's Most Realistic CBT Exam Platform</title>
     <meta name="description" content="Give your NEET, JEE & KCET coaching students the exact NTA exam experience. Real CBT interface, instant analytics, batch management — all in one platform.">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,7 +25,7 @@
         <div class="container mx-auto px-4 h-16 flex items-center justify-between max-w-7xl">
             <a href="/" class="flex items-center gap-2 font-display text-xl font-bold tracking-tight text-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                ExamSphere
+                Examsphere
             </a>
 
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -37,7 +37,9 @@
 
             <div class="flex items-center gap-3">
                 @auth
-                    <a href="{{ auth()->user()->role === 'super_admin' ? route('admin.dashboard') : route('institution.dashboard') }}" class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95">Dashboard</a>
+                    @if(auth()->user()->role !== 'super_admin')
+                    <a href="{{ route('institution.dashboard') }}" class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95">Dashboard</a>
+                    @endif
                 @else
                     <a href="{{ route('login') }}" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Login</a>
                     <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-all active:scale-95">
@@ -263,7 +265,7 @@
                 <div class="md:col-span-2">
                     <div class="flex items-center gap-2 font-display text-xl font-bold text-primary mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                        ExamSphere
+                        Examsphere
                     </div>
                     <p class="text-sm text-muted-foreground max-w-xs mb-4">India's most realistic CBT examination platform for NEET, JEE &amp; KCET coaching institutes.</p>
                     <p class="text-xs text-muted-foreground">Made with care in Bangalore, India 🇮🇳</p>
@@ -287,7 +289,7 @@
                 </div>
             </div>
             <div class="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-muted-foreground">© {{ date('Y') }} ExamSphere. All rights reserved.</p>
+                <p class="text-sm text-muted-foreground">© {{ date('Y') }} Examsphere by Mitra Softwares. All rights reserved.</p>
                 <div class="text-sm text-muted-foreground flex gap-6">
                     <a href="#" class="hover:text-foreground transition-colors">Privacy Policy</a>
                     <a href="#" class="hover:text-foreground transition-colors">Terms of Service</a>

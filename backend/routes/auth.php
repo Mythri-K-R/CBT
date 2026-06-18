@@ -14,6 +14,9 @@ Route::middleware('guest')->group(function () {
     Volt::route('manage/signin', 'pages.auth.admin-login')
         ->name('admin-login');
 
+    Route::get('manager/signin', fn() => redirect('/manage/signin'));
+    Route::get('signin', fn() => redirect('/manage/signin'));
+
     Volt::route('forgot-password', 'pages.auth.forgot-password')
         ->name('password.request');
 

@@ -66,7 +66,7 @@ new #[Layout('layouts.admin')] class extends Component {
 <div class="space-y-6 max-w-3xl">
     <div>
         <h1 class="font-display text-2xl font-bold">Platform Settings</h1>
-        <p class="text-muted-foreground text-sm mt-1">Global configuration for the ExamSphere platform</p>
+        <p class="text-muted-foreground text-sm mt-1">Global configuration for the Examsphere platform</p>
     </div>
 
     @if(session('success'))

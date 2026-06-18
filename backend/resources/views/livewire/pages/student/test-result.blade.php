@@ -40,7 +40,7 @@ new #[Layout('layouts.exam')] class extends Component {
         @if($testLink->test->institution?->logo_path)
         <img src="{{ asset('storage/'.$testLink->test->institution->logo_path) }}" class="h-8 w-auto" alt="">
         @endif
-        <span class="text-white font-bold text-base">{{ $testLink->test->institution?->name ?? 'ExamSphere' }}</span>
+        <span class="text-white font-bold text-base">{{ $testLink->test->institution?->name ?? 'Examsphere' }}</span>
     </div>
     <span class="text-white/60 text-sm font-semibold">CBT Examination Portal</span>
 </div>
@@ -86,7 +86,7 @@ new #[Layout('layouts.exam')] class extends Component {
             Your results will be reviewed and shared by your institution. You may close this window.
         </div>
 
-        <p class="text-xs text-gray-400">Powered by <strong>ExamSphere</strong> CBT Platform</p>
+        <p class="text-xs text-gray-400">Powered by <strong>Examsphere</strong> · Mitra Softwares</p>
     </div>
 </div>
 </div>

@@ -60,7 +60,7 @@ new class extends Component {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Results Lookup — ExamSphere</title>
+    <title>Results Lookup — Examsphere</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-background text-foreground min-h-screen flex flex-col">
@@ -69,7 +69,7 @@ new class extends Component {
     <div class="max-w-4xl mx-auto flex items-center justify-between">
         <a href="/" class="flex items-center gap-2 font-display font-bold text-xl text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-            ExamSphere
+            Examsphere
         </a>
         <span class="text-sm text-muted-foreground">Results Portal</span>
     </div>
@@ -190,7 +190,7 @@ new class extends Component {
 </main>
 
 <footer class="py-6 text-center text-xs text-muted-foreground border-t border-border">
-    ExamSphere · CBT Platform for Coaching Institutes
+    Examsphere · CBT Platform for Coaching Institutes
 </footer>
 </body>
 </html>

@@ -131,34 +131,81 @@ $isTestScheduled = $t->scheduled_start && now()->lt($t->scheduled_start);
     clickBegin() {
         if (!this.agreed) { this.agreementError = true; return; }
         this.agreementError = false;
-        if (!this.isScheduled) {
-            $wire.beginTest();
-            return;
-        }
         this.showOverlay = true;
-        this.overlayRemaining = Math.max(0, this.target - Math.floor(Date.now() / 1000));
-        let iv = setInterval(() => {
+        if (!this.isScheduled) {
+            this.overlayRemaining = 3;
+            let iv = setInterval(() => {
+                this.overlayRemaining--;
+                if (this.overlayRemaining <= 0) {
+                    clearInterval(iv);
+                    setTimeout(() => $wire.beginTest(), 600);
+                }
+            }, 1000);
+        } else {
             this.overlayRemaining = Math.max(0, this.target - Math.floor(Date.now() / 1000));
-            if (this.overlayRemaining <= 0) {
-                clearInterval(iv);
-                setTimeout(() => $wire.beginTest(), 800);
-            }
-        }, 500);
+            let iv = setInterval(() => {
+                this.overlayRemaining = Math.max(0, this.target - Math.floor(Date.now() / 1000));
+                if (this.overlayRemaining <= 0) {
+                    clearInterval(iv);
+                    setTimeout(() => $wire.beginTest(), 800);
+                }
+            }, 500);
+        }
     }
 }">
 
-<!-- Full-screen countdown overlay shown after student clicks I am ready to begin -->
+<!-- Full-screen "All the best" overlay -->
 <div x-show="showOverlay" x-cloak
-     style="position:fixed;inset:0;background:#0f2340;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
-    <p style="color:rgba(255,255,255,.55);font-size:13px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;">Exam begins in</p>
-    <div style="font-size:clamp(72px,12vw,140px);font-weight:900;line-height:1;font-variant-numeric:tabular-nums;color:#fff;"
-         x-text="fmt(overlayRemaining)"></div>
-    <p style="margin-top:28px;font-size:12px;color:rgba(255,255,255,.35);">Please wait — the exam interface will open automatically.</p>
+     style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(135deg,#0a1628 0%,#1a3c5e 50%,#0d2137 100%);overflow:hidden;">
+
+    <!-- Decorative rings -->
+    <div style="position:absolute;width:600px;height:600px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+    <div style="position:absolute;width:450px;height:450px;border-radius:50%;border:1px solid rgba(255,255,255,0.07);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+    <div style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+
+    <!-- Content -->
+    <div style="position:relative;z-index:1;text-align:center;padding:0 24px;">
+
+        <!-- Star icon -->
+        <div style="margin-bottom:16px;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" style="margin:0 auto;filter:drop-shadow(0 0 12px rgba(245,158,11,0.6));">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+        </div>
+
+        <!-- All the best -->
+        <h1 style="font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;line-height:1.1;margin:0 0 8px;letter-spacing:-1px;">
+            All the Best!
+        </h1>
+        <p style="font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.55);margin:0 0 40px;font-weight:400;">
+            Stay focused, stay calm — you've got this.
+        </p>
+
+        <!-- Countdown circle -->
+        <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;margin-bottom:32px;">
+            <div style="width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.06);border:3px solid rgba(245,158,11,0.4);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(245,158,11,0.15),inset 0 0 40px rgba(0,0,0,0.2);">
+                <p style="color:rgba(255,255,255,0.45);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 4px;" x-text="isScheduled ? 'Exam begins in' : 'Starting in'"></p>
+                <div style="font-size:clamp(48px,8vw,80px);font-weight:900;line-height:1;font-variant-numeric:tabular-nums;color:#fff;" x-text="isScheduled ? fmt(overlayRemaining) : overlayRemaining"></div>
+                <p x-show="!isScheduled" style="color:rgba(255,255,255,0.35);font-size:11px;margin:4px 0 0;">seconds</p>
+            </div>
+        </div>
+
+        <!-- Student name -->
+        @if($student)
+        <p style="color:rgba(255,255,255,0.4);font-size:13px;margin:0;">
+            Good luck, <span style="color:rgba(255,255,255,0.8);font-weight:600;">{{ $student->name }}</span>
+        </p>
+        @endif
+
+        <p style="color:rgba(255,255,255,0.2);font-size:11px;margin-top:12px;">
+            The exam interface will open automatically.
+        </p>
+    </div>
 </div>
 
 <!-- Header -->
 <div class="nta-header">
-    <div class="text-white font-bold text-base">ExamSphere</div>
+    <div class="text-white font-bold text-base">Examsphere</div>
     <div class="text-white/70 text-sm">{{ $testLink->test->title }}</div>
 </div>
 

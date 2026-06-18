@@ -37,7 +37,7 @@ new #[Layout('layouts.admin')] class extends Component {
     <div class="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 mb-6">
         <div class="min-w-0">
             <h1 class="font-display text-2xl sm:text-3xl font-bold tracking-tight truncate">Platform Overview</h1>
-            <p class="mt-1 text-sm text-muted-foreground">Real-time snapshot of ExamSphere across all institutions.</p>
+            <p class="mt-1 text-sm text-muted-foreground">Real-time snapshot of Examsphere across all institutions.</p>
         </div>
     </div>
 

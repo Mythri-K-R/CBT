@@ -84,6 +84,19 @@ new #[Layout('layouts.institution')] class extends Component {
         ];
     }
 
+    public function incrementChapter(int $si, int $ci): void
+    {
+        $available = $this->subjects[$si]['chapters'][$ci]['available'] ?? 0;
+        $current   = (int)($this->subjects[$si]['chapters'][$ci]['count'] ?? 0);
+        $this->subjects[$si]['chapters'][$ci]['count'] = min($available, $current + 1);
+    }
+
+    public function decrementChapter(int $si, int $ci): void
+    {
+        $current = (int)($this->subjects[$si]['chapters'][$ci]['count'] ?? 0);
+        $this->subjects[$si]['chapters'][$ci]['count'] = max(0, $current - 1);
+    }
+
     public function selectMode(string $m): void
     {
         $this->mode = $m;
@@ -306,15 +319,18 @@ new #[Layout('layouts.institution')] class extends Component {
                 </div>
             </button>
 
-            <div class="relative flex flex-col items-start gap-4 rounded-2xl border-2 border-dashed border-border bg-muted/30 p-6 opacity-60 cursor-not-allowed">
+            <button wire:click="selectExamType('kcet')" type="button" wire:loading.attr="disabled"
+                class="group relative flex flex-col items-start gap-4 rounded-2xl border-2 border-border bg-card p-6 text-left shadow-sm hover:border-primary hover:shadow-md transition-all active:scale-95">
                 <div class="h-12 w-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-700 text-lg font-bold">C</div>
                 <div>
                     <p class="font-display text-xl font-bold text-foreground">CET / KCET</p>
-                    <p class="text-sm text-muted-foreground mt-1">Physics · Chemistry · Math/Bio</p>
+                    <p class="text-sm text-muted-foreground mt-1">Physics · Chemistry · Maths · Biology</p>
                     <p class="text-xs text-muted-foreground mt-2">+1 / 0 marking · MCQ</p>
                 </div>
-                <span class="absolute top-4 right-4 text-[10px] font-bold bg-muted text-muted-foreground px-2 py-0.5 rounded-full uppercase tracking-wider">Soon</span>
-            </div>
+                <div class="absolute inset-0 flex items-center justify-center rounded-2xl bg-background/60 hidden" wire:loading wire:target="selectExamType('kcet')">
+                    <svg class="animate-spin h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                </div>
+            </button>
         </div>
     </div>
     @endif
@@ -351,7 +367,7 @@ new #[Layout('layouts.institution')] class extends Component {
         @if($mode === 'bank')
         <div class="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
             {{-- Subject Tabs --}}
-            <div class="flex border-b border-border">
+            <div class="flex border-b border-border sticky top-0 z-10 bg-card">
                 @foreach($subjects as $si => $subject)
                 @php $st = $subjectTotals[$subject['id']] ?? 0; @endphp
                 <button type="button"
@@ -391,14 +407,15 @@ new #[Layout('layouts.institution')] class extends Component {
                     <div class="col-span-3 flex items-center justify-center gap-1">
                         @if($chapter['available'] > 0)
                         <button type="button"
-                            wire:click="$set('subjects.{{ $si }}.chapters.{{ $ci }}.count', {{ max(0, (int)($chapter['count'] ?? 0) - 1) }})"
+                            wire:click="decrementChapter({{ $si }}, {{ $ci }})"
                             class="h-7 w-7 rounded border border-border bg-background hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors font-bold text-base leading-none">−</button>
                         <input type="number"
-                            wire:model.blur="subjects.{{ $si }}.chapters.{{ $ci }}.count"
+                            wire:key="chapter-count-{{ $si }}-{{ $ci }}-{{ $chapter['count'] }}"
+                            wire:model.live="subjects.{{ $si }}.chapters.{{ $ci }}.count"
                             min="0" max="{{ $chapter['available'] }}"
                             class="w-14 text-center rounded border border-input bg-background px-1 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                         <button type="button"
-                            wire:click="$set('subjects.{{ $si }}.chapters.{{ $ci }}.count', {{ min($chapter['available'], (int)($chapter['count'] ?? 0) + 1) }})"
+                            wire:click="incrementChapter({{ $si }}, {{ $ci }})"
                             class="h-7 w-7 rounded border border-border bg-background hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors font-bold text-base leading-none">+</button>
                         @else
                         <span class="text-xs text-muted-foreground italic col-span-3">No questions</span>
@@ -427,7 +444,7 @@ new #[Layout('layouts.institution')] class extends Component {
         @endif
 
         {{-- Summary bar --}}
-        <div class="rounded-xl border border-border bg-card/95 px-5 py-4 flex items-center justify-between gap-4">
+        <div class="sticky bottom-0 z-10 rounded-xl border border-border bg-card shadow-lg px-5 py-4 flex items-center justify-between gap-4 backdrop-blur-sm">
             @if($mode === 'bank')
             <div class="flex items-center gap-6 flex-wrap">
                 <div>

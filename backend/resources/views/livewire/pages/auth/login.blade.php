@@ -40,7 +40,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="relative">
             <a href="/" class="inline-flex items-center gap-2 text-xl font-bold font-display text-primary-foreground">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-foreground"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                ExamSphere
+                Examsphere
             </a>
         </div>
         <div class="relative space-y-8">
@@ -63,7 +63,7 @@ new #[Layout('layouts.guest')] class extends Component
                 </div>
             </div>
         </div>
-        <div class="relative text-xs opacity-80">© 2026 ExamSphere Technologies Pvt Ltd</div>
+        <div class="relative text-xs opacity-80">© 2026 Examsphere by Mitra Softwares</div>
     </div>
 
     <!-- Right panel -->
@@ -71,7 +71,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="flex items-center justify-between p-4 lg:p-6">
             <a href="/" class="lg:hidden items-center gap-2 text-xl font-bold font-display text-primary flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-                ExamSphere
+                Examsphere
             </a>
             <div class="ml-auto">
                 <!-- Theme Toggle -->
@@ -99,11 +99,7 @@ new #[Layout('layouts.guest')] class extends Component
                     <div>
                         <div class="flex items-center justify-between">
                             <x-ui.label for="password">Password</x-ui.label>
-                            @if (Route::has('password.request'))
-                                <a class="text-xs text-primary hover:underline" href="{{ route('password.request') }}" wire:navigate>
-                                    {{ __('Forgot Password?') }}
-                                </a>
-                            @endif
+                            <span class="text-xs text-muted-foreground">Contact super admin to reset</span>
                         </div>
                         <div class="relative mt-1.5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>

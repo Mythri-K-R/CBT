@@ -95,7 +95,7 @@ new #[Layout('layouts.guest')] class extends Component {
         <!-- Logo -->
         <div class="flex items-center justify-center gap-2 mb-8 font-display text-xl font-bold text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
-            ExamSphere
+            Examsphere
         </div>
 
         <!-- Progress -->
@@ -134,7 +134,7 @@ new #[Layout('layouts.guest')] class extends Component {
             @if($step === 1)
             <div>
                 <div class="mb-6">
-                    <h2 class="font-display text-2xl font-bold mb-1">Welcome to ExamSphere!</h2>
+                    <h2 class="font-display text-2xl font-bold mb-1">Welcome to Examsphere!</h2>
                     <p class="text-sm text-muted-foreground">Your account has been set up. First, create a secure password for yourself.</p>
                 </div>
 

@@ -18,12 +18,13 @@ new #[Layout('layouts.institution')] class extends Component {
 
     public string $name = '';
     public string $rollNumber = '';
+    public string $dob = '';
     public string $phone = '';
     public string $batchId = '';
 
     public function openCreate(): void
     {
-        $this->reset(['name','rollNumber','phone','batchId','editingId']);
+        $this->reset(['name','rollNumber','dob','phone','batchId','editingId']);
         $this->showModal = true;
     }
 
@@ -34,6 +35,7 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->editingId = $student->id;
         $this->name = $student->name;
         $this->rollNumber = $student->roll_number;
+        $this->dob = $student->date_of_birth?->format('Y-m-d') ?? '';
         $this->phone = $student->phone ?? '';
         $this->batchId = (string) ($student->batches->first()?->id ?? '');
         $this->showModal = true;
@@ -44,14 +46,16 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->validate([
             'name'        => 'required|string|max:150',
             'rollNumber'  => 'required|string|max:50',
+            'dob'         => 'nullable|date',
             'phone'       => 'nullable|string|max:20',
             'batchId'     => 'nullable|exists:batches,id',
         ]);
 
         $data = [
-            'name'        => $this->name,
-            'roll_number' => $this->rollNumber,
-            'phone'       => $this->phone ?: null,
+            'name'          => $this->name,
+            'roll_number'   => $this->rollNumber,
+            'date_of_birth' => $this->dob ?: null,
+            'phone'         => $this->phone ?: null,
         ];
 
         if ($this->editingId) {
@@ -152,8 +156,9 @@ new #[Layout('layouts.institution')] class extends Component {
                 <tr>
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground">Student</th>
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden sm:table-cell">Roll Number</th>
-                    <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden md:table-cell">Batch</th>
-                    <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden lg:table-cell">Contact</th>
+                    <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden md:table-cell">Date of Birth</th>
+                    <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden lg:table-cell">Batch</th>
+                    <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden xl:table-cell">Contact</th>
                     <th class="text-right px-4 py-3 font-semibold text-muted-foreground">Actions</th>
                 </tr>
             </thead>
@@ -170,7 +175,15 @@ new #[Layout('layouts.institution')] class extends Component {
                         </div>
                     </td>
                     <td class="px-4 py-3 text-muted-foreground hidden sm:table-cell font-mono text-xs">{{ $student->roll_number }}</td>
-                    <td class="px-4 py-3 hidden md:table-cell">
+                    <td class="px-4 py-3 hidden md:table-cell text-xs">
+                        @if($student->date_of_birth)
+                        <span class="font-mono text-foreground">{{ $student->date_of_birth->format('d/m/Y') }}</span>
+                        <span class="block text-muted-foreground text-[10px]">{{ $student->date_of_birth->format('dmY') }} (pin)</span>
+                        @else
+                        <span class="text-muted-foreground italic">Not set</span>
+                        @endif
+                    </td>
+                    <td class="px-4 py-3 hidden lg:table-cell">
                         @php $primaryBatch = $student->batches->first(); @endphp
                         @if($primaryBatch)
                         <span class="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs font-medium">{{ $primaryBatch->name }}</span>
@@ -178,7 +191,7 @@ new #[Layout('layouts.institution')] class extends Component {
                         <span class="text-muted-foreground text-xs">—</span>
                         @endif
                     </td>
-                    <td class="px-4 py-3 text-muted-foreground text-xs hidden lg:table-cell">
+                    <td class="px-4 py-3 text-muted-foreground text-xs hidden xl:table-cell">
                         {{ $student->phone ?? '—' }}
                     </td>
                     <td class="px-4 py-3">
@@ -230,6 +243,11 @@ new #[Layout('layouts.institution')] class extends Component {
                 <label class="block text-sm font-medium mb-1.5">Roll Number <span class="text-destructive">*</span></label>
                 <input wire:model="rollNumber" type="text" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring font-mono @error('rollNumber') border-destructive @enderror">
                 @error('rollNumber')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1.5">Date of Birth <span class="text-xs text-muted-foreground font-normal">(used as test password)</span></label>
+                <input wire:model="dob" type="date" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring @error('dob') border-destructive @enderror">
+                @error('dob')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
             </div>
             <div>
                 <label class="block text-sm font-medium mb-1.5">Phone</label>
