@@ -62,6 +62,7 @@ class TestJoinController extends Controller
         $request->validate([
             'student_id'  => 'required_without:roll_number|nullable|integer',
             'roll_number' => 'required_without:student_id|nullable|string',
+            'dob'         => 'nullable|string',
             'access_code' => 'nullable|string',
         ]);
 
@@ -85,6 +86,14 @@ class TestJoinController extends Controller
 
         if (!$student) {
             return response()->json(['message' => 'Student not found.'], 404);
+        }
+
+        // Verify DOB as password if the student has one set
+        if ($student->dob && $request->filled('dob')) {
+            $enteredDob = preg_replace('/\D/', '', trim($request->dob)); // strip non-digits
+            if ($enteredDob !== $student->dob) {
+                return response()->json(['message' => 'Incorrect date of birth.'], 403);
+            }
         }
 
         // Check if student already has an attempt for this test

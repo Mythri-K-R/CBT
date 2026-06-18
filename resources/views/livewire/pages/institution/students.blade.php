@@ -19,13 +19,14 @@ new #[Layout('layouts.institution')] class extends Component {
     public string $name = '';
     public string $rollNumber = '';
     public string $phone = '';
+    public string $dob = '';
     public string $batchId = '';
 
     public $importFile = null;
 
     public function openCreate(): void
     {
-        $this->reset(['name','rollNumber','phone','batchId','editingId']);
+        $this->reset(['name','rollNumber','phone','dob','batchId','editingId']);
         $this->showModal = true;
     }
 
@@ -37,6 +38,7 @@ new #[Layout('layouts.institution')] class extends Component {
         $this->name = $student->name;
         $this->rollNumber = $student->roll_number;
         $this->phone = $student->phone ?? '';
+        $this->dob = $student->dob ?? '';
         $this->batchId = (string) ($student->batches->first()?->id ?? '');
         $this->showModal = true;
     }
@@ -54,13 +56,17 @@ new #[Layout('layouts.institution')] class extends Component {
                     ->ignore($this->editingId),
             ],
             'phone'       => 'nullable|string|max:20',
+            'dob'         => 'nullable|string|max:8',
             'batchId'     => 'nullable|exists:batches,id',
+        ], [
+            'rollNumber.unique' => 'This student name or roll number already exists in the system.',
         ]);
 
         $data = [
             'name'        => $this->name,
             'roll_number' => $this->rollNumber,
             'phone'       => $this->phone ?: null,
+            'dob'         => $this->dob ?: null,
         ];
 
         if ($this->editingId) {
@@ -125,6 +131,7 @@ new #[Layout('layouts.institution')] class extends Component {
                 'roll_number' => ['roll no', 'roll no.', 'rollno', 'roll', 'roll number', 'reg no', 'reg_no', 'registration no', 'id'],
                 'contact'     => ['phone', 'mobile', 'mobile no', 'phone no', 'contact no', 'number'],
                 'batch'       => ['class', 'section', 'group', 'batch name'],
+                'dob'         => ['date of birth', 'dateofbirth', 'date_of_birth', 'birth date', 'birthdate', 'birth_date', 'd.o.b', 'd.o.b.', 'password'],
             ];
             $header = array_map(function ($col) use ($aliases) {
                 foreach ($aliases as $canonical => $variants) {
@@ -133,8 +140,8 @@ new #[Layout('layouts.institution')] class extends Component {
                 return $col;
             }, $header);
 
-            // Check all 4 required columns are present
-            $missing = array_diff(['name', 'roll_number', 'contact', 'batch'], $header);
+            // Check all 5 required columns are present
+            $missing = array_diff(['name', 'roll_number', 'contact', 'batch', 'dob'], $header);
             if (!empty($missing)) {
                 fclose($handle);
                 $found = implode(', ', $header);
@@ -155,11 +162,14 @@ new #[Layout('layouts.institution')] class extends Component {
                     $row  = array_pad($row, count($header), '');
                     $data = array_combine($header, array_map('trim', $row));
 
-                    foreach (['name', 'roll_number', 'contact', 'batch'] as $field) {
+                    foreach (['name', 'roll_number', 'contact', 'batch', 'dob'] as $field) {
                         if (empty($data[$field] ?? '')) {
                             throw new \InvalidArgumentException("'{$field}' is empty");
                         }
                     }
+
+                    // Parse DOB → DDMMYYYY
+                    $dobFormatted = $this->parseDob($data['dob']);
 
                     // Upsert student by roll number
                     $student = \App\Models\Student::where('institution_id', $institutionId)
@@ -167,12 +177,17 @@ new #[Layout('layouts.institution')] class extends Component {
                         ->first();
 
                     if ($student) {
-                        $student->update(['name' => $data['name'], 'phone' => $data['contact'] ?: null]);
+                        $student->update([
+                            'name'  => $data['name'],
+                            'phone' => $data['contact'] ?: null,
+                            'dob'   => $dobFormatted,
+                        ]);
                     } else {
                         $student = auth()->user()->institution->students()->create([
                             'name'        => $data['name'],
                             'roll_number' => $data['roll_number'],
                             'phone'       => $data['contact'] ?: null,
+                            'dob'         => $dobFormatted,
                         ]);
                     }
 
@@ -224,6 +239,48 @@ new #[Layout('layouts.institution')] class extends Component {
             $this->showImportModal = false;
             $this->importFile      = null;
         }
+    }
+
+    private function parseDob(string $value): string
+    {
+        $value = trim($value);
+
+        // Already DDMMYYYY (8 digits)
+        if (preg_match('/^\d{8}$/', $value)) {
+            return $value;
+        }
+
+        // Excel serial date (numeric, e.g. 36526)
+        if (preg_match('/^\d{4,5}$/', $value)) {
+            $ts = \Carbon\Carbon::create(1899, 12, 30)->addDays((int)$value)->timestamp;
+            return date('dmY', $ts);
+        }
+
+        // Try common explicit formats (DD first — Indian convention)
+        $formats = [
+            'd/m/Y', 'd-m-Y', 'd.m.Y', 'd/m/y', 'd-m-y',
+            'Y-m-d', 'Y/m/d', 'Y.m.d',
+            'd M Y', 'd F Y', 'j M Y', 'j F Y',
+            'm/d/Y', 'm-d-Y',
+        ];
+        foreach ($formats as $fmt) {
+            $dt = \DateTime::createFromFormat($fmt, $value);
+            if ($dt !== false) {
+                // Sanity check: year between 1950 and today
+                $year = (int) $dt->format('Y');
+                if ($year >= 1950 && $year <= (int) date('Y')) {
+                    return $dt->format('dmY');
+                }
+            }
+        }
+
+        // Last resort: strtotime
+        $ts = strtotime($value);
+        if ($ts !== false) {
+            return date('dmY', $ts);
+        }
+
+        throw new \InvalidArgumentException("Cannot parse DOB: '{$value}'");
     }
 
     public function with(): array
@@ -299,6 +356,7 @@ new #[Layout('layouts.institution')] class extends Component {
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden sm:table-cell">Roll Number</th>
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden md:table-cell">Batch</th>
                     <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden lg:table-cell">Contact</th>
+                    <th class="text-left px-4 py-3 font-semibold text-muted-foreground hidden xl:table-cell">DOB (Password)</th>
                     <th class="text-right px-4 py-3 font-semibold text-muted-foreground">Actions</th>
                 </tr>
             </thead>
@@ -326,6 +384,13 @@ new #[Layout('layouts.institution')] class extends Component {
                     <td class="px-4 py-3 text-muted-foreground text-xs hidden lg:table-cell">
                         {{ $student->phone ?? '—' }}
                     </td>
+                    <td class="px-4 py-3 hidden xl:table-cell">
+                        @if($student->dob)
+                        <span class="font-mono text-xs bg-muted px-2 py-0.5 rounded">{{ $student->dob }}</span>
+                        @else
+                        <span class="text-muted-foreground text-xs">—</span>
+                        @endif
+                    </td>
                     <td class="px-4 py-3">
                         <div class="flex items-center justify-end gap-1">
                             <a href="{{ route('institution.students.show', $student) }}" wire:navigate class="h-7 w-7 rounded flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
@@ -342,7 +407,7 @@ new #[Layout('layouts.institution')] class extends Component {
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="px-4 py-16 text-center text-muted-foreground">
+                    <td colspan="6" class="px-4 py-16 text-center text-muted-foreground">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-3 text-muted-foreground/40"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                         <p class="font-medium">No students found</p>
                         <p class="text-sm mt-1">Try adjusting your search or filters</p>
@@ -407,22 +472,25 @@ new #[Layout('layouts.institution')] class extends Component {
                     <table class="w-full text-[10px] font-mono border-collapse">
                         <thead>
                             <tr class="border-b border-border">
-                                <th class="text-left py-1 pr-3 text-muted-foreground font-semibold">student / name <span class="text-destructive">*</span></th>
-                                <th class="text-left py-1 pr-3 text-muted-foreground font-semibold">roll_number / roll no <span class="text-destructive">*</span></th>
-                                <th class="text-left py-1 pr-3 text-muted-foreground font-semibold">contact / phone <span class="text-destructive">*</span></th>
-                                <th class="text-left py-1 text-muted-foreground font-semibold">batch / class <span class="text-destructive">*</span></th>
+                                <th class="text-left py-1 pr-2 text-muted-foreground font-semibold">student/name <span class="text-destructive">*</span></th>
+                                <th class="text-left py-1 pr-2 text-muted-foreground font-semibold">roll_number <span class="text-destructive">*</span></th>
+                                <th class="text-left py-1 pr-2 text-muted-foreground font-semibold">contact/phone <span class="text-destructive">*</span></th>
+                                <th class="text-left py-1 pr-2 text-muted-foreground font-semibold">dob <span class="text-destructive">*</span></th>
+                                <th class="text-left py-1 text-muted-foreground font-semibold">batch/class <span class="text-destructive">*</span></th>
                             </tr>
                         </thead>
                         <tbody class="text-muted-foreground">
                             <tr>
-                                <td class="py-1 pr-3">Arjun Kumar</td>
-                                <td class="py-1 pr-3">2024001</td>
-                                <td class="py-1 pr-3">9876543210</td>
+                                <td class="py-1 pr-2">Arjun Kumar</td>
+                                <td class="py-1 pr-2">2024001</td>
+                                <td class="py-1 pr-2">9876543210</td>
+                                <td class="py-1 pr-2">01/01/2005</td>
                                 <td class="py-1">{{ $batches->first()?->name ?? 'NEET Batch A' }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p class="text-muted-foreground text-[10px]">DOB accepts any format: <span class="font-mono">01/01/2005</span>, <span class="font-mono">01-01-2005</span>, <span class="font-mono">2005-01-01</span>, <span class="font-mono">01012005</span> — all stored as <span class="font-mono font-semibold">DDMMYYYY</span> (student's exam password).</p>
                 @if($batches->isNotEmpty())
                 <div class="space-y-1">
                     <p class="font-semibold text-foreground">Your existing batches:</p>
@@ -480,6 +548,14 @@ new #[Layout('layouts.institution')] class extends Component {
             <div>
                 <label class="block text-sm font-medium mb-1.5">Phone</label>
                 <input wire:model="phone" type="tel" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1.5">Date of Birth <span class="text-destructive">*</span> <span class="text-xs text-muted-foreground font-normal">(used as exam password)</span></label>
+                <input wire:model="dob" type="text" placeholder="DDMMYYYY — e.g. 01012005" class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring font-mono @error('dob') border-destructive @enderror">
+                @error('dob')<p class="text-xs text-destructive mt-1">{{ $message }}</p>@enderror
+                @if($dob)
+                <p class="text-xs text-muted-foreground mt-1">Stored as: <span class="font-mono font-semibold">{{ $dob }}</span></p>
+                @endif
             </div>
             <div>
                 <label class="block text-sm font-medium mb-1.5">Batch</label>

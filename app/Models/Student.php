@@ -14,7 +14,7 @@ class Student extends Model
 
     protected $fillable = [
         'institution_id', 'name', 'roll_number', 'phone', 'parent_phone',
-        'photo_path', 'is_active',
+        'photo_path', 'is_active', 'dob',
     ];
 
     protected $casts = [
