@@ -1,0 +1,375 @@
+BROCHURE DESIGN PROMPT — ExamSphere by Mitra Softwares
+========================================================
+
+Create a professional 4-page printed brochure (A4 size, portrait orientation, 210mm × 297mm).
+Output format: PDF or high-resolution print-ready image (300 DPI minimum). NOT a PowerPoint/PPTX.
+
+CRITICAL DESIGN PHILOSOPHY — READ BEFORE STARTING:
+- LIGHT THEME throughout — bright, airy, clean. Backgrounds are white or very light.
+- IMAGES dominate every page — minimum 55–70% of each page area must be photographs or
+  visuals. Text lives in overlay bands, caption strips, or compact content panels.
+- Think magazine editorial meets corporate brochure — image-first, text-second.
+- Images must be sourced/generated to show real-feeling Indian context:
+    • Indian students (17–22 yrs, South Asian appearance) at computers, celebrating results,
+      in coaching institute computer labs, holding NEET/JEE books
+    • Indian faculty/teacher (30–50 yrs) reviewing tests on a laptop or whiteboard
+    • Modern coaching institute / junior college exteriors and smart classrooms
+    • Close-ups of a laptop/desktop screen showing a multiple-choice CBT exam interface
+    • Group of happy Indian students (mixed gender) in casual or uniform attire
+    • Aspirational future-doctors / future-engineers imagery (stethoscope, engineering gear)
+- Colour palette — LIGHT THEME:
+    Primary:   #FFFFFF  — White (main backgrounds)
+    Accent 1:  #1A56DB  — Bright Royal Blue (headings, icon fills, accent bars)
+    Accent 2:  #F59E0B  — Warm Amber/Saffron (highlight pills, CTA buttons, call-outs)
+    Accent 3:  #16A34A  — Success Green (badges, achievement tags only)
+    Text:      #1E293B  — Dark Slate (body text)
+    Sub-text:  #64748B  — Medium Grey (captions, sub-headings)
+    Card bg:   #F0F4FF  — Very light blue-white (feature cards, info boxes)
+- Typography:
+    Headings:  Poppins ExtraBold / Montserrat Black
+    Sub-heads: Poppins SemiBold
+    Body:      Nunito Regular / Open Sans Regular — 10–11pt
+    Captions:  Nunito Italic — 9pt
+- Thin Royal Blue (#1A56DB) horizontal rule separates major sections
+- Small ExamSphere wordmark + "by Mitra Softwares" in footer of every page (grey, 8pt)
+- NO dark full-bleed backgrounds — even the cover uses a bright image, not a dark solid colour
+- All overlay text areas use a WHITE semi-transparent frosted panel, not a dark overlay
+
+
+══════════════════════════════════════════════════════════════
+PAGE 1 — COVER / ABOUT MITRA SOFTWARES
+══════════════════════════════════════════════════════════════
+
+TARGET FEEL: A premium software company brochure cover. Bright, professional, trustworthy.
+
+FULL-PAGE BACKGROUND IMAGE (covers 100% of page):
+  A bright, high-resolution composite image showing:
+  - Main scene: A wide modern coaching institute building exterior OR smart classroom
+    interior with large glass windows, filled with focused Indian students at desktops.
+  - Slightly warm-toned, natural daylight lighting.
+  - NO dark overlay — the image should be bright and vivid.
+  Image source/generation prompt:
+  "Wide-angle photo of a modern Indian coaching institute or computer lab interior,
+   bright natural light, rows of young Indian students (17-22 years, South Asian) seated
+   at desktop computers, focused and studious, clean and modern facility,
+   warm natural lighting, high resolution, photorealistic."
+
+HEADER STRIP — top 12% of page, white frosted panel (85% opacity):
+  Left side:
+    Company name: "Mitra Softwares" in Royal Blue (#1A56DB), Poppins ExtraBold, 18pt
+    Tagline below: "Software Solutions · Shivamogga, Karnataka" in grey, 9pt
+  Right side (right-aligned):
+    Small pill badge (amber background, white text): "www.mitrasoftwares.in"
+    Below: "08182-298188  ·  info@mitrasoftwares.in" in grey, 9pt
+
+CENTRE OVERLAY PANEL — positioned at vertical 30–55% of page:
+  White frosted rectangle (90% opacity, soft drop shadow, rounded corners 8px):
+  Width: 85% of page, centred horizontally.
+
+  Inside the panel:
+    TOP TAG: Small Royal Blue pill → "About Us"
+    MAIN HEADLINE (Royal Blue, Poppins ExtraBold, 28pt, 2 lines max):
+      "Enterprise Software Solutions from the Heart of Karnataka"
+    RULE: 2px amber line, 60px wide, left-aligned below headline
+    BODY TEXT (Dark Slate, Nunito Regular, 10pt, 3 tight paragraphs):
+
+    Paragraph 1:
+      "Mitra Softwares is a software development company based in Shivamogga, Karnataka,
+      with over six years of expertise in the IT industry. We have established ourselves as
+      an enterprise-class solutions provider serving businesses across education, hospitality,
+      healthcare, and retail sectors."
+
+    Paragraph 2:
+      "Our portfolio spans custom CMS web application development, Android app development,
+      School ERP and Management Systems, digital marketing, BPO/ITES services, and branding
+      solutions. We build high-performance, visually appealing, and functionally robust
+      digital products using modern frameworks and technologies."
+
+    Paragraph 3:
+      "Guided by four core values — Commitment to Excellence, Creativity and Innovation,
+      Cost Effectiveness, and Client Satisfaction — we deliver solutions that drive real
+      results for our clients across India."
+
+  4-ICON ROW below paragraphs (Royal Blue icons, amber underline on hover-state styling):
+    [Code icon]           [GraduationCap]       [Briefcase]          [Star icon]
+    Custom Software       School ERP             Digital Marketing    Client Satisfaction
+    & Web Apps            & Management           & BPO/ITES           Since 2018
+
+BOTTOM STRIP — bottom 8% of page, Royal Blue solid band:
+  Left: "ExamSphere — by Mitra Softwares" in white, 9pt
+  Centre: "Our Flagship EdTech Product" in amber, 9pt, italic
+  Right: "www.mitrasoftwares.in" in white, 9pt
+
+
+══════════════════════════════════════════════════════════════
+PAGE 2 — INTRODUCING EXAMSPHERE (Platform Overview)
+══════════════════════════════════════════════════════════════
+
+TARGET FEEL: Tech product launch page. Energetic, modern, feature-rich.
+
+LAYOUT: Two-column grid. Left 55% = content. Right 45% = large image.
+Background: White (#FFFFFF)
+
+LEFT COLUMN (55%):
+
+  SECTION TAG (amber pill, Royal Blue text): "Our EdTech Platform"
+
+  MAIN HEADING (Royal Blue, Poppins ExtraBold, 24pt):
+    "ExamSphere"
+  SUB-HEADING (Dark Slate, Poppins SemiBold, 14pt):
+    "The NTA-Replica CBT Platform for NEET, JEE & CET"
+  THIN AMBER RULE (2px, 80px wide)
+
+  INTRO PARAGRAPH (Dark Slate, Nunito, 10.5pt):
+    "ExamSphere is Mitra Softwares' flagship education platform, purpose-built for
+    coaching institutes and junior colleges preparing students for India's most competitive
+    entrance examinations. The student interface is a pixel-perfect replica of the NTA
+    (National Testing Agency) interface used in JEE Main and NEET — so students practise
+    in the exact environment they will face on exam day."
+
+  3 FEATURE CARDS (stacked vertically, light-blue card bg #F0F4FF, left Royal Blue border 4px):
+
+    CARD 1:
+      [Monitor icon — Royal Blue]  "NTA-Identical CBT Interface"
+      "Question palette, colour-coded answer states (Not Visited / Not Answered / Answered /
+      Marked for Review), section-wise countdown timer, and subject tabs — an exact NTA replica."
+
+    CARD 2:
+      [BookOpen icon — Amber]  "Chapter-Wise Question Bank & PYQ"
+      "Thousands of questions organised by subject, chapter, and topic. Includes curated
+      Previous Year Questions (PYQ) from NEET and JEE Main — ready to assign instantly."
+
+    CARD 3:
+      [Share icon — Green]  "Instant Test Links — No App Required"
+      "Faculty create a test in minutes, generate a unique shareable link, and send it to
+      students via WhatsApp or email. Students attend via any browser on any device."
+
+  STAT ROW below cards (3 amber-highlighted numbers in a row):
+    [ NEET · JEE · CET ]    [ Chapter-Wise ]    [ Auto-Evaluated ]
+    "3 Exam Streams"         "Question Bank"      "Instant Results"
+
+RIGHT COLUMN (45%):
+
+  TOP IMAGE (60% of column height):
+    Image source/generation prompt:
+    "Close-up photo of a laptop screen displaying an online multiple-choice exam interface
+     similar to NTA JEE/NEET, showing a physics question, four options, question number
+     palette on the right side, countdown timer at top. Indian student's hands visible
+     on keyboard. Clean modern desk setup. Bright, photorealistic."
+    Caption strip (light blue bg, Royal Blue text, 9pt italic):
+      "The ExamSphere interface — indistinguishable from the actual NTA exam screen."
+
+  BOTTOM IMAGE (40% of column height):
+    Image source/generation prompt:
+    "Smiling young Indian male student (17-20 years, South Asian) sitting at a desktop
+     computer in a coaching institute computer lab, looking confident and happy after
+     completing an online test. Bright background, natural light, photorealistic."
+    Caption strip: "Students complete tests and get results instantly."
+
+BOTTOM FULL-WIDTH STRIP (Royal Blue bg, white text, 30px height):
+  "Trusted by faculty. Loved by students. Built for NEET, JEE & CET."
+
+
+══════════════════════════════════════════════════════════════
+PAGE 3 — FEATURES IN DEPTH + EXPERIENCE (Faculty & Student)
+══════════════════════════════════════════════════════════════
+
+TARGET FEEL: Image-heavy editorial page. Two vivid visual sections separated by a thin rule.
+
+LAYOUT: Full-width. Top half = Faculty section. Bottom half = Student section.
+Background: Very light blue-white (#F8FAFF)
+
+─── TOP HALF — FOR FACULTY ───────────────────────────────────
+
+  TOP BANNER IMAGE (full-width, 28% of page height):
+    Image source/generation prompt:
+    "Professional Indian female teacher or faculty member (35-45 years, South Asian)
+     sitting at a laptop in a modern coaching institute office, reviewing an online test
+     result or question paper on screen. Smart, confident, professional attire.
+     Warm natural lighting, clean background, photorealistic."
+    Over the image — WHITE frosted bottom-gradient band (bottom 35% of image):
+      SECTION TAG (Royal Blue pill): "For Faculty & Institutes"
+      HEADING (Royal Blue, Poppins ExtraBold, 18pt):
+        "Everything Your Faculty Needs to Run Tests — in Minutes"
+
+  3-COLUMN ICON GRID below the image (white card bg, thin Royal Blue border):
+
+    Col 1: [Pencil icon — Amber]
+      "Create Custom Tests"
+      Build full-length, chapter-wise, or topic-specific tests. Set marks, configure
+      negative marking, and mix question types — exactly like the real exam pattern.
+
+    Col 2: [Clock icon — Amber]
+      "Schedule & Share Instantly"
+      Set test windows, generate a unique test link, and send to your batch via WhatsApp
+      or email. No student logins or app downloads required.
+
+    Col 3: [BarChart icon — Amber]
+      "Auto-Evaluated Results"
+      Scores, accuracy, and subject-wise performance are ready the moment a student
+      submits. Download class-wide reports in one click.
+
+THIN AMBER DIVIDER LINE (full width, 2px) + small diamond ornament at centre.
+
+─── BOTTOM HALF — FOR STUDENTS ──────────────────────────────
+
+  3-COLUMN ICON GRID (first, above image — white card bg, thin Amber border):
+
+    Col 1: [GraduationCap icon — Royal Blue]
+      "CBT Environment Familiarity"
+      Students who practise on ExamSphere enter NEET/JEE halls with zero anxiety.
+      The interface, timing pressure, and review mechanics are already second nature.
+
+    Col 2: [Target icon — Royal Blue]
+      "Instant Feedback & Analytics"
+      After every test, students see score, time per question, accuracy rate, and
+      subject-wise strengths — so they know exactly what to improve next.
+
+    Col 3: [Archive/PYQ icon — Royal Blue]
+      "Previous Year Papers"
+      Practise real NEET and JEE questions from past years, sorted by subject and year.
+      Understand patterns, target high-yield topics, and build exam strategy.
+
+  BOTTOM BANNER IMAGE (full-width, 28% of page height):
+    Image source/generation prompt:
+    "Wide photo of a group of young Indian students (mixed gender, 17-22 years, South Asian)
+     in a bright coaching institute computer lab, all focused on their computer screens
+     taking an online mock test. Some students look confident and engaged. Modern facility,
+     rows of desktops, bright daylight through windows, photorealistic."
+    Over the image — WHITE frosted top-gradient band (top 30% of image):
+      SECTION TAG (Amber pill): "For Students"
+      CAPTION (Dark Slate, italic, 11pt):
+        "Students who practise CBT on ExamSphere outperform those who don't — every time."
+
+
+══════════════════════════════════════════════════════════════
+PAGE 4 — BACK COVER / CALL TO ACTION
+══════════════════════════════════════════════════════════════
+
+TARGET FEEL: High-impact closing page. Aspirational. Should make an institute principal
+want to pick up the phone and call Mitra Softwares immediately.
+
+FULL-PAGE BACKGROUND IMAGE (covers 100% of page):
+  Image source/generation prompt:
+  "Wide-angle celebratory photo of a group of young Indian students (mixed gender,
+   17-22 years, South Asian) cheering, raising hands, smiling broadly — celebrating exam
+   results or admission success. Outdoors or bright institute campus setting. Some holding
+   certificates or mark sheets. Vibrant, joyful, aspirational mood. Natural warm lighting,
+   photorealistic, high resolution."
+  Apply a very light white vignette overlay on the bottom 40% of the image so
+  the white CTA panel below reads cleanly. The image itself stays bright — no dark toning.
+
+TOP-LEFT CORNER BADGE (circular, Amber background, 80px diameter):
+  Inner text (Royal Blue, bold, 8pt, centred):
+    "NEET"
+    "JEE"
+    "CET"
+  Outer ring text (white, 7pt, spaced): "NTA-REPLICA INTERFACE"
+
+TOP OVERLAY QUOTE PANEL (White frosted panel, 80% opacity, centred, width 80%, at ~30% from top):
+  LARGE QUOTE (Royal Blue, Poppins ExtraBold, 22pt, centred):
+    "The institute that prepares students best — wins."
+  ATTRIBUTION (Amber, Nunito SemiBold, 11pt, centred, italic):
+    "— ExamSphere by Mitra Softwares"
+
+BOTTOM CTA ZONE (White solid background panel, rounded top corners, bottom 38% of page):
+
+  HEADING (Royal Blue, Poppins ExtraBold, 20pt, centred):
+    "Ready to Transform Your Institute's Results?"
+
+  BODY TEXT (Dark Slate, Nunito Regular, 10.5pt, centred):
+    "Join coaching institutes and junior colleges across Karnataka already using ExamSphere
+    to give their students a decisive edge in NEET, JEE, and CET preparation.
+    No complex setup. No app downloads. Just results."
+
+  AMBER RULE (2px, 100px, centred)
+
+  3-CONTACT BLOCKS side by side (white cards, Royal Blue icon, thin border):
+
+  [Globe icon]                [Phone icon]                  [Mail icon]
+  "Visit Us"                  "Call / WhatsApp"             "Write to Us"
+  www.mitrasoftwares.in       08182-298188                  info@mitrasoftwares.in
+  (Royal Blue hyperlink)      (Bold, Dark Slate)            (Royal Blue hyperlink)
+
+  DIVIDER (thin amber line, full width)
+
+  TAGLINE ROW (centred, small-caps, Medium Grey, 9pt):
+    "Mitra Softwares  ·  Shivamogga, Karnataka  ·  www.mitrasoftwares.in"
+
+  FOOTER BAR (Royal Blue bg, full width, white text, 9pt):
+    Left: "ExamSphere — by Mitra Softwares"
+    Centre: "NTA-Replica CBT Platform · NEET · JEE Main · CET"
+    Right: "www.mitrasoftwares.in · 08182-298188"
+
+
+══════════════════════════════════════════════════════════════
+IMAGE SOURCING / GENERATION GUIDE
+══════════════════════════════════════════════════════════════
+
+Use these prompts with an AI image generator (Adobe Firefly, Midjourney, DALL-E 3,
+Stable Diffusion, or Ideogram) OR source royalty-free from Unsplash/Pexels using
+search terms provided. Do NOT use AI-generated Western/Caucasian faces — ensure
+South Asian / Indian appearance for all people.
+
+Image 1 (Page 1 background):
+  Search: "Indian coaching institute computer lab students studying"
+  AI prompt: "Wide-angle photo of a modern Indian coaching institute interior, rows of
+  young South Asian students (17-22 years) at desktop computers, bright natural daylight,
+  clean modern facility, photorealistic, high resolution"
+
+Image 2 (Page 2 right-top — CBT screen closeup):
+  Search: "online exam computer screen multiple choice India student"
+  AI prompt: "Close-up of a laptop screen showing an NTA-style online multiple choice
+  exam interface, physics question with 4 options, question palette on right, timer top,
+  Indian student hands on keyboard, bright desk, photorealistic"
+
+Image 3 (Page 2 right-bottom — happy student):
+  Search: "happy Indian student computer exam success"
+  AI prompt: "Smiling young Indian male student (18-20 years, South Asian) at desktop
+  computer in coaching institute lab, confident expression after completing online test,
+  bright natural light, photorealistic"
+
+Image 4 (Page 3 top — faculty):
+  Search: "Indian female teacher laptop school office"
+  AI prompt: "Professional Indian female teacher (35-45 years, South Asian) at a laptop
+  in a modern office or classroom, reviewing student test results on screen, professional
+  attire, warm natural light, photorealistic"
+
+Image 5 (Page 3 bottom — students in lab):
+  Search: "Indian students computer lab mock test coaching"
+  AI prompt: "Wide photo of group of young Indian students (mixed gender, 17-22 years,
+  South Asian) in a coaching institute computer lab, all focused on desktop screens taking
+  an online test, rows of computers, bright daylight windows, photorealistic"
+
+Image 6 (Page 4 background — celebration):
+  Search: "Indian students celebrating exam results success"
+  AI prompt: "Group of young Indian students (mixed gender, 17-22 years, South Asian)
+  celebrating exam success, cheering and smiling, bright outdoor campus setting, some
+  holding mark sheets, joyful aspirational mood, warm natural lighting, photorealistic"
+
+
+══════════════════════════════════════════════════════════════
+FINAL SPECIFICATIONS CHECKLIST
+══════════════════════════════════════════════════════════════
+
+Theme:            LIGHT — white/blue/amber. No dark full-bleed backgrounds.
+Image coverage:   Minimum 55–70% of each page occupied by photographs.
+Size:             A4 (210mm × 297mm), portrait
+Bleed:            3mm on all sides
+Resolution:       300 DPI minimum
+Colour mode:      CMYK for print / RGB for digital PDF
+Output:           PDF (print-ready) — NOT PowerPoint, NOT Word, NOT PNG slideshow
+Pages:            Exactly 4 pages
+
+Content rules:
+  ✗  No pricing, subscription plans, or billing information
+  ✗  No unverified statistics or made-up numbers
+  ✗  No dark-mode colour scheme anywhere
+  ✓  Accurate company info: Shivamogga (not Bengaluru), Phone: 08182-298188
+  ✓  Accurate email: info@mitrasoftwares.in
+  ✓  Accurate website: www.mitrasoftwares.in
+  ✓  ExamSphere covers: NEET, JEE Main, CET (Karnataka)
+  ✓  South Asian / Indian faces in all people imagery
+  ✓  Each page stands alone but flows as a 4-page sequence
+
+END OF BROCHURE DESIGN PROMPT

@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Volt::route('institutions/{institution}', 'pages.admin.institutions.show')->name('institutions.show');
         Volt::route('subjects', 'pages.admin.subjects')->name('subjects');
         Volt::route('questions', 'pages.admin.questions')->name('questions');
+        Volt::route('questions/import', 'pages.admin.questions-import')->name('questions.import');
         Volt::route('exam-templates', 'pages.admin.exam-templates')->name('exam-templates');
         Volt::route('settings', 'pages.admin.settings')->name('settings');
     });
@@ -57,6 +58,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Volt::route('faculty', 'pages.institution.faculty')->name('faculty');
         Volt::route('questions', 'pages.institution.questions.index')->name('questions');
         Volt::route('questions/create', 'pages.institution.questions.create')->name('questions.create');
+        Volt::route('questions/import', 'pages.institution.questions.import')->name('questions.import');
+
+        // Dedicated PDF upload endpoint — uses XHR (not Livewire) to avoid session-lock blocking
+        Route::post('questions/upload-pdf-temp', function (Illuminate\Http\Request $request) {
+            $request->validate(['pdf' => 'required|file|mimes:pdf|max:25600']);
+            session()->save(); // Release session file lock so other requests aren't blocked
+            $path = $request->file('pdf')->store('pdf-temp', 'local');
+            return response()->json(['path' => \Illuminate\Support\Facades\Storage::disk('local')->path($path)]);
+        })->name('questions.upload-pdf-temp');
         Volt::route('questions/{question}/edit', 'pages.institution.questions.edit')->name('questions.edit');
         Volt::route('tests', 'pages.institution.tests.index')->name('tests');
         Volt::route('tests/create', 'pages.institution.tests.create')->name('tests.create');

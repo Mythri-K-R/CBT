@@ -1,0 +1,50 @@
+{
+  "Physics": [
+    "Units and Measurements",
+    "Kinematics",
+    "Laws of Motion",
+    "Work, Energy and Power",
+    "Gravitation",
+    "Properties of Bulk Matter",
+    "Thermodynamics",
+    "Oscillations and Waves",
+    "Electrostatics",
+    "Current Electricity",
+    "Magnetic Effects of Current and Magnetism",
+    "Electromagnetic Induction and Alternating Currents",
+    "Optics",
+    "Dual Nature of Matter and Radiation",
+    "Atoms and Nuclei",
+    "Electronic Devices"
+  ],
+  "Chemistry": [
+    "Some Basic Concepts of Chemistry",
+    "Structure of Atom",
+    "Classification of Elements and Periodicity",
+    "Chemical Bonding and Molecular Structure",
+    "States of Matter",
+    "Thermodynamics",
+    "Equilibrium",
+    "Redox Reactions",
+    "Organic Chemistry - Basic Principles",
+    "Hydrocarbons",
+    "Solid State",
+    "Solutions",
+    "Electrochemistry",
+    "Chemical Kinetics",
+    "Coordination Compounds",
+    "Aldehydes, Ketones and Carboxylic Acids",
+    "Biomolecules"
+  ],
+  "Biology": [
+    "Diversity in the Living World",
+    "Cell Structure and Function",
+    "Plant Physiology",
+    "Human Physiology",
+    "Reproduction",
+    "Genetics and Evolution",
+    "Biology and Human Welfare",
+    "Biotechnology and its Applications",
+    "Ecology and Environment"
+  ]
+}

@@ -67,6 +67,33 @@ class QuestionImportService
     {
         $path = Storage::path($import->file_path);
 
+        if ($import->import_type === 'pdf') {
+            $pdfExtractor = app(\App\Services\PdfExtractionService::class);
+            $results = $pdfExtractor->extract($path);
+            
+            $rows = [];
+            foreach ($results['clean'] as $item) {
+                $rows[] = [
+                    'exam_type'      => $import->exam_type,
+                    'subject_id'     => $import->subject_id,
+                    'chapter_id'     => $import->chapter_id,
+                    'question_text'  => $item['question'],
+                    'option_A'       => $item['options']['a'] ?? '',
+                    'option_B'       => $item['options']['b'] ?? '',
+                    'option_C'       => $item['options']['c'] ?? '',
+                    'option_D'       => $item['options']['d'] ?? '',
+                    'correct_answer' => strtoupper($item['correct_answer']),
+                    'source'         => $item['year'] ?? null,
+                ];
+            }
+            
+            if (!empty($results['review'])) {
+                \Illuminate\Support\Facades\Log::warning("PDF Extraction had " . count($results['review']) . " items flagged for review.", ['import_id' => $import->id]);
+            }
+            
+            return $rows;
+        }
+
         if ($import->import_type === 'json') {
             return json_decode(file_get_contents($path), true) ?? [];
         }

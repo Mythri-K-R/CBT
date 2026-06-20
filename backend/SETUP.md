@@ -1,6 +1,7 @@
 # ExamSphere Backend — Setup Guide
 
 ## Prerequisites (already done)
+
 - [x] Laragon installed at `D:\laragon`
 - [x] PHP 8.3 active
 - [x] Composer installed
@@ -27,7 +28,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=examsphere
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=ad029
 ```
 
 > Laragon's MySQL runs on port **3306** with user `root` and **no password** by default.
@@ -61,6 +62,7 @@ php artisan db:seed
 ```
 
 This seeds:
+
 - Super admin user (`username: superadmin`, `password: change-me-immediately`)
 - NEET + JEE Main subjects and chapters
 - Exam templates (NEET Full Mock, JEE Main)
@@ -133,6 +135,7 @@ Content-Type: application/json
 ## Architecture Notes
 
 ### Exam Engine Flow
+
 ```
 Student clicks link → GET /api/test/join/{slug}
 Student selects name → POST /api/test/join/{slug}/identify
@@ -155,29 +158,34 @@ View result → GET /api/test/exam/{uuid}/result
 ```
 
 ### Multi-Tenancy
+
 Every institution-scoped model uses the `BelongsToInstitution` trait which auto-applies
 `InstitutionScope` — adds `WHERE institution_id = X` to all queries automatically.
 Super admin bypasses this and sees all institutions.
 
 ### Faculty Permissions
+
 8 boolean columns on `users` table. Middleware `CheckFacultyPermission` enforces them per route.
 Institution admins bypass all permission checks.
 
 ### Queue Channels
+
 - `high` — auto-submit expired tests (time-sensitive)
 - `default` — imports, QR code generation, PDF reports
 - `analytics` — stats updates after test submission
 
 ## API Base URL
+
 All routes are prefixed with `/api/`. E.g., `POST /api/login`.
 
 ## Key Tables
-| Table | Purpose |
-|-------|---------|
-| `test_attempts` | One row per student-test pair |
-| `test_responses` | Pre-created at test start, updated on each save |
-| `test_timer_state` | Server-side timer (tamper-proof) |
-| `proctor_events` | Anti-cheat violations logged here |
-| `student_subject_stats` | Running accuracy per student per subject |
-| `student_chapter_stats` | Running accuracy per student per chapter |
-| `batch_test_stats` | Aggregated batch performance per test |
+
+| Table                   | Purpose                                         |
+| ----------------------- | ----------------------------------------------- |
+| `test_attempts`         | One row per student-test pair                   |
+| `test_responses`        | Pre-created at test start, updated on each save |
+| `test_timer_state`      | Server-side timer (tamper-proof)                |
+| `proctor_events`        | Anti-cheat violations logged here               |
+| `student_subject_stats` | Running accuracy per student per subject        |
+| `student_chapter_stats` | Running accuracy per student per chapter        |
+| `batch_test_stats`      | Aggregated batch performance per test           |

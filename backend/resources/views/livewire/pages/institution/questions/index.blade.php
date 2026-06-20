@@ -141,11 +141,18 @@ new #[Layout('layouts.institution')] class extends Component {
             <h1 class="text-2xl font-display font-bold">Question Bank</h1>
             <p class="text-sm text-muted-foreground mt-0.5">Browse questions by exam type, subject, and chapter</p>
         </div>
-        <a href="{{ route('institution.questions.create') }}" wire:navigate
-           class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            Add Question
-        </a>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('institution.questions.import') }}" wire:navigate
+               class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-semibold hover:bg-muted transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Import PDF
+            </a>
+            <a href="{{ route('institution.questions.create') }}" wire:navigate
+               class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                Add Question
+            </a>
+        </div>
     </div>
 
     @if(session('status'))

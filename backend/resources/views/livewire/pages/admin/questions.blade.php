@@ -98,11 +98,16 @@ new #[Layout('layouts.admin')] class extends Component {
 
 <div class="space-y-5">
 
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between gap-4">
         <div>
             <h1 class="text-2xl font-display font-bold">Platform Question Bank</h1>
             <p class="text-sm text-muted-foreground mt-0.5">Browse and manage all platform-wide questions</p>
         </div>
+        <a href="{{ route('admin.questions.import') }}" wire:navigate
+           class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-semibold hover:bg-muted transition-colors shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Import PDF
+        </a>
     </div>
 
     @if(session('status'))

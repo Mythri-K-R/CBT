@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Examsphere — Brochure</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --N:#0b1d35;--N2:#0f2545;--B:#1155cc;
+  --G:#f59e0b;--G2:#fbbf24;--G3:#d97706;
+  --W:#fff;--BG:#f0f4f8;--MU:#64748b;--BR:#dde6f0;
+  --GR:#10b981;--SK:#0ea5e9;--PU:#7c3aed;--RD:#dc2626;
+}
+body{font-family:'Inter',sans-serif;background:#c8d0da;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;background:var(--W);margin:0 auto 6mm;position:relative;overflow:hidden;display:flex;flex-direction:column}
+@media print{body{background:white}.page{margin:0;break-after:page}}
+@page{size:A4;margin:0}
+h1,h2,h3{font-family:'Montserrat',sans-serif}
+
+/* ───── SHARED NAV ───── */
+.topbar{background:var(--N);padding:0 13mm;height:14mm;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.logo-row{display:flex;align-items:center;gap:9px}
+.logo-ico{width:32px;height:32px;background:var(--G);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-ico svg{width:18px;height:18px}
+.logo-name{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:#fff;letter-spacing:-.3px}
+.logo-by{font-size:7.5px;color:rgba(255,255,255,.4);letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
+.pnum{font-size:8px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+
+/* ───── SHARED FOOTER ───── */
+.btmbar{background:var(--N);padding:0 13mm;height:10mm;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;margin-top:auto}
+.btmbar span{font-size:7.5px;color:rgba(255,255,255,.3);letter-spacing:.3px}
+.btmbar .burl{font-size:8.5px;font-weight:800;color:var(--G);letter-spacing:.3px}
+
+/* ══════════════════════════════
+   PAGE 1 — COVER
+══════════════════════════════ */
+.p1-body{flex:1;display:grid;grid-template-columns:82mm 1fr;position:relative;overflow:hidden}
+
+/* Left panel */
+.p1-left{background:var(--N);padding:10mm 11mm 8mm;display:flex;flex-direction:column;position:relative;overflow:hidden;z-index:1}
+.p1-left::after{content:'';position:absolute;right:-28mm;top:-18mm;width:70mm;height:70mm;background:var(--G);transform:rotate(20deg);z-index:0;opacity:.13;border-radius:8px}
+.p1-left::before{content:'';position:absolute;right:-10mm;bottom:20mm;width:50mm;height:50mm;background:var(--B);transform:rotate(35deg);z-index:0;opacity:.2;border-radius:8px}
+
+.p1-supertag{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35);color:var(--G2);font-size:8px;font-weight:700;padding:4px 12px;border-radius:50px;margin-bottom:12mm;letter-spacing:.8px;text-transform:uppercase;width:fit-content;position:relative;z-index:1}
+.p1-supertag::before{content:'';width:6px;height:6px;background:var(--G);border-radius:50%}
+
+.p1-h1{font-size:34px;font-weight:900;color:#fff;line-height:1.08;letter-spacing:-1px;margin-bottom:6mm;position:relative;z-index:1}
+.p1-h1 span{color:var(--G)}
+
+.p1-tagline{font-size:10px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:10mm;position:relative;z-index:1}
+
+.p1-exams{display:flex;flex-direction:column;gap:7px;position:relative;z-index:1}
+.exam-row{display:flex;align-items:center;gap:10px}
+.exam-row-ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.exam-row-ico svg{width:14px;height:14px}
+.exam-row h5{font-size:11px;font-weight:800;color:#fff;margin-bottom:1px}
+.exam-row p{font-size:8px;color:rgba(255,255,255,.5)}
+
+.p1-divider{height:1px;background:rgba(255,255,255,.1);margin:8mm 0;position:relative;z-index:1}
+
+.p1-badges{display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1}
+.p1-badge-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:8.5px;font-weight:700;padding:4px 12px;border-radius:50px;letter-spacing:.3px}
+.p1-badge-item.hi{background:var(--G);color:var(--N);border-color:var(--G)}
+
+/* Right panel - NTA interface */
+.p1-right{background:#f5f5f0;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.p1-right-label{background:rgba(11,29,53,.85);padding:5px 10px;display:flex;align-items:center;gap:6px}
+.p1-right-label span{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.8px;text-transform:uppercase}
+.p1-right-label::before{content:'●';color:var(--GR);font-size:8px}
+
+/* ── NTA CBT INTERFACE ────────────────────────── */
+.nta{flex:1;display:flex;flex-direction:column;font-family:'Inter',sans-serif}
+
+/* NTA Header */
+.nta-hdr{background:#3c5800;padding:5px 8px;display:flex;align-items:center;gap:8px}
+.nta-hdr-logo{background:#fff;border-radius:3px;padding:2px 7px;font-size:8px;font-weight:900;color:#3c5800;letter-spacing:.5px}
+.nta-hdr-info{flex:1;padding-left:6px;border-left:1px solid rgba(255,255,255,.2)}
+.nta-hdr-info .exam-title{font-size:8px;font-weight:700;color:#fff;letter-spacing:.3px}
+.nta-hdr-info .candidate{font-size:7px;color:rgba(255,255,255,.65);margin-top:1px}
+.nta-hdr-right{display:flex;align-items:center;gap:8px}
+.nta-timer-box{background:#fff;border-radius:3px;padding:3px 8px;text-align:center}
+.nta-timer-box .tlbl{font-size:6px;color:#666;text-transform:uppercase;letter-spacing:.3px}
+.nta-timer-box .tval{font-size:12px;font-weight:900;color:#3c5800;letter-spacing:1px;line-height:1}
+.nta-photo{width:28px;height:32px;background:#ccc;border:1px solid #aaa;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:6px;color:#888}
+
+/* NTA Section tabs */
+.nta-tabs{background:#4d7000;display:flex;border-bottom:2px solid #2a3e00}
+.nta-tab{padding:4px 10px;font-size:7.5px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;border-right:1px solid rgba(255,255,255,.1)}
+.nta-tab.active{background:#fff;color:#3c5800;font-weight:800}
+
+/* NTA main split */
+.nta-main{flex:1;display:grid;grid-template-columns:1fr 92px;background:#f5f5f0}
+
+/* Question area */
+.nta-qzone{padding:8px 10px;border-right:2px solid #ccc;display:flex;flex-direction:column;background:#fff}
+.nta-qzone-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid #ddd}
+.nta-qzone-head .qnum{font-size:8.5px;font-weight:800;color:#333}
+.nta-qzone-head .qmarks{font-size:7px;color:#666;background:#f0f0e8;padding:2px 7px;border-radius:3px}
+.nta-qtxt{font-size:8.5px;color:#222;line-height:1.6;margin-bottom:9px}
+.nta-opts{display:flex;flex-direction:column;gap:5px}
+.nta-opt{display:flex;align-items:center;gap:8px;font-size:8.5px;background:#fff;border:1px solid #bbb;border-radius:3px;padding:5px 8px;cursor:pointer;color:#333}
+.nta-opt.sel{background:#e6f4ea;border-color:#5cb85c;color:#1a5c1a}
+.nta-opt .oradio{width:11px;height:11px;border-radius:50%;border:1.5px solid #888;flex-shrink:0}
+.nta-opt.sel .oradio{background:#5cb85c;border-color:#5cb85c}
+.nta-opt .olabel{font-weight:700;font-size:8px;color:#555;flex-shrink:0;width:12px}
+
+/* NTA Question palette */
+.nta-palette{padding:6px 5px;background:#e8e8dc;overflow-y:auto}
+.pal-sec-title{font-size:6.5px;font-weight:800;color:#333;text-align:center;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;padding-bottom:3px;border-bottom:1px solid #ccc}
+.pal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:7px}
+.pq{width:18px;height:18px;border-radius:3px;font-size:7px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none}
+.pq.nv{background:#808080;color:#fff}           /* not visited */
+.pq.na{background:#dc2626;color:#fff}            /* not answered */
+.pq.an{background:#16a34a;color:#fff}            /* answered */
+.pq.mr{background:#7c3aed;color:#fff}            /* marked review */
+.pq.am{background:#7c3aed;color:#fff;outline:2px solid #16a34a;outline-offset:1px} /* answered+marked */
+.pq.cu{background:#1d4ed8;color:#fff;box-shadow:0 0 0 2px #93c5fd} /* current */
+
+.pal-legend{display:flex;flex-direction:column;gap:3px}
+.pl{display:flex;align-items:center;gap:4px;font-size:6px;color:#444}
+.pl-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* NTA Bottom bar */
+.nta-btm{background:#d0d0c0;padding:5px 10px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #aaa;flex-shrink:0}
+.nta-btm-left{display:flex;gap:5px}
+.nb{font-size:7.5px;font-weight:700;padding:4px 10px;border-radius:3px;border:none;cursor:pointer;letter-spacing:.2px}
+.nb.gr{background:#3c5800;color:#fff}
+.nb.pu{background:#7c3aed;color:#fff}
+.nb.wh{background:#fff;color:#333;border:1px solid #bbb}
+.nb.rd{background:#dc2626;color:#fff}
+
+/* Bottom strip - page 1 */
+.p1-strip{background:linear-gradient(90deg,var(--G) 0%,var(--G2) 100%);padding:4mm 13mm;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.p1-strip h3{font-size:13px;font-weight:900;color:var(--N)}
+.p1-strip p{font-size:9px;color:rgba(11,29,53,.7)}
+.p1-strip-pill{background:var(--N);color:#fff;font-size:9px;font-weight:700;padding:6px 18px;border-radius:50px;white-space:nowrap}
+
+/* ══════════════════════════════
+   PAGE 2 — FEATURES + DASHBOARD
+══════════════════════════════ */
+.p2-body{flex:1;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}
+
+.p2-hero{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--N);overflow:hidden;position:relative}
+.p2-hero-left{padding:10mm 12mm;position:relative;z-index:1}
+.p2-hero-left::after{content:'';position:absolute;right:-20mm;top:50%;transform:translateY(-50%);width:50mm;height:50mm;background:var(--G);clip-path:polygon(50% 0%,100% 100%,0% 100%);opacity:.12}
+.p2-hl-tag{font-size:8px;font-weight:700;color:var(--G);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.p2-hl-tag::before{content:'';width:20px;height:2px;background:var(--G)}
+.p2-hl-h2{font-size:26px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.5px}
+.p2-hl-h2 span{color:var(--G)}
+.p2-hero-right{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.04);position:relative}
+.p2-hero-right::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.08)}
+.p2-stat{padding:8mm 8mm;border-bottom:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;justify-content:center}
+.p2-stat:nth-child(2n){border-right:none}
+.p2-stat:nth-child(n+3){border-bottom:none}
+.p2-stat-n{font-family:'Montserrat',sans-serif;font-size:34px;font-weight:900;color:var(--G);line-height:1}
+.p2-stat-l{font-size:9px;color:rgba(255,255,255,.55);margin-top:4px}
+
+.p2-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-bottom:1px solid var(--BR)}
+.p2-feat{padding:6mm 7mm;border-right:1px solid var(--BR);position:relative;overflow:hidden}
+.p2-feat:last-child{border-right:none}
+.p2-feat::before{content:'';position:absolute;right:-8mm;bottom:-8mm;width:30mm;height:30mm;background:var(--G);opacity:.04;border-radius:50%}
+.p2-feat-n{font-family:'Montserrat',sans-serif;font-size:42px;font-weight:900;color:var(--BR);line-height:1;margin-bottom:3mm;opacity:.8}
+.p2-feat-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.p2-feat-ico svg{width:18px;height:18px}
+.p2-feat-ico.g{background:rgba(16,185,129,.1);color:var(--GR)}
+.p2-feat-ico.b{background:rgba(14,165,233,.1);color:var(--SK)}
+.p2-feat-ico.o{background:rgba(245,158,11,.1);color:var(--G)}
+.p2-feat-ico.p{background:rgba(124,58,237,.1);color:var(--PU)}
+.p2-feat-ico.n{background:rgba(11,29,53,.08);color:var(--N)}
+.p2-feat-ico.r{background:rgba(220,38,38,.08);color:var(--RD)}
+.p2-feat h4{font-size:11px;font-weight:800;color:var(--N);margin-bottom:4px}
+.p2-feat p{font-size:8.5px;color:var(--MU);line-height:1.55}
+
+/* Dashboard mockup strip */
+.p2-dash{background:var(--N);padding:5mm 12mm;display:flex;align-items:center;gap:12mm}
+.p2-dash-label{flex-shrink:0}
+.p2-dash-label h4{font-size:13px;font-weight:900;color:#fff;margin-bottom:3px}
+.p2-dash-label p{font-size:8.5px;color:rgba(255,255,255,.5);max-width:120px;line-height:1.5}
+.p2-dash-ui{flex:1;background:#fff;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.p2-dash-topbar{background:#f1f5f9;padding:4px 8px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #e2e8f0}
+.p2-dash-topbar .dt{display:flex;gap:3px}
+.p2-dash-topbar .dt span{width:7px;height:7px;border-radius:50%}
+.p2-dash-topbar .rd{background:#ef4444}.p2-dash-topbar .ye{background:#f59e0b}.p2-dash-topbar .gr{background:#22c55e}
+.p2-dash-topbar .durl{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:3px;padding:2px 7px;font-size:7px;color:#94a3b8}
+.dash-grid{display:grid;grid-template-columns:46px 1fr}
+.dash-sb{background:#0b1d35;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:3px}
+.dsb-i{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.dsb-i.ac{background:rgba(245,158,11,.18)}
+.dsb-i svg{width:13px;height:13px;color:rgba(255,255,255,.45)}
+.dsb-i.ac svg{color:var(--G)}
+.dash-content{padding:7px 9px;background:#f8fafc;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px}
+.dc-stat{background:#fff;border-radius:6px;padding:6px 7px;border:1px solid #e8edf5}
+.dc-stat .dn{font-size:18px;font-weight:900;color:var(--N);line-height:1}
+.dc-stat .dl{font-size:6.5px;color:#94a3b8;margin-top:2px}
+
+/* ══════════════════════════════
+   PAGE 3 — NTA EXAM INTERFACE
+══════════════════════════════ */
+.p3-body{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.p3-intro{padding:7mm 13mm 5mm;display:grid;grid-template-columns:auto 1fr auto;gap:14mm;align-items:center}
+.p3-intro-tag{font-size:8px;font-weight:700;color:var(--G);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.p3-intro-tag::before{content:'';width:20px;height:2px;background:var(--G)}
+.p3-intro h2{font-size:24px;font-weight:900;color:var(--N);line-height:1.1;letter-spacing:-.5px}
+.p3-intro h2 span{color:var(--G)}
+.p3-intro p{font-size:9.5px;color:var(--MU);line-height:1.65;max-width:280px}
+.p3-intro-right{display:flex;gap:6px}
+.p3-pill{background:var(--N);color:#fff;font-size:9px;font-weight:800;padding:6px 16px;border-radius:50px;letter-spacing:.3px}
+.p3-pill.g{background:var(--G);color:var(--N)}
+
+/* Full NTA interface */
+.nta-full-frame{flex:1;background:#f5f5f0;display:flex;flex-direction:column;border-top:3px solid var(--G);margin:0 13mm 4mm;border-radius:8px;overflow:hidden;box-shadow:0 6px 24px rgba(11,29,53,.15)}
+
+/* Same NTA styling but bigger */
+.nf-hdr{background:#3c5800;padding:7px 12px;display:flex;align-items:center;gap:10px}
+.nf-hdr-logo{background:#fff;border-radius:3px;padding:3px 9px;font-size:9px;font-weight:900;color:#3c5800;letter-spacing:.5px;flex-shrink:0}
+.nf-hdr-center{flex:1;border-left:1px solid rgba(255,255,255,.2);padding-left:10px}
+.nf-hdr-center .et{font-size:9px;font-weight:800;color:#fff;letter-spacing:.3px}
+.nf-hdr-center .cn{font-size:7.5px;color:rgba(255,255,255,.65);margin-top:2px}
+.nf-hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nf-timer{background:#fff;border-radius:4px;padding:4px 12px;text-align:center}
+.nf-timer .tl{font-size:7px;color:#666;text-transform:uppercase;letter-spacing:.3px}
+.nf-timer .tv{font-size:16px;font-weight:900;color:#3c5800;letter-spacing:2px;line-height:1}
+.nf-photo{width:36px;height:40px;background:#d0c8b0;border:1px solid #aaa;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.nf-photo svg{width:16px;height:16px;color:#888}
+.nf-photo span{font-size:5.5px;color:#888}
+.nf-end{background:#c0392b;color:#fff;font-size:8px;font-weight:800;padding:4px 12px;border-radius:3px;border:none;cursor:pointer;letter-spacing:.3px}
+
+.nf-tabs{background:#4d7000;display:flex;border-bottom:2px solid #2a3e00}
+.nf-tab{padding:5px 16px;font-size:8px;font-weight:700;color:rgba(255,255,255,.65);cursor:pointer;border-right:1px solid rgba(255,255,255,.1);letter-spacing:.2px}
+.nf-tab.active{background:#fff;color:#3c5800;font-weight:800}
+.nf-tab.done{color:rgba(255,255,255,.9)}
+.nf-tab.done::after{content:' ✓';color:#5cb85c;font-size:9px}
+
+.nf-split{flex:1;display:grid;grid-template-columns:1fr 110px;overflow:hidden}
+
+.nf-qleft{padding:10px 14px;background:#fff;border-right:2px solid #c8c8b8;display:flex;flex-direction:column;overflow-y:auto}
+.nf-qhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid #ddd}
+.nf-qhead .qno{font-size:9px;font-weight:800;color:#333}
+.nf-qhead .qtype{background:#eaf2fb;color:#2471a3;font-size:7.5px;font-weight:600;padding:2px 9px;border-radius:3px;letter-spacing:.2px}
+.nf-qhead .qmarks{font-size:7.5px;color:#5a5a5a;background:#f8f8f0;padding:2px 9px;border-radius:3px}
+.nf-qtxt{font-size:9.5px;color:#222;line-height:1.7;margin-bottom:11px}
+.nf-opts{display:flex;flex-direction:column;gap:6px}
+.nf-opt{display:flex;align-items:center;gap:10px;font-size:9px;background:#fafaf5;border:1px solid #c8c8b8;border-radius:4px;padding:6px 10px;cursor:pointer;color:#333}
+.nf-opt.sel{background:#e8f5e9;border-color:#5cb85c;color:#1b5e20}
+.nf-opt .nr{width:13px;height:13px;border-radius:50%;border:2px solid #888;flex-shrink:0}
+.nf-opt.sel .nr{background:#5cb85c;border-color:#5cb85c}
+.nf-opt .nl{font-weight:800;color:#666;width:14px;font-size:9px}
+
+.nf-right{padding:8px 7px;background:#e5e5d8;display:flex;flex-direction:column;overflow-y:auto}
+.nf-pal-sec{font-size:7px;font-weight:800;color:#333;text-align:center;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;padding-bottom:4px;border-bottom:1px solid #ccc}
+.nf-pal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:8px}
+.np{width:20px;height:20px;border-radius:3px;font-size:7.5px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.np.nv{background:#6b7280;color:#fff}
+.np.na{background:#dc2626;color:#fff}
+.np.an{background:#16a34a;color:#fff}
+.np.mr{background:#7c3aed;color:#fff}
+.np.am{background:#7c3aed;color:#fff;box-shadow:0 0 0 2px #16a34a}
+.np.cu{background:#1d4ed8;color:#fff;box-shadow:0 0 0 2px #93c5fd}
+
+.nf-legend{margin-top:auto;display:flex;flex-direction:column;gap:3px;padding-top:6px;border-top:1px solid #ccc}
+.nl-row{display:flex;align-items:center;gap:4px;font-size:6.5px;color:#444;line-height:1.3}
+.nl-sq{width:11px;height:11px;border-radius:2px;flex-shrink:0}
+
+.nf-btm{background:#c8c8b8;padding:6px 14px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #aaa}
+.nf-btm-left{display:flex;gap:5px}
+.nfb{font-size:8px;font-weight:700;padding:5px 12px;border-radius:3px;border:none;cursor:pointer;letter-spacing:.2px}
+.nfb.g{background:#3c5800;color:#fff}
+.nfb.p{background:#7c3aed;color:#fff}
+.nfb.w{background:#fff;color:#333;border:1px solid #bbb}
+.nfb.r{background:#dc2626;color:#fff}
+
+/* Annotations */
+.p3-annots{padding:4mm 13mm 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex-shrink:0}
+.ann{background:var(--N);border-radius:8px;padding:7px 9px;display:flex;align-items:flex-start;gap:7px}
+.ann-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.ann h5{font-size:9px;font-weight:800;color:#fff;margin-bottom:2px}
+.ann p{font-size:7.5px;color:rgba(255,255,255,.55);line-height:1.45}
+
+/* ══════════════════════════════
+   PAGE 4 — RESULTS + CTA
+══════════════════════════════ */
+.p4-body{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+
+.p4-left{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--BR)}
+.p4-left-top{padding:8mm 11mm 5mm;flex-shrink:0}
+.p4-left-top .tag{font-size:8px;font-weight:700;color:var(--G3);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.p4-left-top .tag::before{content:'';width:20px;height:2px;background:var(--G3)}
+.p4-left-top h2{font-size:22px;font-weight:900;color:var(--N);line-height:1.1;letter-spacing:-.5px;margin-bottom:5px}
+.p4-left-top p{font-size:9px;color:var(--MU);line-height:1.6}
+
+/* Result UI */
+.result-ui{margin:0 11mm;border-radius:10px;overflow:hidden;border:1px solid var(--BR);box-shadow:0 4px 20px rgba(11,29,53,.1);flex-shrink:0}
+.res-hdr{background:linear-gradient(135deg,#0b1d35,#1e4080);padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.res-hdr-left h4{font-size:9px;font-weight:800;color:#fff}
+.res-hdr-left small{font-size:7px;color:rgba(255,255,255,.5);margin-top:2px;display:block}
+.score-ring{width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--G) 0deg 252deg,rgba(255,255,255,.1) 252deg 360deg);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+.score-ring::before{content:'';position:absolute;inset:7px;background:#1e4080;border-radius:50%}
+.score-ring .sv{position:relative;z-index:1;text-align:center;color:#fff;font-size:15px;font-weight:900;line-height:1}
+.score-ring .sv small{font-size:7.5px;font-weight:400;display:block}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--BR)}
+.rs{padding:6px 8px;text-align:center;border-right:1px solid var(--BR)}
+.rs:last-child{border-right:none}
+.rs-n{font-size:17px;font-weight:900;color:var(--N);line-height:1}
+.rs-n.g{color:var(--GR)}.rs-n.r{color:var(--RD)}.rs-n.o{color:var(--G3)}
+.rs-l{font-size:6.5px;color:#94a3b8;margin-top:2px}
+.res-bars{padding:8px 12px}
+.res-bar-title{font-size:8px;font-weight:800;color:var(--N);margin-bottom:7px}
+.rb{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.rb-name{font-size:8px;color:#475569;width:65px;flex-shrink:0}
+.rb-track{flex:1;height:9px;background:#f1f5f9;border-radius:5px;overflow:hidden}
+.rb-fill{height:100%;border-radius:5px}
+.rb-score{font-size:8px;font-weight:700;color:var(--N);width:32px;text-align:right;flex-shrink:0}
+.res-rank{margin:6px 12px 10px;background:linear-gradient(90deg,rgba(245,158,11,.1),rgba(245,158,11,.04));border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
+.res-rank .rrl{font-size:9px;font-weight:800;color:var(--N)}
+.res-rank .rrs{font-size:7.5px;color:var(--MU);margin-top:2px}
+.res-rank .rrn{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--G);line-height:1}
+.res-rank .rrl2{font-size:7px;color:var(--MU);text-align:right}
+
+.p4-left-bottom{margin-top:auto}
+
+/* CTA Right panel */
+.p4-right{display:flex;flex-direction:column;overflow:hidden}
+.p4-right-top{background:var(--N);flex:1;padding:8mm 11mm;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.p4-right-top::before{content:'';position:absolute;right:-20mm;top:-20mm;width:80mm;height:80mm;background:var(--G);opacity:.06;border-radius:50%}
+.p4-right-top::after{content:'';position:absolute;left:-15mm;bottom:-15mm;width:60mm;height:60mm;background:var(--B);opacity:.15;border-radius:50%;transform:rotate(20deg)}
+
+.p4-cta-tag{font-size:8px;font-weight:700;color:var(--G);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;position:relative;z-index:1;display:flex;align-items:center;gap:6px}
+.p4-cta-tag::before{content:'';width:20px;height:2px;background:var(--G)}
+.p4-cta-h2{font-size:30px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.8px;margin-bottom:6mm;position:relative;z-index:1}
+.p4-cta-h2 span{color:var(--G)}
+.p4-checks{display:flex;flex-direction:column;gap:7px;margin-bottom:8mm;position:relative;z-index:1}
+.p4-chk{display:flex;align-items:flex-start;gap:9px;font-size:9px;color:rgba(255,255,255,.75);line-height:1.5}
+.p4-chk-ico{width:18px;height:18px;background:rgba(16,185,129,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0px}
+.p4-chk-ico svg{width:10px;height:10px;color:var(--GR)}
+.p4-cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--G);color:var(--N);font-size:11px;font-weight:900;padding:10px 22px;border-radius:8px;letter-spacing:.3px;position:relative;z-index:1;width:fit-content}
+.p4-cta-btn svg{width:14px;height:14px}
+
+.p4-right-bottom{background:var(--G);padding:8mm 11mm;flex-shrink:0}
+.p4-right-bottom h4{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:var(--N);margin-bottom:5mm}
+.p4-contacts{display:flex;flex-direction:column;gap:8px}
+.p4-ci{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:600;color:var(--N)}
+.p4-ci-ico{width:28px;height:28px;background:rgba(11,29,53,.12);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.p4-ci-ico svg{width:14px;height:14px;color:var(--N)}
+/* ══════════════════════════════
+   PAGE 5 — HOW IT WORKS
+══════════════════════════════ */
+.p5-body { flex: 1; display: flex; flex-direction: column; background: var(--W); padding: 12mm 14mm; }
+.p5-title { text-align: center; margin-bottom: 12mm; }
+.p5-title .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 8px; font-weight: 700; color: var(--G); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.p5-title .tag::before, .p5-title .tag::after { content: ''; width: 20px; height: 2px; background: var(--G); }
+.p5-title h2 { font-size: 28px; font-weight: 900; color: var(--N); line-height: 1.1; letter-spacing: -0.5px; }
+.p5-title h2 span { color: var(--G); }
+
+.p5-steps { display: flex; flex-direction: column; gap: 8mm; position: relative; }
+.p5-steps::before { content: ''; position: absolute; left: 24px; top: 10px; bottom: 10px; width: 2px; background: var(--BR); z-index: 0; }
+.p5-step { display: flex; gap: 8mm; position: relative; z-index: 1; }
+.p5-step-num { width: 50px; height: 50px; background: var(--W); border: 2px solid var(--G); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; color: var(--N); flex-shrink: 0; box-shadow: 0 4px 10px rgba(245,158,11,0.15); }
+.p5-step-content { flex: 1; background: var(--BG); border-radius: 12px; padding: 6mm 8mm; display: flex; align-items: center; gap: 8mm; border: 1px solid var(--BR); }
+.p5-step-text { flex: 1; }
+.p5-step-text h3 { font-size: 16px; font-weight: 900; color: var(--N); margin-bottom: 3px; }
+.p5-step-text p { font-size: 9.5px; color: var(--MU); line-height: 1.6; }
+.p5-step-ui { flex-shrink: 0; width: 60mm; height: 35mm; background: var(--W); border-radius: 8px; border: 1px solid var(--BR); box-shadow: 0 4px 15px rgba(11,29,53,0.05); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+/* Mock UI parts for steps */
+.s-ui-pdf { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: rgba(220,38,38,0.05); border: 1px dashed rgba(220,38,38,0.3); border-radius: 6px; }
+.s-ui-pdf-ico { width: 30px; height: 30px; background: var(--RD); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--W); }
+.s-ui-pdf-ico svg { width: 16px; height: 16px; }
+.s-ui-pdf-txt { font-size: 8px; font-weight: 700; color: var(--RD); }
+.s-ui-pdf-txt span { display: block; font-size: 6px; color: rgba(220,38,38,0.6); font-weight: 500; }
+
+.s-ui-link { display: flex; align-items: center; gap: 8px; background: #f8fafc; padding: 6px 10px; border-radius: 6px; border: 1px solid #e2e8f0; width: 80%; }
+.s-ui-link-ico { color: var(--SK); }
+.s-ui-link-ico svg { width: 14px; height: 14px; }
+.s-ui-link-txt { font-size: 7px; color: var(--MU); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-ui-link-btn { background: var(--N); color: var(--W); font-size: 6px; font-weight: 700; padding: 3px 6px; border-radius: 4px; }
+
+.s-ui-graph { display: flex; align-items: flex-end; gap: 4px; height: 25px; }
+.s-ui-bar { width: 12px; background: var(--B); border-radius: 2px 2px 0 0; }
+.s-ui-bar.g { background: var(--GR); }
+.s-ui-bar.y { background: var(--G); }
+
+/* ══════════════════════════════
+   PAGE 6 — PRICING & TRUST
+══════════════════════════════ */
+.p6-body { flex: 1; display: flex; flex-direction: column; background: var(--BG); position: relative; overflow: hidden; }
+.p6-top { background: var(--N); padding: 12mm 14mm 20mm; text-align: center; position: relative; }
+.p6-top::before { content: ''; position: absolute; left: -10mm; top: -10mm; width: 60mm; height: 60mm; background: var(--B); opacity: 0.15; border-radius: 50%; filter: blur(20px); }
+.p6-top::after { content: ''; position: absolute; right: -10mm; bottom: -10mm; width: 60mm; height: 60mm; background: var(--G); opacity: 0.1; border-radius: 50%; filter: blur(20px); }
+.p6-top .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 8px; font-weight: 700; color: var(--G); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.p6-top h2 { font-size: 28px; font-weight: 900; color: var(--W); line-height: 1.1; letter-spacing: -0.5px; }
+.p6-top h2 span { color: var(--G); }
+
+.p6-pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; margin: -14mm 14mm 8mm; position: relative; z-index: 10; }
+.price-card { background: var(--W); border-radius: 12px; padding: 8mm 6mm; border: 1px solid var(--BR); box-shadow: 0 4px 15px rgba(11,29,53,0.05); display: flex; flex-direction: column; }
+.price-card.pro { border: 2px solid var(--G); box-shadow: 0 8px 25px rgba(245,158,11,0.15); transform: translateY(-4mm); position: relative; }
+.price-card.pro::before { content: 'MOST POPULAR'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--G); color: var(--N); font-size: 7px; font-weight: 900; padding: 4px 12px; border-radius: 50px; letter-spacing: 1px; }
+
+.pc-name { font-size: 14px; font-weight: 900; color: var(--N); margin-bottom: 2px; }
+.pc-desc { font-size: 8px; color: var(--MU); margin-bottom: 5mm; height: 24px; }
+.pc-price { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: var(--N); margin-bottom: 1mm; line-height: 1; }
+.pc-price span { font-size: 10px; color: var(--MU); font-weight: 600; font-family: 'Inter', sans-serif; }
+.pc-btn { display: block; text-align: center; padding: 8px 0; border-radius: 6px; font-size: 9px; font-weight: 800; margin: 4mm 0 6mm; text-decoration: none; }
+.pc-btn.outline { background: var(--W); color: var(--N); border: 1px solid var(--BR); }
+.pc-btn.solid { background: var(--G); color: var(--N); }
+.pc-feats { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.pc-feat { display: flex; align-items: flex-start; gap: 6px; font-size: 8px; color: var(--N2); line-height: 1.4; }
+.pc-feat svg { width: 12px; height: 12px; color: var(--GR); flex-shrink: 0; }
+.pc-feat.x { color: var(--MU); opacity: 0.6; }
+.pc-feat.x svg { color: var(--MU); }
+
+.p6-trust { padding: 4mm 14mm; text-align: center; }
+.p6-trust-lbl { font-size: 8px; font-weight: 700; color: var(--MU); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5mm; }
+.p6-logos { display: flex; justify-content: center; gap: 8mm; align-items: center; opacity: 0.6; filter: grayscale(100%); }
+.p6-logo { height: 20px; display: flex; align-items: center; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 900; color: var(--N); letter-spacing: -0.5px; }
+.p6-logo svg { height: 100%; margin-right: 6px; }
+
+.p6-footer { margin-top: auto; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     PAGE 1 — COVER
+════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="topbar">
+    <div class="logo-row">
+      <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1d35" stroke-width="2.2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg></div>
+      <div><div class="logo-name">Examsphere</div><div class="logo-by">by Mitra Softwares</div></div>
+    </div>
+    <span class="pnum">Product Brochure · 2025</span>
+  </div>
+
+  <div class="p1-body">
+    <!-- Left copy panel -->
+    <div class="p1-left">
+      <div class="p1-supertag">CBT Platform for Coaching Institutes</div>
+
+      <h1 class="p1-h1">Smarter<br>Tests.<br><span>Better<br>Results.</span></h1>
+
+      <p class="p1-tagline">The complete computer-based testing platform built for NEET, JEE &amp; KCET coaching institutes across India.</p>
+
+      <div class="p1-divider"></div>
+
+      <div class="p1-exams">
+        <div class="exam-row">
+          <div class="exam-row-ico" style="background:rgba(245,158,11,.15)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div><h5>NEET UG</h5><p>Physics · Chemistry · Biology</p></div>
+        </div>
+        <div class="exam-row">
+          <div class="exam-row-ico" style="background:rgba(14,165,233,.15)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <div><h5>JEE Main</h5><p>Physics · Chemistry · Mathematics</p></div>
+        </div>
+        <div class="exam-row">
+          <div class="exam-row-ico" style="background:rgba(16,185,129,.15)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div><h5>KCET</h5><p>Physics · Chemistry · Maths · Biology</p></div>
+        </div>
+      </div>
+
+      <div class="p1-divider"></div>
+
+      <div class="p1-badges">
+        <div class="p1-badge-item hi">NTA-Identical UI</div>
+        <div class="p1-badge-item">AI Import</div>
+        <div class="p1-badge-item">Instant Results</div>
+        <div class="p1-badge-item">Any Device</div>
+      </div>
+    </div>
+
+    <!-- Right: NTA CBT Interface -->
+    <div class="p1-right">
+      <div class="p1-right-label">
+        <span>LIVE — NTA CBT Exam Interface</span>
+      </div>
+      <div class="nta" style="flex:1">
+        <div class="nta-hdr">
+          <div class="nta-hdr-logo">NTA</div>
+          <div class="nta-hdr-info">
+            <div class="exam-title">NEET (UG) — 2025 | Mock Test Series</div>
+            <div class="candidate">Candidate: Arjun Reddy &nbsp;|&nbsp; Roll No.: 25041209087 &nbsp;|&nbsp; Center: BGS Institute, Bengaluru</div>
+          </div>
+          <div class="nta-hdr-right">
+            <div class="nta-timer-box">
+              <div class="tlbl">Time Left</div>
+              <div class="tval">02:31:47</div>
+            </div>
+            <div class="nta-photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="nta-tabs">
+          <div class="nta-tab active">Physics (Q.1 to Q.45)</div>
+          <div class="nta-tab">Chemistry (Q.46 to Q.90)</div>
+          <div class="nta-tab">Biology (Q.91 to Q.180)</div>
+        </div>
+
+        <div class="nta-main">
+          <div class="nta-qzone">
+            <div class="nta-qzone-head">
+              <span class="qnum">Question No. 14</span>
+              <span class="qmarks">+4 / −1 &nbsp;|&nbsp; Single Correct</span>
+            </div>
+            <div class="nta-qtxt">A particle moves in a circular path of radius <i>r</i> with uniform speed <i>v</i>. The magnitude of change in velocity when the particle completes half the circle is:</div>
+            <div class="nta-opts">
+              <div class="nta-opt"><div class="oradio"></div><span class="olabel">(A)</span> 0</div>
+              <div class="nta-opt sel"><div class="oradio"></div><span class="olabel">(B)</span> 2v</div>
+              <div class="nta-opt"><div class="oradio"></div><span class="olabel">(C)</span> v√2</div>
+              <div class="nta-opt"><div class="oradio"></div><span class="olabel">(D)</span> 2v√2</div>
+            </div>
+          </div>
+
+          <div class="nta-palette">
+            <div class="pal-sec-title">Question Palette</div>
+            <div class="pal-grid">
+              <div class="pq an">1</div><div class="pq an">2</div><div class="pq an">3</div><div class="pq an">4</div>
+              <div class="pq an">5</div><div class="pq mr">6</div><div class="pq an">7</div><div class="pq an">8</div>
+              <div class="pq an">9</div><div class="pq na">10</div><div class="pq na">11</div><div class="pq na">12</div>
+              <div class="pq an">13</div><div class="pq cu">14</div><div class="pq nv">15</div><div class="pq nv">16</div>
+              <div class="pq nv">17</div><div class="pq nv">18</div><div class="pq nv">19</div><div class="pq nv">20</div>
+            </div>
+            <div class="pal-legend">
+              <div class="pl"><div class="pl-sq" style="background:#16a34a"></div>Answered (12)</div>
+              <div class="pl"><div class="pl-sq" style="background:#dc2626"></div>Not Answered (2)</div>
+              <div class="pl"><div class="pl-sq" style="background:#7c3aed"></div>Marked for Review (1)</div>
+              <div class="pl"><div class="pl-sq" style="background:#6b7280"></div>Not Visited (6)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nta-btm">
+          <div class="nta-btm-left">
+            <div class="nb wh">← Prev</div>
+            <div class="nb pu">Mark for Review &amp; Next</div>
+            <div class="nb wh">Clear Response</div>
+          </div>
+          <div style="display:flex;gap:5px">
+            <div class="nb gr">Save &amp; Next →</div>
+            <div class="nb rd">Submit Paper</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-strip">
+    <div>
+      <h3>India's Most Realistic CBT Platform</h3>
+      <p>Trusted by coaching institutes across Karnataka, Tamil Nadu &amp; Maharashtra</p>
+    </div>
+    <div class="p1-strip-pill">Book a Free Demo →</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     PAGE 2 — FEATURES + DASHBOARD
+════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="topbar">
+    <div class="logo-row">
+      <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1d35" stroke-width="2.2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg></div>
+      <div><div class="logo-name">Examsphere</div><div class="logo-by">by Mitra Softwares</div></div>
+    </div>
+    <span class="pnum">02 / Platform Features</span>
+  </div>
+
+  <div class="p2-body">
+    <div class="p2-hero">
+      <div class="p2-hero-left">
+        <div class="p2-hl-tag">Everything You Need</div>
+        <h2 class="p2-hl-h2">One Platform.<br><span>Total Control.</span></h2>
+      </div>
+      <div class="p2-hero-right">
+        <div class="p2-stat"><div class="p2-stat-n">∞</div><div class="p2-stat-l">Questions in your bank</div></div>
+        <div class="p2-stat"><div class="p2-stat-n">0s</div><div class="p2-stat-l">Wait time for results</div></div>
+        <div class="p2-stat"><div class="p2-stat-n">3+</div><div class="p2-stat-l">Exams supported</div></div>
+        <div class="p2-stat"><div class="p2-stat-n">AI</div><div class="p2-stat-l">PDF question import</div></div>
+      </div>
+    </div>
+
+    <div class="p2-feats">
+      <div class="p2-feat">
+        <div class="p2-feat-n">01</div>
+        <div class="p2-feat-ico g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></div>
+        <h4>Smart Test Creation</h4>
+        <p>Build chapter-wise or full mock tests. Configure question counts, time, and +4/−1 NTA marking in minutes.</p>
+      </div>
+      <div class="p2-feat">
+        <div class="p2-feat-n">02</div>
+        <div class="p2-feat-ico o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h4>AI Question Bank</h4>
+        <p>Upload any printed question bank PDF. Our AI extracts every MCQ automatically — saving hours of manual entry.</p>
+      </div>
+      <div class="p2-feat">
+        <div class="p2-feat-n">03</div>
+        <div class="p2-feat-ico b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Student Management</h4>
+        <p>Register students by batch with roll numbers. DOB-based secure login — no app or account creation needed.</p>
+      </div>
+      <div class="p2-feat">
+        <div class="p2-feat-n">04</div>
+        <div class="p2-feat-ico p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <h4>Real-time Analytics</h4>
+        <p>Instant rank lists, percentile scores, and subject-wise breakdowns the moment a student submits their test.</p>
+      </div>
+      <div class="p2-feat">
+        <div class="p2-feat-n">05</div>
+        <div class="p2-feat-ico r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Secure &amp; Audited</h4>
+        <p>Session-locked attempts, auto-submit on timeout, randomised question order, and full audit trail for every test.</p>
+      </div>
+      <div class="p2-feat">
+        <div class="p2-feat-n">06</div>
+        <div class="p2-feat-ico n"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div>
+        <h4>Instant PDF Reports</h4>
+        <p>Downloadable answer sheets with every question, student response, and correct answer. Share with parents instantly.</p>
+      </div>
+    </div>
+
+    <div class="p2-dash">
+      <div class="p2-dash-label">
+        <h4>Institute Dashboard</h4>
+        <p>Manage tests, students and batches from one place</p>
+      </div>
+      <div class="p2-dash-ui">
+        <div class="p2-dash-topbar">
+          <div class="dt"><span class="rd"></span><span class="ye"></span><span class="gr"></span></div>
+          <div class="durl">examsphere.in/institution/dashboard</div>
+        </div>
+        <div class="dash-grid">
+          <div class="dash-sb">
+            <div style="width:32px;height:32px;background:rgba(245,158,11,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:4px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" width="14" height="14"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg>
+            </div>
+            <div class="dsb-i ac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></div>
+            <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></div>
+            <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          </div>
+          <div class="dash-content">
+            <div class="dc-stat"><div class="dn">6</div><div class="dl">Active Batches</div></div>
+            <div class="dc-stat"><div class="dn" style="color:#3b82f6">384</div><div class="dl">Students</div></div>
+            <div class="dc-stat"><div class="dn" style="color:#10b981">12</div><div class="dl">Tests / Month</div></div>
+            <div class="dc-stat"><div class="dn" style="color:#f59e0b">4,850</div><div class="dl">Questions</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btmbar">
+    <span>Examsphere by Mitra Softwares · Confidential</span>
+    <span class="burl">examsphere.in</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     PAGE 3 — FULL NTA EXAM INTERFACE
+════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="topbar">
+    <div class="logo-row">
+      <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1d35" stroke-width="2.2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg></div>
+      <div><div class="logo-name">Examsphere</div><div class="logo-by">by Mitra Softwares</div></div>
+    </div>
+    <span class="pnum">03 / The Exam Experience</span>
+  </div>
+
+  <div class="p3-body">
+    <div class="p3-intro">
+      <div>
+        <div class="p3-intro-tag">Student Interface</div>
+        <h2 class="p3-intro h2" style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:900;color:#0b1d35;line-height:1.15;letter-spacing:-.5px">Identical to the<br>Real NTA Exam.<br><span style="color:#f59e0b">On Day One.</span></h2>
+      </div>
+      <p style="font-size:9.5px;color:#64748b;line-height:1.7;max-width:260px">Students practice on the exact same interface they'll face in the real NEET, JEE &amp; KCET exam. Same layout, same colours, same workflow — zero learning curve on exam day.</p>
+      <div class="p3-intro-right">
+        <div class="p3-pill g">NEET</div>
+        <div class="p3-pill">JEE</div>
+        <div class="p3-pill">KCET</div>
+      </div>
+    </div>
+
+    <!-- Full-size NTA interface -->
+    <div class="nta-full-frame">
+      <div class="nf-hdr">
+        <div class="nf-hdr-logo">NTA</div>
+        <div class="nf-hdr-center">
+          <div class="et">NEET (UG) — 2025 Grand Mock Test 5 &nbsp;|&nbsp; Test Center: BGS Institute, Bengaluru</div>
+          <div class="cn">Candidate Name: Priya Sharma &nbsp;|&nbsp; Roll No.: 25041209047 &nbsp;|&nbsp; Subject: Physics, Chemistry, Biology</div>
+        </div>
+        <div class="nf-hdr-right">
+          <div class="nf-timer">
+            <div class="tl">Time Left</div>
+            <div class="tv">01:28:55</div>
+          </div>
+          <div class="nf-photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Photo</span>
+          </div>
+          <button class="nf-end">End Test</button>
+        </div>
+      </div>
+
+      <div class="nf-tabs">
+        <div class="nf-tab active">Physics (Q.1–45)</div>
+        <div class="nf-tab done">Chemistry (Q.46–90)</div>
+        <div class="nf-tab">Biology (Q.91–180)</div>
+      </div>
+
+      <div class="nf-split">
+        <div class="nf-qleft">
+          <div class="nf-qhead">
+            <span class="qno">Question No. 23</span>
+            <span class="qtype">Single Correct Type</span>
+            <span class="qmarks">Marks: +4 | −1</span>
+          </div>
+          <div class="nf-qtxt">
+            An object of mass 2 kg is moving with a velocity of 10 m/s. A net force of 5 N acts on the object for 4 seconds in the direction of motion. What is the final kinetic energy of the object?
+          </div>
+          <div class="nf-opts">
+            <div class="nf-opt"><div class="nr"></div><span class="nl">(A)</span>100 J</div>
+            <div class="nf-opt"><div class="nr"></div><span class="nl">(B)</span>200 J</div>
+            <div class="nf-opt sel"><div class="nr"></div><span class="nl">(C)</span>900 J</div>
+            <div class="nf-opt"><div class="nr"></div><span class="nl">(D)</span>450 J</div>
+          </div>
+        </div>
+
+        <div class="nf-right">
+          <div class="nf-pal-sec">Physics — 45 Questions</div>
+          <div class="nf-pal-grid">
+            <div class="np an">1</div><div class="np an">2</div><div class="np an">3</div><div class="np an">4</div>
+            <div class="np an">5</div><div class="np mr">6</div><div class="np an">7</div><div class="np an">8</div>
+            <div class="np an">9</div><div class="np an">10</div><div class="np na">11</div><div class="np na">12</div>
+            <div class="np an">13</div><div class="np an">14</div><div class="np an">15</div><div class="np an">16</div>
+            <div class="np an">17</div><div class="np an">18</div><div class="np an">19</div><div class="np an">20</div>
+            <div class="np an">21</div><div class="np an">22</div><div class="np cu">23</div><div class="np nv">24</div>
+            <div class="np nv">25</div><div class="np nv">26</div><div class="np nv">27</div><div class="np nv">28</div>
+          </div>
+          <div class="nf-legend">
+            <div class="nl-row"><div class="nl-sq" style="background:#16a34a"></div>Answered: 20</div>
+            <div class="nl-row"><div class="nl-sq" style="background:#dc2626"></div>Not Answered: 2</div>
+            <div class="nl-row"><div class="nl-sq" style="background:#7c3aed"></div>Marked: 1</div>
+            <div class="nl-row"><div class="nl-sq" style="background:#6b7280"></div>Not Visited: 6</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nf-btm">
+        <div class="nf-btm-left">
+          <div class="nfb w">← Previous</div>
+          <div class="nfb p">Mark for Review &amp; Next</div>
+          <div class="nfb w">Clear Response</div>
+          <div class="nfb g">Save &amp; Next →</div>
+        </div>
+        <div class="nfb r">Submit Paper</div>
+      </div>
+    </div>
+
+    <div class="p3-annots">
+      <div class="ann">
+        <div class="ann-dot" style="background:#16a34a;margin-top:3px"></div>
+        <div><h5>Live Timer</h5><p>Auto-submits when time expires. Matches NTA exam behaviour exactly.</p></div>
+      </div>
+      <div class="ann">
+        <div class="ann-dot" style="background:#7c3aed;margin-top:3px"></div>
+        <div><h5>Mark for Review</h5><p>NTA-style mark &amp; review with full colour-coded question palette.</p></div>
+      </div>
+      <div class="ann">
+        <div class="ann-dot" style="background:#f59e0b;margin-top:3px"></div>
+        <div><h5>Section Navigation</h5><p>Switch between Physics, Chemistry &amp; Biology tabs just like in real NEET.</p></div>
+      </div>
+      <div class="ann">
+        <div class="ann-dot" style="background:#0ea5e9;margin-top:3px"></div>
+        <div><h5>Any Device</h5><p>Works on phone, tablet or laptop — no app install or account needed.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btmbar">
+    <span>Examsphere by Mitra Softwares · Confidential</span>
+    <span class="burl">examsphere.in</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     PAGE 4 — RESULTS + CTA
+════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="topbar">
+    <div class="logo-row">
+      <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1d35" stroke-width="2.2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg></div>
+      <div><div class="logo-name">Examsphere</div><div class="logo-by">by Mitra Softwares</div></div>
+    </div>
+    <span class="pnum">04 / Results &amp; Get Started</span>
+  </div>
+
+  <div class="p4-body">
+    <div class="p4-left">
+      <div class="p4-left-top">
+        <div class="tag">Instant Results</div>
+        <h2>Results the Moment<br>the Test Ends.</h2>
+        <p>No manual checking. Students see their score, subject breakdown, rank, and downloadable answer sheet the instant they submit — or when time runs out.</p>
+      </div>
+
+      <div class="result-ui">
+        <div class="res-hdr">
+          <div class="res-hdr-left">
+            <h4>NEET Grand Mock 5 — Score Card</h4>
+            <small>Priya Sharma &nbsp;·&nbsp; Roll: 25041209047 &nbsp;·&nbsp; NEET 2026 Batch</small>
+          </div>
+          <div class="score-ring">
+            <div class="sv">560<small>/720</small></div>
+          </div>
+        </div>
+        <div class="res-stats">
+          <div class="rs"><div class="rs-n g">47</div><div class="rs-l">Correct</div></div>
+          <div class="rs"><div class="rs-n r">8</div><div class="rs-l">Wrong</div></div>
+          <div class="rs"><div class="rs-n o">5</div><div class="rs-l">Skipped</div></div>
+          <div class="rs"><div class="rs-n">88.2</div><div class="rs-l">Percentile</div></div>
+        </div>
+        <div class="res-bars">
+          <div class="res-bar-title">Subject-wise Breakdown</div>
+          <div class="rb"><span class="rb-name">Physics</span><div class="rb-track"><div class="rb-fill" style="width:74%;background:#3b82f6"></div></div><span class="rb-score">148/200</span></div>
+          <div class="rb"><span class="rb-name">Chemistry</span><div class="rb-track"><div class="rb-fill" style="width:81%;background:#10b981"></div></div><span class="rb-score">162/200</span></div>
+          <div class="rb"><span class="rb-name">Biology</span><div class="rb-track"><div class="rb-fill" style="width:63%;background:#f59e0b"></div></div><span class="rb-score">250/320</span></div>
+        </div>
+        <div class="res-rank">
+          <div><div class="rrl">Class Rank</div><div class="rrs">Out of 284 students · NEET 2026 Batch</div></div>
+          <div><div class="rrn">#12</div><div class="rrl2">Top 5%</div></div>
+        </div>
+      </div>
+
+      <div style="padding:6mm 11mm 0;display:grid;grid-template-columns:1fr 1fr;gap:7px">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 10px">
+          <div style="font-size:9.5px;font-weight:800;color:#15803d;margin-bottom:2px">✓ &nbsp;Zero Paperwork</div>
+          <div style="font-size:8px;color:#64748b;line-height:1.5">No manual checking, no data entry. Everything is automatic from test creation to rank list.</div>
+        </div>
+        <div style="background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:8px 10px">
+          <div style="font-size:9.5px;font-weight:800;color:#a16207;margin-bottom:2px">✓ &nbsp;Works on Any Device</div>
+          <div style="font-size:8px;color:#64748b;line-height:1.5">Students attend tests from any smartphone, tablet or laptop — no app installation ever needed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p4-right">
+      <div class="p4-right-top">
+        <div>
+          <div class="p4-cta-tag">Start Today</div>
+          <h2 class="p4-cta-h2">Give Your Students<br>the <span>Edge</span> They<br>Deserve.</h2>
+          <div class="p4-checks">
+            <div class="p4-chk">
+              <div class="p4-chk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              NTA-identical interface — students practice exactly what they'll face on exam day
+            </div>
+            <div class="p4-chk">
+              <div class="p4-chk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              AI imports your question bank PDF in under 60 seconds — no manual typing
+            </div>
+            <div class="p4-chk">
+              <div class="p4-chk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              Share tests via WhatsApp link — students need no account or app
+            </div>
+            <div class="p4-chk">
+              <div class="p4-chk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              Instant results, rank lists, and PDF answer sheets the moment test ends
+            </div>
+            <div class="p4-chk">
+              <div class="p4-chk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              Full support — your first test goes live within 24 hours, guaranteed
+            </div>
+          </div>
+        </div>
+        <div class="p4-cta-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21 11-8-8-8 8"/><path d="M3 12v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M12 3v13"/></svg>
+          Get Started Free Today
+        </div>
+      </div>
+
+      <div class="p4-right-bottom">
+        <h4>Talk to Us</h4>
+        <div class="p4-contacts">
+          <div class="p4-ci">
+            <div class="p4-ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.64 3.32 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.55 5.55l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg></div>
+            +91 98765 43210
+          </div>
+          <div class="p4-ci">
+            <div class="p4-ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+            hello@examsphere.in
+          </div>
+          <div class="p4-ci">
+            <div class="p4-ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg></div>
+            www.examsphere.in
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     PAGE 5 — HOW IT WORKS
+════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="topbar">
+    <div class="logo-row">
+      <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1d35" stroke-width="2.2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg></div>
+      <div><div class="logo-name">Examsphere</div><div class="logo-by">by Mitra Softwares</div></div>
+    </div>
+    <span class="pnum">05 / How It Works</span>
+  </div>
+
+  <div class="p5-body">
+    <div class="p5-title">
+      <div class="tag">Simplicity First</div>
+      <h2>3 Simple Steps to<br><span>Conduct Exams</span></h2>
+    </div>
+
+    <div class="p5-steps">
+      <div class="p5-step">
+        <div class="p5-step-num">1</div>
+        <div class="p5-step-content">
+          <div class="p5-step-text">
+            <h3>Upload PDF Question Bank</h3>
+            <p>Just upload your existing Word or PDF mock tests. Our AI automatically extracts questions, options, and diagrams. No manual data entry required.</p>
+          </div>
+          <div class="p5-step-ui">
+            <div class="s-ui-pdf">
+              <div class="s-ui-pdf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3-3 3 3"/></svg></div>
+              <div class="s-ui-pdf-txt">NEET_Mock_Test_5.pdf<span>Parsing complete: 180 MCQs</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p5-step">
+        <div class="p5-step-num">2</div>
+        <div class="p5-step-content">
+          <div class="p5-step-text">
+            <h3>Generate &amp; Share Link</h3>
+            <p>Set exam duration, marking scheme (+4/-1), and schedule. Click 'Publish' to get a secure link. Share it with your batches via WhatsApp.</p>
+          </div>
+          <div class="p5-step-ui">
+            <div class="s-ui-link">
+              <div class="s-ui-link-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+              <div class="s-ui-link-txt">examsphere.in/test/neet-gm-5</div>
+              <div class="s-ui-link-btn">Copy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p5-step">
+        <div class="p5-step-num">3</div>
+        <div class="p5-step-content">
+          <div class="p5-step-text">
+            <h3>Live Test &amp; Instant Results</h3>
+            <p>Students attend the test on NTA interface. Institute gets live tracking. The moment time runs out, instant analytics and rank lists are generated.</p>
+          </div>
+          <div class="p5-step-ui">
+            <div style="text-align:center">
+              <div class="s-ui-graph">
+                <div class="s-ui-bar g" style="height:15px"></div><div class="s-ui-bar y" style="height:25px"></div><div class="s-ui-bar" style="height:12px"></div><div class="s-ui-bar g" style="height:20px"></div><div class="s-ui-bar y" style="height:10px"></div>
+              </div>
+              <div style="font-size:6px;font-weight:700;color:var(--N);margin-top:4px">Real-time Analytics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btmbar">
+    <span>Examsphere by Mitra Softwares · Confidential</span>
+    <span class="burl">examsphere.in</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════
+     PAGE 6 — PRICING & TRUST
+════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="topbar">
+    <div class="logo-row">
+      <div class="logo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1d35" stroke-width="2.2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 17-3-5 3-5"/><path d="m19 17 3-5-3-5"/></svg></div>
+      <div><div class="logo-name">Examsphere</div><div class="logo-by">by Mitra Softwares</div></div>
+    </div>
+    <span class="pnum">06 / Pricing &amp; Plans</span>
+  </div>
+
+  <div class="p6-body">
+    <div class="p6-top">
+      <div class="tag">Simple Pricing</div>
+      <h2>Plans that Scale with<br><span>Your Institute</span></h2>
+    </div>
+
+    <div class="p6-pricing">
+      <!-- Starter Plan -->
+      <div class="price-card">
+        <div class="pc-name">Starter</div>
+        <div class="pc-desc">Perfect for small coaching centers with single batch</div>
+        <div class="pc-price">₹2,999<span>/mo</span></div>
+        <a href="#" class="pc-btn outline">Get Started</a>
+        <div class="pc-feats">
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 100 Students</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 5 Tests per month</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> AI Question Extraction</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Basic Analytics</div>
+          <div class="pc-feat x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Custom Institute Branding</div>
+        </div>
+      </div>
+
+      <!-- Pro Plan -->
+      <div class="price-card pro">
+        <div class="pc-name">Pro</div>
+        <div class="pc-desc">Ideal for growing institutes needing advanced features</div>
+        <div class="pc-price">₹5,999<span>/mo</span></div>
+        <a href="#" class="pc-btn solid">Start Free Trial</a>
+        <div class="pc-feats">
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 500 Students</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Tests</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> NTA Exact Interface</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Advanced Rank Lists</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Custom Institute Branding</div>
+        </div>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="price-card">
+        <div class="pc-name">Enterprise</div>
+        <div class="pc-desc">For large networks with multiple branches</div>
+        <div class="pc-price">Custom</div>
+        <a href="#" class="pc-btn outline">Contact Sales</a>
+        <div class="pc-feats">
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Students</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Multi-branch Management</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Account Manager</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> API Access</div>
+          <div class="pc-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Priority 24/7 Support</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p6-trust">
+      <div class="p6-trust-lbl">Trusted by Top Institutes Across India</div>
+      <div class="p6-logos">
+        <div class="p6-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Aakash Institute</div>
+        <div class="p6-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Allen Career</div>
+        <div class="p6-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Resonance</div>
+      </div>
+    </div>
+
+    <div class="btmbar p6-footer">
+      <span>Examsphere by Mitra Softwares · Confidential</span>
+      <span class="burl">examsphere.in</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

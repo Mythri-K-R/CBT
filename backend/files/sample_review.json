@@ -1,0 +1,22 @@
+[
+  {
+    "question_number": 10,
+    "raw_text": "10. A physical quantity of the dimensions of length that can\ne2\nbe formed out of c, G and is [c is velocity of light,\n4πε\nG is universal constant of gravitation and e is charge]:\n(2017-Delhi)\n1 1\n e2  2 1  e2  2\na. c2 G  b.  \n 4πε 0  c2 G4πε 0 \n1 e2 1  e2  2\nc. G d. G \nc2 4πε c2  4πε \n0 0",
+    "reason": "Could not parse cleanly via regex or local LLM fallback"
+  },
+  {
+    "question_number": 11,
+    "raw_text": "11. Planck’s constant (h), speed of light in vacuum (c) and\nNewton’s gravitational constant (G) are three fundamental\nconstants. Which of the following combinations of these has\nthe dimension of length? (2016-II)\nhc Gc hG hG\na. b. c. d.\nG h3/2 c3/2 c5/2",
+    "reason": "Could not parse cleanly via regex or local LLM fallback"
+  },
+  {
+    "question_number": 19,
+    "raw_text": "19. In an experiment, the percentage of error occurred in the\nmeasurement of physical quantities A, B, C and D are 1%,\n2%, 3% and 4% respectively. Then the maximum percentage\nA2B 2\nof error in the measurement of X, where X = will be\nC 3D3\n(2019)\n 3 \na  % b. 16% c. – 10% d. 10%\n13",
+    "reason": "Could not parse cleanly via regex or local LLM fallback"
+  },
+  {
+    "question_number": 25,
+    "raw_text": "25. In a vernier calipers, (N + 1) divisions of vernier scale\ncoincide with N divisions of main scale. If 1 MSD represents\n0.1 mm, the vernier constant (in cm) is: (2024)\na. 100 N b. 10(N+ 1)\n1 1\nc. d.\n10N 100(N+1)",
+    "reason": "Could not parse cleanly via regex or local LLM fallback"
+  }
+]

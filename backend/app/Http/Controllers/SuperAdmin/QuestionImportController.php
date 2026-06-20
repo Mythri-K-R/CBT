@@ -13,7 +13,7 @@ class QuestionImportController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'file'       => 'required|file|mimes:xlsx,xls,csv,json|max:20480',
+            'file'       => 'required|file|mimes:xlsx,xls,csv,json,pdf|max:10240',
             'exam_type'  => 'required|in:neet,jee_main,jee_advanced,kcet',
             'subject_id' => 'nullable|exists:subjects,id',
             'chapter_id' => 'nullable|exists:chapters,id',
