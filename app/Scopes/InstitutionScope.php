@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Scopes;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\Auth;
+
+class InstitutionScope implements Scope
+{
+    public function apply(Builder $builder, Model $model): void
+    {
+        if (!Auth::check()) {
+            return;
+        }
+
+        $user = Auth::user();
+
+        // Super admin sees all institutions — no filter applied
+        if ($user->role === 'super_admin') {
+            return;
+        }
+
+        if ($user->institution_id) {
+            $table = $model->getTable();
+            $builder->where(function ($q) use ($table, $user) {
+                $q->where($table . '.institution_id', $user->institution_id)
+                  ->orWhereNull($table . '.institution_id');
+            });
+        }
+    }
+}

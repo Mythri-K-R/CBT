@@ -1,0 +1,222 @@
+# Artillery — Full Exam Flow
+#
+# Models the complete student exam lifecycle with realistic think times:
+#   identify → start → answer (loop) → submit → poll result
+#
+# Artillery's think() calls model realistic pauses between student actions.
+# This differs from the k6 sleep(10) cadence — here we model per-question
+# navigation time (30–120 s per question) rather than the auto-save tick.
+#
+# Suitable for:
+#   - Regression testing under moderate load (< 5k users)
+#   - Functional correctness validation under concurrent sessions
+#   - Queue health monitoring during gradual ramp
+#
+# For 20k-user burst testing, prefer the k6 full-lifecycle script which
+# uses VU-level state and is more memory-efficient at extreme concurrency.
+#
+# Run:
+#   artillery run \
+#     --target http://localhost:8000 \
+#     tests/load/artillery/exam-flow.yml
+#
+# Generate HTML report:
+#   artillery run --output results/exam-flow.json tests/load/artillery/exam-flow.yml
+#   artillery report results/exam-flow.json
+
+config:
+  target: "{{ $processEnvironment.BASE_URL || 'http://localhost:8000' }}"
+  processor: "./functions.js"
+  http:
+    timeout: 60
+    pool: 200
+    maxSockets: 200
+
+  variables:
+    test_slug:  "load-test-exam"
+    test_id:    1
+
+  phases:
+    - name: "Gentle ramp"
+      duration: 120
+      arrivalRate: 2
+      rampTo: 20
+
+    - name: "Exam rush (students joining)"
+      duration: 300
+      arrivalRate: 20
+
+    - name: "Exam in progress (sustained)"
+      duration: 600
+      arrivalRate: 20
+
+    - name: "Submit storm (exam ends)"
+      duration: 180
+      arrivalRate: 40  # submissions cluster at end
+
+    - name: "Drain"
+      duration: 60
+      arrivalRate: 5
+
+  ensure:
+    thresholds:
+      - http.response_time.p95: 500
+      - http.response_time.p99: 1000
+      - http.codes.200: 95
+
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+
+scenarios:
+  - name: "Full student exam session"
+    weight: 90   # 90% of VUs do the full flow
+    flow:
+      - function: "setStudentData"
+
+      # ── Step 1: Identify ────────────────────────────────────────────────────
+      - post:
+          url: "/api/test/join/{{ test_slug }}/identify"
+          name: "identify"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json:
+            roll_number: "{{ roll_number }}"
+          capture:
+            - json: "$.data.student.id"
+              as: "student_id"
+          expect:
+            - statusCode: 200
+            - hasProperty: "data.student.id"
+
+      - think: 5   # student reads instructions
+
+      # ── Step 2: Start exam ──────────────────────────────────────────────────
+      # Response is flat: { success, attempt_uuid, session_token, ... } (no data wrapper)
+      - post:
+          url: "/api/test/join/{{ test_slug }}/start"
+          name: "exam_start"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json:
+            student_id: "{{ student_id }}"
+          capture:
+            - json: "$.attempt_uuid"
+              as: "attempt_uuid"
+            - json: "$.session_token"
+              as: "session_token"
+          expect:
+            - statusCode:
+                - 200
+                - 201
+            - hasProperty: "attempt_uuid"
+            - hasProperty: "session_token"
+
+      - function: "saveAttemptUuid"
+
+      # ── Step 3: Answer loop (10 questions with think time) ──────────────────
+      - loop:
+          - function: "nextQuestion"
+          - post:
+              url: "/api/test/exam/save-response"
+              name: "save_response"
+              headers:
+                Content-Type: "application/json"
+                Accept: "application/json"
+                X-Exam-Session-Token: "{{ session_token }}"
+              json:
+                attempt_uuid:       "{{ attempt_uuid }}"
+                test_question_id:   "{{ question_id }}"
+                selected_answer:    "{{ answer }}"
+                status:             "{{ resp_status }}"
+                time_spent_seconds: "{{ time_spent }}"
+              expect:
+                - statusCode:
+                    - 200
+                    - 429   # rate limit is acceptable
+
+          - think: 30   # 30 s per question (realistic navigation time)
+
+          # Timer sync every other question
+          - get:
+              url: "/api/test/exam/{{ attempt_uuid }}/timer"
+              name: "timer_sync"
+              headers:
+                Accept: "application/json"
+              expect:
+                - statusCode:
+                    - 200
+                    - 429   # throttle:public fires from single-IP runner; not an error
+        count: 10   # test 10 questions per session (not all 180, for speed)
+
+      # ── Step 4: Submit ──────────────────────────────────────────────────────
+      - post:
+          url: "/api/test/exam/{{ attempt_uuid }}/submit"
+          name: "exam_submit"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json: {}
+          capture:
+            - json: "$.processing"
+              as: "processing"
+          expect:
+            - statusCode: 200
+
+      # ── Step 5: Poll result (up to 30 s) ───────────────────────────────────
+      - think: 5
+
+      - get:
+          url: "/api/test/exam/{{ attempt_uuid }}/result"
+          name: "result_poll_1"
+          headers:
+            Accept: "application/json"
+          capture:
+            - json: "$.processing"
+              as: "processing"
+
+      - think: 5
+
+      - get:
+          url: "/api/test/exam/{{ attempt_uuid }}/result"
+          name: "result_poll_2"
+          headers:
+            Accept: "application/json"
+          expect:
+            - statusCode: 200
+
+  # ── 10% of VUs are institution admins watching the monitoring dashboard ──────
+  - name: "Monitoring dashboard watcher"
+    weight: 10
+    flow:
+      # Admin login
+      - post:
+          url: "/api/login"
+          name: "admin_login"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json:
+            email: "admin@loadtest.local"
+            password: "LoadTest@123"
+          capture:
+            - json: "$.token"
+              as: "admin_token"
+          expect:
+            - statusCode: 200
+
+      # Fetch one-shot snapshot (polling model, no SSE)
+      - loop:
+          - get:
+              url: "/api/monitoring/exams/{{ test_id }}/snapshot"
+              name: "monitoring_snapshot"
+              headers:
+                Authorization: "Bearer {{ admin_token }}"
+                Accept: "application/json"
+              expect:
+                - statusCode: 200
+                - hasProperty: "active_count"
+          - think: 5   # poll every 5 s (faster than SSE 3 s for stress purposes)
+        count: 20      # 20 polls = 100 s of monitoring

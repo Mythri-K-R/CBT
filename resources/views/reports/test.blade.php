@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: DejaVu Sans, sans-serif; font-size: 11px; color: #1a1a1a; }
+  .page-header { background: #1e3a5f; color: #fff; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .page-header h1 { font-size: 18px; font-weight: 700; }
+  .page-header .meta { font-size: 10px; opacity: 0.8; text-align: right; }
+  .section { margin: 16px 20px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #1e3a5f; border-bottom: 2px solid #1e3a5f; padding-bottom: 4px; margin-bottom: 10px; }
+  .stats-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .stat-card { flex: 1; min-width: 100px; background: #f4f7fb; border-radius: 6px; padding: 10px; text-align: center; }
+  .stat-card .value { font-size: 20px; font-weight: 700; color: #1e3a5f; }
+  .stat-card .label { font-size: 9px; color: #666; margin-top: 2px; text-transform: uppercase; }
+  table { width: 100%; border-collapse: collapse; font-size: 10px; }
+  th { background: #1e3a5f; color: #fff; padding: 6px 8px; text-align: left; }
+  td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) td { background: #f9fafc; }
+  .correct { color: #16a34a; font-weight: 600; }
+  .wrong { color: #dc2626; font-weight: 600; }
+  .skipped { color: #9ca3af; }
+  .badge { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 9px; font-weight: 600; }
+  .badge-pass { background: #dcfce7; color: #16a34a; }
+  .badge-fail { background: #fee2e2; color: #dc2626; }
+  .footer { text-align: center; font-size: 9px; color: #999; margin: 20px; padding-top: 10px; border-top: 1px solid #eee; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <h1>{{ $test->title }}</h1>
+    <div style="font-size:11px;margin-top:2px;opacity:0.9;">{{ $institution->name }}</div>
+  </div>
+  <div class="meta">
+    Test Report<br>
+    {{ now()->format('d M Y, h:i A') }}<br>
+    {{ $test->exam_type ?? '' }}
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Test Overview</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="value">{{ $stats['total_attempts'] ?? 0 }}</div>
+      <div class="label">Appeared</div>
+    </div>
+    <div class="stat-card">
+      <div class="value">{{ $stats['avg_score'] ?? '—' }}</div>
+      <div class="label">Avg Score</div>
+    </div>
+    <div class="stat-card">
+      <div class="value">{{ $stats['highest_score'] ?? '—' }}</div>
+      <div class="label">Highest</div>
+    </div>
+    <div class="stat-card">
+      <div class="value">{{ $stats['lowest_score'] ?? '—' }}</div>
+      <div class="label">Lowest</div>
+    </div>
+    <div class="stat-card">
+      <div class="value">{{ $stats['avg_accuracy'] ?? '—' }}%</div>
+      <div class="label">Avg Accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="value">{{ $test->total_marks }}</div>
+      <div class="label">Max Marks</div>
+    </div>
+  </div>
+</div>
+
+@if(!empty($rankings))
+<div class="section">
+  <div class="section-title">Rankings</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Student Name</th>
+        <th>Roll No.</th>
+        <th>Score</th>
+        <th>Correct</th>
+        <th>Wrong</th>
+        <th>Skipped</th>
+        <th>Accuracy</th>
+        <th>Percentile</th>
+        <th>Time Spent</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($rankings as $row)
+      <tr>
+        <td><strong>#{{ $row->rank_in_test }}</strong></td>
+        <td>{{ $row->student->name ?? '—' }}</td>
+        <td>{{ $row->student->roll_number ?? '—' }}</td>
+        <td><strong>{{ $row->total_score }}</strong></td>
+        <td class="correct">{{ $row->correct_count }}</td>
+        <td class="wrong">{{ $row->wrong_count }}</td>
+        <td class="skipped">{{ $row->skipped_count }}</td>
+        <td>{{ $row->accuracy }}%</td>
+        <td>{{ number_format($row->percentile, 1) }}</td>
+        <td>{{ gmdate('H:i:s', $row->time_spent_seconds ?? 0) }}</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+@endif
+
+@if(!empty($sectionStats))
+<div class="section">
+  <div class="section-title">Section-wise Analysis</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Section</th>
+        <th>Total Questions</th>
+        <th>Avg Correct</th>
+        <th>Avg Wrong</th>
+        <th>Avg Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($sectionStats as $sec)
+      <tr>
+        <td>{{ $sec['name'] }}</td>
+        <td>{{ $sec['total_questions'] }}</td>
+        <td class="correct">{{ $sec['avg_correct'] }}</td>
+        <td class="wrong">{{ $sec['avg_wrong'] }}</td>
+        <td>{{ $sec['avg_score'] }}</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+@endif
+
+<div class="footer">
+  Generated by ExamSphere &bull; {{ $institution->name }} &bull; {{ now()->format('d M Y') }}
+</div>
+
+</body>
+</html>
