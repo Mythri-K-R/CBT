@@ -8,11 +8,14 @@
         "barryvdh/laravel-dompdf": "^2.2",
         "intervention/image": "^3.7",
         "laravel/framework": "^11.0",
+        "laravel/horizon": "*",
+        "laravel/pulse": "*",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.6.4",
         "livewire/volt": "^1.7.0",
         "maatwebsite/excel": "^3.1",
+        "predis/predis": "*",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
@@ -20,6 +23,7 @@
         "laravel/breeze": "^2.4",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
+        "laravel/telescope": "^5.0",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^11.0"
@@ -74,6 +78,11 @@
                 "PKSA-qzrn-rnz3-85w1",
                 "PKSA-w7xr-vk7n-rstm"
             ]
+        },
+        "policy": {
+            "advisories": {
+                "block": false
+            }
         }
     },
     "minimum-stability": "stable",

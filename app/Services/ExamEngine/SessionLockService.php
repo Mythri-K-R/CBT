@@ -3,27 +3,23 @@
 namespace App\Services\ExamEngine;
 
 use App\Models\TestAttempt;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 class SessionLockService
 {
-    private const TTL_MINUTES = 5;
+    private const TTL_SECONDS = 300; // 5 minutes — matches examsphere.exam.session_token_ttl_minutes
 
     public function createSession(TestAttempt $attempt): string
     {
         $token = Str::random(64);
-        Cache::put(
-            $this->cacheKey($attempt->id),
-            $token,
-            now()->addMinutes(self::TTL_MINUTES)
-        );
+        Redis::connection('default')->setex($this->redisKey($attempt->id), self::TTL_SECONDS, $token);
         return $token;
     }
 
     public function validateSession(TestAttempt $attempt, string $token): bool
     {
-        $stored = Cache::get($this->cacheKey($attempt->id));
+        $stored = Redis::connection('default')->get($this->redisKey($attempt->id));
         if ($stored && $stored === $token) {
             $this->refreshSession($attempt->id, $token);
             return true;
@@ -33,20 +29,16 @@ class SessionLockService
 
     public function refreshSession(int $attemptId, string $token): void
     {
-        Cache::put(
-            $this->cacheKey($attemptId),
-            $token,
-            now()->addMinutes(self::TTL_MINUTES)
-        );
+        Redis::connection('default')->setex($this->redisKey($attemptId), self::TTL_SECONDS, $token);
     }
 
     public function destroySession(int $attemptId): void
     {
-        Cache::forget($this->cacheKey($attemptId));
+        Redis::connection('default')->del($this->redisKey($attemptId));
     }
 
-    private function cacheKey(int $attemptId): string
+    private function redisKey(int $attemptId): string
     {
-        return "exam_session_{$attemptId}";
+        return "exam:session:{$attemptId}";
     }
 }

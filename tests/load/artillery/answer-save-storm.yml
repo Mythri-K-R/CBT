@@ -1,0 +1,129 @@
+# Artillery — Answer Save Storm
+#
+# Sustained high-volume test of the save-response endpoint.
+#
+# Each virtual user:
+#   1. Calls identify + start to obtain an attempt_uuid and session_token
+#      (required since the C-2 session-token enforcement fix).
+#   2. Loops N save-response calls using X-Exam-Session-Token on every request.
+#
+# The previous version read attempt UUIDs from a static CSV, which is
+# incompatible with session tokens (TTL: 5 min). Dynamic token acquisition
+# reflects real student behaviour and keeps the storm valid across the full
+# sustain window.
+#
+# Data files (for reference and future tooling):
+#   tests/load/artillery/data/attempts.csv  — sample UUID/q_offset pairs
+#   (not loaded at runtime; tokens are obtained dynamically below)
+#
+# Pre-requisite: 20,000 students seeded as LD-00001..LD-20000
+#
+# Run:
+#   artillery run \
+#     --target http://localhost:8000 \
+#     tests/load/artillery/answer-save-storm.yml
+#
+# For > 5k users use parallel workers:
+#   artillery run-parallel \
+#     --workers 4 \
+#     tests/load/artillery/answer-save-storm.yml
+
+config:
+  target: "{{ $processEnvironment.BASE_URL || 'http://localhost:8000' }}"
+  processor: "./functions.js"
+  http:
+    timeout: 15
+    pool: 500
+
+  variables:
+    test_slug: "load-test-exam"
+
+  phases:
+    - name: "ramp"
+      duration: 120
+      arrivalRate: 10
+      rampTo: 200          # 200 sessions/s arriving → 200 × saves/loop req/s sustained
+
+    - name: "sustain"
+      duration: 600        # 10 minutes sustained
+      arrivalRate: 200
+
+    - name: "drain"
+      duration: 60
+      arrivalRate: 0
+
+  ensure:
+    thresholds:
+      - http.response_time.p50: 75
+      - http.response_time.p95: 200
+      - http.response_time.p99: 500
+      - http.codes.200: 90          # up to 10% may be 429 (rate limited) — acceptable
+
+  plugins:
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+
+scenarios:
+  - name: "Sustained answer saves"
+    flow:
+      - function: "setStudentData"
+
+      # ── Step 1: Identify — get student_id ──────────────────────────────────
+      - post:
+          url: "/api/test/join/{{ test_slug }}/identify"
+          name: "identify_init"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json:
+            roll_number: "{{ roll_number }}"
+          capture:
+            - json: "$.data.student.id"
+              as: "student_id"
+          expect:
+            - statusCode: 200
+            - hasProperty: "data.student.id"
+
+      # ── Step 2: Start/resume exam — get attempt_uuid + session_token ───────
+      # /start response is flat: { success, attempt_uuid, session_token, ... }
+      - post:
+          url: "/api/test/join/{{ test_slug }}/start"
+          name: "exam_start_init"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json:
+            student_id: "{{ student_id }}"
+          capture:
+            - json: "$.attempt_uuid"
+              as: "attempt_uuid"
+            - json: "$.session_token"
+              as: "session_token"
+          expect:
+            - statusCode:
+                - 200
+                - 201
+            - hasProperty: "attempt_uuid"
+            - hasProperty: "session_token"
+
+      # ── Step 3: Sustained save loop ─────────────────────────────────────────
+      # 60 iterations × 0.1 s think time ≈ covers ~6 s of exam time per VU.
+      # At 200 arrivals/s this drives 200 × (1 save / 0.1 s) = 2,000 req/s
+      # on the save-response endpoint, matching the 20k-student auto-save rate.
+      - loop:
+          - function: "nextQuestion"
+          - post:
+              url: "/api/test/exam/save-response"
+              name: "save_response"
+              headers:
+                Content-Type: "application/json"
+                Accept: "application/json"
+                X-Exam-Session-Token: "{{ session_token }}"
+              json:
+                attempt_uuid:       "{{ attempt_uuid }}"
+                test_question_id:   "{{ question_id }}"
+                selected_answer:    "{{ answer }}"
+                status:             "{{ resp_status }}"
+                time_spent_seconds: "{{ time_spent }}"
+          - think: 0.1   # minimal think time to model auto-save burst
+        count: 60

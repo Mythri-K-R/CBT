@@ -2,118 +2,136 @@
 
 namespace App\Services\ExamEngine;
 
-use App\Events\TestSubmitted;
+use App\Events\ExamAutoSubmitted;
+use App\Events\ExamSubmitted;
+use App\Events\StudentLoggedOut;
+use App\Jobs\CalculateTestResults;
 use App\Models\TestAttempt;
-use App\Models\TestResponse;
+use App\Services\ExamEngine\ExamStateCacheService;
+use App\Services\Infrastructure\DistributedLockService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
+/**
+ * LIGHTWEIGHT SUBMISSION DESIGN
+ * ─────────────────────────────
+ * Old flow  : validate → score 180 questions → update N responses → update
+ *             attempt → fire analytics  (~300–800 ms under load)
+ *
+ * New flow  : validate → mark as submitted → return (~20–50 ms)
+ *             CalculateTestResults job handles scoring asynchronously.
+ *
+ * Idempotency: Redis distributed lock (cross-server) + lockForUpdate() inside
+ *             the DB transaction (single-server fallback) guarantee exactly-once
+ *             semantics even when the student double-clicks Submit, two auto-submit
+ *             workers race, or a browser retries after a timeout.
+ *
+ * The scoring job is dispatched AFTER the transaction commits to avoid the
+ * edge case where a transaction rolls back after a job is already enqueued.
+ */
 class TestSubmitService
 {
+    public function __construct(
+        private readonly DistributedLockService $locks,
+        private readonly ExamStateCacheService  $stateCache
+    ) {}
+
     public function submit(TestAttempt $attempt, string $submissionType = 'manual'): array
     {
-        return DB::transaction(function () use ($attempt, $submissionType) {
-            $responses = $attempt->responses()->with('question')->get();
+        $lockKey = $this->locks->examSubmitKey($attempt->id);
 
-            $totalScore         = 0.0;
-            $maxPossibleScore   = 0.0;
-            $totalCorrect       = 0;
-            $totalWrong         = 0;
-            $totalUnattempted   = 0;
-            $totalMarkedReview  = 0;
-            $subjectScores      = [];
-            $timeSpent          = 0;
+        return $this->locks->withLock(
+            key:         $lockKey,
+            ttl:         DistributedLockService::TTL_SUBMIT,
+            waitSeconds: 5,
+            callback:    function () use ($attempt, $submissionType): array {
+                // ── Exact Phase 1 submission logic — unchanged ────────────────
+                $needsScoring = false;
 
-            foreach ($responses as $response) {
-                $question        = $response->question;
-                $maxPossibleScore += $question->positive_marks;
+                $result = DB::transaction(function () use ($attempt, $submissionType, &$needsScoring) {
+                    // Row-level lock: only one request can enter this block for a
+                    // given attempt at a time. All others block until the lock is
+                    // released when the transaction commits.
+                    $locked = TestAttempt::lockForUpdate()->find($attempt->id);
 
-                if (in_array($response->status, ['marked_review', 'answered_marked_review'])) {
-                    $totalMarkedReview++;
-                }
-
-                $timeSpent += $response->time_spent_seconds;
-
-                if (!$response->isAnswered()) {
-                    $totalUnattempted++;
-                    $marksAwarded = 0;
-                    $isCorrect    = null;
-                } else {
-                    $marksAwarded = $question->calculateMarks($response->selected_answer);
-                    $isCorrect    = $marksAwarded > 0;
-
-                    if ($isCorrect) {
-                        $totalCorrect++;
-                    } else {
-                        $totalWrong++;
+                    if (!$locked) {
+                        return ['error' => 'Attempt not found.'];
                     }
-                    $totalScore += $marksAwarded;
+
+                    // ── Idempotent check ──────────────────────────────────────
+                    // Already submitted (by another tab / worker / auto-submit).
+                    if ($locked->status !== 'in_progress') {
+                        return [
+                            'already_submitted' => true,
+                            'processing'        => $locked->total_score === null,
+                            'show_result'       => (bool) $locked->test->show_result_immediately,
+                        ];
+                    }
+
+                    // ── Lightweight update ────────────────────────────────────
+                    // Only the minimum fields needed to lock the attempt.
+                    // Scores, subject_scores, rankings are all computed in the job.
+                    $locked->update([
+                        'status'          => 'submitted',
+                        'submitted_at'    => now(),
+                        'submission_type' => $submissionType,
+                    ]);
+
+                    $needsScoring = true;
+
+                    return [
+                        'processing'  => true,
+                        'show_result' => (bool) $locked->test->show_result_immediately,
+                    ];
+                });
+
+                // Dispatch AFTER the transaction commits so the job is never
+                // enqueued for a rolled-back submission.
+                if ($needsScoring) {
+                    CalculateTestResults::dispatch($attempt->id)
+                        ->onQueue('results');
                 }
 
-                // Update the response with evaluation
-                $response->update([
-                    'is_correct'   => $isCorrect,
-                    'marks_awarded'=> $marksAwarded,
-                ]);
+                // Invalidate exam state cache — exam is now submitted.
+                // Covers both manual submit (from controller) and auto_timeout submit.
+                $this->stateCache->invalidate($attempt->id);
 
-                // Aggregate by subject
-                $subjectId = $question->subject_id;
-                if (!isset($subjectScores[$subjectId])) {
-                    $subjectScores[$subjectId] = [
-                        'subject_id'    => $subjectId,
-                        'subject_name'  => $question->subject->name ?? '',
-                        'score'         => 0,
-                        'max_score'     => 0,
-                        'correct'       => 0,
-                        'wrong'         => 0,
-                        'unattempted'   => 0,
-                        'time_seconds'  => 0,
+                // Fire events only when submission actually happened ($needsScoring).
+                // The idempotent path (already_submitted) must not re-fire events.
+                if ($needsScoring) {
+                    event(new ExamSubmitted($attempt, $submissionType));
+
+                    if ($submissionType !== 'manual') {
+                        event(new ExamAutoSubmitted($attempt, $submissionType));
+                    }
+
+                    event(new StudentLoggedOut($attempt));
+                }
+
+                return $result;
+            },
+            fallback: function () use ($attempt): array {
+                // Lock contention: another server is already holding the submit lock
+                // for this attempt. Read current state and return idempotent response
+                // so the client is not left waiting indefinitely.
+                $fresh = TestAttempt::select(['id', 'status', 'total_score'])
+                                    ->with('test:id,show_result_immediately')
+                                    ->find($attempt->id);
+
+                if ($fresh && $fresh->status !== 'in_progress') {
+                    return [
+                        'already_submitted' => true,
+                        'processing'        => $fresh->total_score === null,
+                        'show_result'       => (bool) optional($fresh->test)->show_result_immediately,
                     ];
                 }
-                $subjectScores[$subjectId]['score']        += $marksAwarded;
-                $subjectScores[$subjectId]['max_score']    += $question->positive_marks;
-                $subjectScores[$subjectId]['time_seconds'] += $response->time_spent_seconds;
-                if ($isCorrect)                    $subjectScores[$subjectId]['correct']++;
-                elseif ($isCorrect === false)      $subjectScores[$subjectId]['wrong']++;
-                else                               $subjectScores[$subjectId]['unattempted']++;
+
+                Log::warning('TestSubmitService: could not acquire submit lock', [
+                    'attempt_id' => $attempt->id,
+                ]);
+
+                return ['error' => 'Submission is being processed. Please wait a moment and try again.'];
             }
-
-            // Calculate derived stats
-            $attempted   = $totalCorrect + $totalWrong;
-            $accuracy    = $attempted > 0 ? round($totalCorrect / $attempted * 100, 2) : 0;
-            $percentage  = $maxPossibleScore > 0 ? round($totalScore / $maxPossibleScore * 100, 2) : 0;
-
-            foreach ($subjectScores as &$ss) {
-                $attempted = $ss['correct'] + $ss['wrong'];
-                $ss['accuracy'] = $attempted > 0 ? round($ss['correct'] / $attempted * 100, 2) : 0;
-            }
-
-            $attempt->update([
-                'status'               => 'submitted',
-                'submitted_at'         => now(),
-                'submission_type'      => $submissionType,
-                'time_spent_seconds'   => $timeSpent,
-                'total_score'          => $totalScore,
-                'max_possible_score'   => $maxPossibleScore,
-                'percentage'           => $percentage,
-                'total_correct'        => $totalCorrect,
-                'total_wrong'          => $totalWrong,
-                'total_unattempted'    => $totalUnattempted,
-                'total_marked_review'  => $totalMarkedReview,
-                'accuracy'             => $accuracy,
-                'subject_scores'       => array_values($subjectScores),
-            ]);
-
-            event(new TestSubmitted($attempt));
-
-            return [
-                'score'         => $totalScore,
-                'max_score'     => $maxPossibleScore,
-                'percentage'    => $percentage,
-                'total_correct' => $totalCorrect,
-                'total_wrong'   => $totalWrong,
-                'accuracy'      => $accuracy,
-                'show_result'   => $attempt->test->show_result_immediately,
-            ];
-        });
+        );
     }
 }

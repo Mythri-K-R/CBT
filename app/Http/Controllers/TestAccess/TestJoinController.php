@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\TestAccess;
 
+use App\Events\StudentLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\TestLink;
@@ -103,6 +104,8 @@ class TestJoinController extends Controller
 
         $this->recordClick($link, $request, 'identified', $student->id);
         $link->increment('total_clicks');
+
+        event(new StudentLoggedIn($student, $link, $request->ip()));
 
         return response()->json([
             'success' => true,

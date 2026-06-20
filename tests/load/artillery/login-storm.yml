@@ -1,0 +1,97 @@
+# Artillery — Login Storm
+#
+# Tests the POST /api/login endpoint under concurrent institution admin logins.
+# Models the morning rush when all faculty log in before a scheduled exam.
+#
+# Run:
+#   artillery run \
+#     --target http://localhost:8000 \
+#     --env USERS=1000 \
+#     tests/load/artillery/login-storm.yml
+#
+# With a custom .env override:
+#   ARTILLERY_WORKERS=4 artillery run ... --dotenv tests/load/artillery/.env.load
+
+config:
+  target: "{{ $processEnvironment.BASE_URL || 'http://localhost:8000' }}"
+  processor: "./functions.js"
+  http:
+    timeout: 30
+    pool: 50
+
+  phases:
+    - name: "Warm-up"
+      duration: 30
+      arrivalRate: 5
+
+    - name: "Ramp-up"
+      duration: 120
+      arrivalRate: 5
+      rampTo: 50       # 50 logins/sec at peak = 3000/min
+
+    - name: "Sustain"
+      duration: 300
+      arrivalRate: 50
+
+    - name: "Ramp-down"
+      duration: 60
+      arrivalRate: 50
+      rampTo: 0
+
+  # Pass/fail thresholds (Artillery 2.x)
+  ensure:
+    thresholds:
+      - http.response_time.p95: 500
+      - http.response_time.p99: 1000
+      - http.codes.200: 95         # at least 95% success rate
+
+  plugins:
+    ensure: {}
+    metrics-by-endpoint:
+      useOnlyRequestNames: true
+
+scenarios:
+  - name: "Institution admin login"
+    flow:
+      - function: "setStudentData"
+
+      - post:
+          url: "/api/login"
+          name: "login"
+          headers:
+            Content-Type: "application/json"
+            Accept: "application/json"
+          json:
+            email: "admin@loadtest.local"
+            password: "LoadTest@123"
+          capture:
+            - json: "$.token"
+              as: "token"
+          expect:
+            - statusCode: 200
+            - contentType: json
+            - hasProperty: token
+
+      - function: "saveToken"
+
+      # Authenticated request: fetch dashboard (proves token works)
+      - get:
+          url: "/api/dashboard"
+          name: "dashboard_after_login"
+          headers:
+            Authorization: "Bearer {{ token }}"
+            Accept: "application/json"
+          expect:
+            - statusCode: 200
+
+      - think: 2
+
+      # Logout
+      - post:
+          url: "/api/logout"
+          name: "logout"
+          headers:
+            Authorization: "Bearer {{ token }}"
+            Accept: "application/json"
+          expect:
+            - statusCode: 200

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\InstitutionUserLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\AuditService;
@@ -47,6 +48,8 @@ class LoginController extends Controller
         $token = $user->createToken('auth-token', ['*'], now()->addDays(30))->plainTextToken;
 
         $this->audit->log('auth.login', 'user', $user->id);
+
+        event(new InstitutionUserLoggedIn($user, $request->ip(), $request->userAgent()));
 
         return response()->json([
             'success' => true,

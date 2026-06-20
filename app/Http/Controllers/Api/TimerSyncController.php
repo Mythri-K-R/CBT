@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\ExamHeartbeatReceived;
 use App\Http\Controllers\Controller;
 use App\Models\TestAttempt;
 use App\Services\ExamEngine\TimerService;
@@ -14,9 +15,10 @@ class TimerSyncController extends Controller
 
     public function sync(Request $request, string $attemptUuid): JsonResponse
     {
+        // timerState is no longer eager-loaded here: TimerService reads from Redis
+        // on the hot path and falls back to a direct DB query only on cache miss.
         $attempt = TestAttempt::where('uuid', $attemptUuid)
                               ->where('status', 'in_progress')
-                              ->with('timerState')
                               ->firstOrFail();
 
         if ($attempt->isExpired()) {
@@ -28,6 +30,9 @@ class TimerSyncController extends Controller
         }
 
         $remaining = $this->timer->sync($attempt);
+
+        // Fire heartbeat event for monitoring hooks (no default listeners at 667/s).
+        event(new ExamHeartbeatReceived($attempt->id, $remaining['remaining']));
 
         return response()->json([
             'remaining_seconds' => $remaining['remaining'],

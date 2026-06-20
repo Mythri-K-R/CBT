@@ -31,6 +31,8 @@ use App\Http\Controllers\TestAccess\TestJoinController;
 use App\Http\Controllers\TestAccess\TestInstructionsController;
 use App\Http\Controllers\TestAccess\StudentResultsController;
 use App\Http\Controllers\Api\ExamEngineController;
+use App\Http\Controllers\Api\ExamOfflineSyncController;
+use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\TimerSyncController;
 use App\Http\Controllers\Api\ProctorController;
 use Illuminate\Support\Facades\Route;
@@ -42,32 +44,57 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Enquiry & registration
-Route::post('/enquiry', [InstitutionRegisterController::class, 'submitEnquiry']);
-Route::post('/register-institution', [InstitutionRegisterController::class, 'register']);
+Route::middleware('throttle:public')->group(function () {
+    Route::post('/enquiry', [InstitutionRegisterController::class, 'submitEnquiry']);
+    Route::post('/register-institution', [InstitutionRegisterController::class, 'register']);
+});
 
 // Authentication
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
-Route::post('/reset-password', [ForgotPasswordController::class, 'reset']);
+Route::post('/login', [LoginController::class, 'login'])->middleware('throttle:login');
+Route::middleware('throttle:public')->group(function () {
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
+    Route::post('/reset-password', [ForgotPasswordController::class, 'reset']);
+});
 
 // Student test access — PUBLIC (no auth)
 Route::prefix('test')->group(function () {
-    Route::get('/join/{slug}', [TestJoinController::class, 'show']);
-    Route::get('/join/{slug}/students', [TestJoinController::class, 'listStudents']);
-    Route::post('/join/{slug}/identify', [TestJoinController::class, 'identify']);
-    Route::get('/join/{slug}/instructions', [TestInstructionsController::class, 'show']);
-    Route::post('/join/{slug}/start', [ExamEngineController::class, 'start']);
+    // Public join/identify — moderate rate limit (60/min per IP)
+    Route::middleware('throttle:public')->group(function () {
+        Route::get('/join/{slug}', [TestJoinController::class, 'show']);
+        Route::get('/join/{slug}/students', [TestJoinController::class, 'listStudents']);
+        Route::post('/join/{slug}/identify', [TestJoinController::class, 'identify']);
+        Route::get('/join/{slug}/instructions', [TestInstructionsController::class, 'show']);
+        Route::post('/join/{slug}/start', [ExamEngineController::class, 'start']);
+    });
 
     // Exam engine (session-locked via attempt UUID — no Sanctum needed)
     Route::middleware('single.session')->group(function () {
-        Route::post('/exam/save-response', [ExamEngineController::class, 'saveResponse']);
-        Route::get('/exam/{attemptUuid}/timer', [TimerSyncController::class, 'sync']);
-        Route::post('/exam/{attemptUuid}/submit', [ExamEngineController::class, 'submit']);
-        Route::post('/exam/{attemptUuid}/proctor-event', [ProctorController::class, 'logEvent']);
+        // Save: 120/min per attempt_uuid (2/sec — well above 10-second auto-save)
+        Route::post('/exam/save-response', [ExamEngineController::class, 'saveResponse'])
+            ->middleware('throttle:exam-save');
+
+        Route::get('/exam/{attemptUuid}/timer', [TimerSyncController::class, 'sync'])
+            ->middleware('throttle:public');
+
+        // Submit: 3/min per attemptUuid (allows retry on network failure)
+        Route::post('/exam/{attemptUuid}/submit', [ExamEngineController::class, 'submit'])
+            ->middleware('throttle:exam-submit');
+
+        Route::post('/exam/{attemptUuid}/proctor-event', [ProctorController::class, 'logEvent'])
+            ->middleware('throttle:public');
     });
 
-    Route::get('/exam/{attemptUuid}/result', [ExamEngineController::class, 'result']);
-    Route::get('/exam/{attemptUuid}/solutions', [ExamEngineController::class, 'solutions']);
+    // Results — moderate limit (no auth required)
+    Route::middleware('throttle:public')->group(function () {
+        Route::get('/exam/{attemptUuid}/result', [ExamEngineController::class, 'result']);
+        Route::get('/exam/{attemptUuid}/solutions', [ExamEngineController::class, 'solutions']);
+    });
+
+    // Offline sync — outside single.session: the student may be coming back from a
+    // network outage in a new tab with an expired session token. Authentication is
+    // by the attempt UUID alone (same model as /result and /solutions).
+    Route::post('/exam/{attemptUuid}/sync-queue', [ExamOfflineSyncController::class, 'sync'])
+        ->middleware('throttle:exam-sync');
 });
 
 // Student results lookup
@@ -80,7 +107,7 @@ Route::get('/results/{attemptUuid}', [StudentResultsController::class, 'show']);
 |==========================================================================
 */
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::get('/me', [LoginController::class, 'me']);
@@ -257,5 +284,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::put('/settings', [InstSettings::class, 'update']);
             Route::post('/settings/logo', [InstSettings::class, 'uploadLogo']);
         });
+
+        // ── Real-Time Exam Monitoring (Feature 5) ─────────────────────────────
+        // Accessible to institution_admin and faculty with can_view_results permission.
+        // SSE stream holds one FPM worker per open connection — see MonitoringController
+        // for the recommended Nginx / FPM pool configuration.
+        Route::prefix('monitoring')
+            ->middleware('faculty.permission:can_view_results')
+            ->group(function () {
+                Route::get('/health', [MonitoringController::class, 'health']);
+                Route::get('/recovery', [MonitoringController::class, 'recovery']);   // Feature 7
+                Route::get('/overview', [MonitoringController::class, 'overview']);
+                Route::get('/exams/{testId}/snapshot', [MonitoringController::class, 'snapshotExam']);
+                // SSE: long-lived connection — must be last in group (no middleware after it runs)
+                Route::get('/exams/{testId}/stream', [MonitoringController::class, 'streamExam']);
+            });
     });
 });

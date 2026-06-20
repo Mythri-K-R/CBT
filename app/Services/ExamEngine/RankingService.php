@@ -2,7 +2,9 @@
 
 namespace App\Services\ExamEngine;
 
+use App\Events\ResultPublished;
 use App\Models\TestAttempt;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class RankingService
@@ -54,5 +56,12 @@ class RankingService
             'highest_score'  => $stats->max_score,
             'lowest_score'   => $stats->min_score,
         ]);
+
+        // Cache::add() is atomic SET NX — ensures ResultPublished fires exactly once
+        // per testId even if calculateRankings() is called again on job retry or
+        // admin re-trigger. TTL 24 h covers any realistic retry window.
+        if (Cache::add("events:result_published:{$testId}", 1, 86400)) {
+            event(new ResultPublished($testId, $total));
+        }
     }
 }
