@@ -149,7 +149,15 @@ new #[Layout('layouts.exam')] class extends Component {
         @endif
         <span class="text-white font-bold text-base">{{ $testLink->test->institution?->name ?? 'Examsphere' }}</span>
     </div>
-    <span class="text-white/60 text-sm font-semibold">CBT Examination Portal</span>
+    <div class="flex items-center gap-4">
+        <span class="text-white/50 text-sm font-semibold hidden sm:block">CBT Examination Portal</span>
+        <a href="{{ route('login') }}"
+           class="flex items-center gap-1.5 text-xs font-semibold text-white/90 hover:text-white border border-white/30 hover:border-white/60 rounded px-3 py-1.5 transition-all hover:bg-white/10"
+           title="Institution / Faculty Login">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Institution Login
+        </a>
+    </div>
 </div>
 
 <div class="min-h-[calc(100vh-52px)] flex items-center justify-center p-4 py-10">
